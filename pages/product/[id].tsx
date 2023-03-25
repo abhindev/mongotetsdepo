@@ -129,14 +129,23 @@ const Product = ({ product, products }: any) => {
   );
 };
 
-export const getServerSideProps = async ({ params }:any) => {
+interface Params {
+    id: string;
+  }
+
+  export const getServerSideProps = async ({ params }: { params: Params }) => {
     try {
-      const client = await MongoClient.connect(process.env.MONGODB_URI);
-      const db = client.db('kalianiammas');
-  
+        const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error('MongoDB connection string is missing.');
+}
+
+const client = await MongoClient.connect(uri);
+const db = client.db('kalianiammas');
       const product = await db
         .collection('products')
-        .findOne({ _id: ObjectId(params.id) });
+        .findOne({ _id: new ObjectId(params.id) });
   
       console.log(product);
   
