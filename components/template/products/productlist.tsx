@@ -7,7 +7,7 @@ import useDeviceSize from "../../hooks/useWindowSize";
 
 function PoductList({products}:any) {
   const [width, height] = useDeviceSize();
-  console.log(width, height);
+  // console.log(width, height);
   
   return (
     <div className={width < 600 ? styles.main : ""}>
