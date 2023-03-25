@@ -32,7 +32,7 @@ export async function getServerSideProps() {
 export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(isConnected)
+  console.log(isConnected[0].title)
   return (
     <div className="container">
       <Head>
@@ -42,9 +42,11 @@ export default function Home({
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js with MongoDB!</a>
+          Welcome to Next.js with MongoDB!
         </h1>
-
+        {isConnected.map((product :any,i:number)=> <h1 key={i}>
+        {product.title}
+        </h1>)}
       </main>
     </div> 
   )
