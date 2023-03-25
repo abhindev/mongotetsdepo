@@ -1,0 +1,142 @@
+/* mobail ui  */
+.left_mob {
+  width: 100%;
+  height: 40vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.imgcont_mob {
+  border: 1px solid grey;
+  border-radius: 10px;
+  height: 130%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img_mob {
+  width: 40vw;
+  height: 30vw;
+  position: relative;
+}
+.right_mob {
+  padding: 10%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 80%;
+}
+.title_mob {
+  font-size: 4.5vw;
+}
+.desc_mob {
+  display: none;
+}
+.price_mob {
+  height: 10px;
+  display: flex;
+  align-items: center;
+}
+.button_mob {
+  margin-top: 10px;
+  display: flex;
+}
+.button_buy_mob {
+  background-color: hsl(80, 68%, 38%);
+  border-style: none;
+  border-radius: 5px;
+  width: 20vw;
+  margin-right: 20px;
+  color: white;
+  font-size: 3vw;
+  size-adjust: none;
+}
+.button_cart_mob {
+  background-color: hsl(80, 68%, 38%);
+  border-style: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+}
+/* mobail ui end */
+
+.container {
+  margin: 20vh 30px 20vh 30px;
+  display: flex;
+  flex-direction: row;
+  
+}
+.left {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.imgcont {
+  position: relative;
+  width: 45vw;
+  height: 45vw;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.title {
+  /* font-family: "Montserrat", sans-serif; */
+}
+.desc {
+/* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+}
+.price {
+  height: 10px;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+.button {
+  display: flex;
+  justify-content: center;
+}
+.button_buy {
+  background-color: hsl(80, 68%, 38%);
+  border-style: none;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  color: whitesmoke;
+}
+.button_cart {
+  background-color: hsl(80, 68%, 38%);
+  border-style: none;
+  border-radius: 10px;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  color: whitesmoke;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .left {
+    width: 50vw;
+    /* height: 80vh; */
+    align-items: center;
+    
+  }
+  .imgcont {
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+  }
+}

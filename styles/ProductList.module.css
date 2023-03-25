@@ -1,0 +1,12 @@
+.main{
+    width: 100%;
+}
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid_item {
+    width: 48vw;
+    justify-content: center;
+    align-items: center;
+  }
