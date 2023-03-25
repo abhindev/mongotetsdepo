@@ -13,8 +13,9 @@ export default async (
       const client = await clientPromise;
       const db = client.db("products");
       
-      const Data = await db.collection("products").find({}).toArray();
+      const Data = await db.collection("products").find().toArray();
       res.json(Data);
+      console.log(Data)
     } catch (e:any) {
       console.error(e);
       throw new Error(e).message;

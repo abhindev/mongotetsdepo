@@ -1,0 +1,31 @@
+
+.title {
+    max-width: 100%;
+    margin-left: 10%; 
+}
+.tab {
+    width: 90px;
+    height: 30px;
+    border-radius: 20px;
+    padding: 2px;
+    border-style: none;
+    margin: 8px;
+    text-decoration: none;
+    color: black;
+    outline: none;
+}
+.tab:focus {
+    border: 2px solid #76A11F;
+}
+.panels {
+    margin: 0 10% 10% 10%;
+} 
+
+@media screen and (max-width: 480px) {
+    .title{
+        margin-left: 0; 
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+}
