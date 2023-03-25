@@ -133,7 +133,7 @@ export const getServerSideProps = async ({ params }: any) => {
 //     `http://localhost:3000/api/products/${params.id}`
 //   );
 //   const resone = await axios.get("http://localhost:3000/api/products");
-    const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
+    const res = await fetch(`/api/products/${params.id}`);
     const data = await res.json();
   return {
     props: {
