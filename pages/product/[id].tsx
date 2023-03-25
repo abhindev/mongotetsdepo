@@ -2,6 +2,7 @@ import styles from "../../styles/Product.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import clientPromise from '../../lib/mongodb'
+import { MongoClient, ObjectId } from 'mongodb';
 // import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../lib/redux/cartSlice";
@@ -128,20 +129,30 @@ const Product = ({ product, products }: any) => {
   );
 };
 
-export const getServerSideProps = async ({ params }: any) => {
-//   const res = await axios.get(
-//     `http://localhost:3000/api/products/${params.id}`
-//   );
-//   const resone = await axios.get("http://localhost:3000/api/products");
-    const res = await fetch(`/api/products/${params.id}`);
-    const data = await res.json();
-  return {
-    props: {
-      product: data,
-    //   products: resone.data,
-    },
+export const getServerSideProps = async ({ params }:any) => {
+    try {
+      const client = await MongoClient.connect(process.env.MONGODB_URI);
+      const db = client.db('kalianiammas');
+  
+      const product = await db
+        .collection('products')
+        .findOne({ _id: ObjectId(params.id) });
+  
+      console.log(product);
+  
+      return {
+        props: {
+          product: JSON.parse(JSON.stringify(product)),
+        },
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        props: {
+          product: null,
+        },
+      };
+    }
   };
-
-};
 
 export default Product;
