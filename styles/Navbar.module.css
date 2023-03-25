@@ -1,0 +1,47 @@
+.container{
+    height: 60px;
+    padding: 10px 50px;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0px;
+    z-index: 10; 
+    margin-bottom: 10px ;
+}
+
+.logo {
+    width: 100px;
+    height: 60px;
+    display: flex;
+    position: relative;
+} 
+.logoImage {
+    width: 100%;
+    height: 100%;
+}
+
+
+.cart {
+    position: relative;
+    color: black;
+}
+
+
+.cartcounter{
+    position: absolute;
+    top: -15px;
+    right: -15px; 
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    color: whitesmoke;
+    background-color: orangered;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 1px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

@@ -4,12 +4,33 @@ import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../../styles/ProductCard.module.css'
 import useDeviceSize from "../../hooks/useWindowSize";
 
+import { useRouter } from 'next/router'
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../../lib/redux/cartSlice";
+
+import { BiShoppingBag } from "react-icons/bi";
+
 function ProductCard({product}:any,i:number) {
   const [width, height] = useDeviceSize();
+  
+  const router = useRouter()
+  const dispatch = useDispatch();
+
+  const item = product;
   const index = i
+  const price = item.prices[0].price;
+  const quantity = 1
+
+  const variant = item.prices[0].text;
 
 
-  console.log(product.img[0])
+  const handleClickAddToCart = () => {
+    dispatch(addProduct({ ...product, price, quantity ,variant}));
+  };
+  const handleClickBuyNow = () => {
+    dispatch(addProduct({ ...product, price, quantity ,variant }));
+    router.push('/cart')
+  };
 
   return (
     <div
@@ -45,12 +66,12 @@ function ProductCard({product}:any,i:number) {
           {/* <h2>{price}</h2> */}
         </p>
         </Link>
-        {/* <div className={width<600 ? styles.button_mob:styles.button}>
+        <div className={width<600 ? styles.button_mob:styles.button}>
           <button onClick={()=>handleClickBuyNow()} className={width<600 ? styles.button_buy_mob:styles.button_buy}>BUY NOW</button>
           <button onClick={()=>handleClickAddToCart()} className={width<600 ? styles.button_cart_mob:styles.button_cart}>
             <BiShoppingBag />
           </button>
-        </div> */}
+        </div>
       </div>
     </div>
   )

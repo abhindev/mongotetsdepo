@@ -1,0 +1,42 @@
+.head {
+    display: flex;
+    justify-content: space-between;
+}
+.title {
+    font-weight: 300;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.price{
+    font-weight:100;
+    margin-right: 20px;
+}
+.total{
+    margin: 10px;
+    border-bottom: 1px solid gray;
+}
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.sum {
+    display: flex;
+    justify-content: space-between;
+    font-family:    "Helvetica Neue",Helvetica,Arial;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.checkout{
+    display: flex;
+    justify-content: center;
+}
+.checkout_btn {
+    font-size: 1.2rem;
+    width: 80vw;
+    justify-content: center;
+    background-color: hsl(80, 68%, 38%);
+    color: white;
+    border-radius: 10px;
+    border-style: none;
+    padding: 10px;
+}
