@@ -1,59 +1,62 @@
-import styles from "../../styles/Product.module.css";
-import Image from "next/image";
-import { useState } from "react";
-import clientPromise from '../../lib/mongodb'
 import { MongoClient, ObjectId } from 'mongodb';
-// import axios from "axios";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../lib/redux/cartSlice";
-import Link from "next/link";
-import Details from "../../components/template/products/Details";
-import { useRouter } from 'next/router'
-// import Slider from "../../components/slider"
 
-const Order = ({ product, products }: any) => {
-  
+interface OrderProps {
+  order: {
+    _id: string;
+    customer: string;
+    method: number;
+  } | null;
+}
 
+const Order = ({ order }: OrderProps) => {
+  console.log(order?.method);
   return (
     <>
-      hi order
+      <h1>{order?._id}</h1>
+      <h1>{order?.customer}</h1>
     </>
   );
 };
 
 interface Params {
-    id: string;
-  }
-
-export const getServerSideProps = async ({ params }: { params: Params }) => {
-    try {
-        const uri = process.env.MONGODB_URI;
-
-if (!uri) {
-  throw new Error('MongoDB connection string is missing.');
+  id: string;
 }
 
-const client = await MongoClient.connect(uri);
-const db = client.db('kalianiammas');
-      const order = await db
-        .collection('orders')
-        .findOne({ _id: new ObjectId(params.id) });
-  
-      console.log(order);
-  
-      return {
-        props: {
-            order: JSON.parse(JSON.stringify(order)),
-        },
-      };
-    } catch (error) {
-      console.error(error);
-      return {
-        props: {
-            order: null,
-        },
-      };
+export const getServerSideProps = async ({ params }: { params: Params }) => {
+  try {
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+      throw new Error('MongoDB connection string is missing.');
     }
-  };
+
+    const client = await MongoClient.connect(uri);
+    const db = client.db('kalianiammas');
+
+    // Find the order to be updated
+    const order = await db.collection('orders').findOne({ _id: new ObjectId(params.id) });
+        console.log(order);
+    // Update the order with method: 1
+    const updatedOrder = await db.collection('orders').updateOne(
+      { _id: new ObjectId(params.id) },
+      { $set: { method: 6 } }
+    );
+
+    console.log(updatedOrder);
+
+    return {
+      props: {
+        order: JSON.parse(JSON.stringify(order)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        order: null,
+      },
+    };
+  }
+};
 
 export default Order;
