@@ -133,7 +133,7 @@ interface Params {
     id: string;
   }
 
-  export const getServerSideProps = async ({ params }: { params: Params }) => {
+export const getServerSideProps = async ({ params }: { params: Params }) => {
     try {
         const uri = process.env.MONGODB_URI;
 
@@ -147,7 +147,7 @@ const db = client.db('kalianiammas');
         .collection('products')
         .findOne({ _id: new ObjectId(params.id) });
   
-      console.log(product);
+      // console.log(product);
   
       return {
         props: {

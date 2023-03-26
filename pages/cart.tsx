@@ -7,7 +7,7 @@ import CartItem from "../components/template/cart/cartItem";
 import Link from "next/link";
 import useDeviceSize from "../components/hooks/useWindowSize";
 // import CheckOut from "../components/ui/CheckOut"
-// import CheckOut from "../components/ui/checkout";
+import CheckOut from "../components/template/cart/checkOut";
 import styles from "../styles/Cart.module.css";
 function Cart() {
   const cart = useSelector((state: any) => state.cart);
@@ -59,8 +59,8 @@ function Cart() {
         </div>
       </div>
       {submit == true ? (
-        // <CheckOut />
-        <>hay</>
+        <CheckOut />
+        // <>hay</>
       ) : (
         <div className={styles.checkout}>
           <button

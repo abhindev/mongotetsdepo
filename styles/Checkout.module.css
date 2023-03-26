@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+.container {
+    /* background-color: aquamarine; */
+    
+    
+}
+.title{ 
+    margin:10px ;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.field {
+    width: 100%;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    justify-content: center;
+}
+.input {
+    /* background-color: blueviolet; */
+    color: rgb(52, 50, 50);
+    width: 80vw;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    border:1px solid gray;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.input::placeholder {
+    color: gray;
+    margin-left: 10px;
+}
+.error{
+    color:rgb(248, 93, 93);
+    margin-left: 10%;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: aquamarine; */
+}
+.button {
+    font-size: 1.2rem;
+    width: 80vw;
+    justify-content: center;
+    background-color: hsl(80, 68%, 38%);
+    color: white;
+    border-radius: 10px;
+    border-style: none;
+    padding: 10px;
+}
+.loading_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.loading {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid hsl(80, 68%, 38%);
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
