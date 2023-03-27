@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from 'react'
-import createOred from '../../hooks/createOredr'
-// import createPayment from "../createPayment"
+import createOrder from '../../hooks/createOredr'
+import createPayment from "../../hooks/createPayment"
 import { useRouter } from 'next/router'
 import { useSelector,useDispatch } from 'react-redux'
 import { reset } from "../../../lib/redux/cartSlice";
@@ -116,14 +116,14 @@ function CheckOut() {
   ////////////////////////////
   
   const handilClick=()=>{
-    createOred(customer, Address, City,State,pinCode, phone , phone2, item, total)
+    createOrder(customer, Address, City,State,pinCode, phone , phone2, item, total)
   .then(function(result) {
-    console.log(result.data._id); // "initResolve"
-    setOrderId(result.data._id)
+    console.log(result.insertedId); // "initResolve"
+    setOrderId(result.insertedId)
     //loading
     setLoading(true)
     //loadingend
-    const order_id = result.data._id
+    const order_id = result.insertedId
     // handilClickBuy()
     createPayment(
       order_id,
@@ -134,11 +134,9 @@ function CheckOut() {
       customer_phone
   )
      .then(function(result) {
-       console.log(result.data); // "initResolve"
-       console.log(result.data.payment_link)
-       router.push(result.data.payment_link)
-       dispatch(reset());
-
+       console.log(result); // "initResolve"
+       console.log(result.payment_link)
+       router.push(result.payment_link)
        return "normalReturn";
      })
     return "normalReturn";
