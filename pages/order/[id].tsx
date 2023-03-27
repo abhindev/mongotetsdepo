@@ -30,7 +30,8 @@ const Order = ({ order ,chash}: OrderProps) => {
 
   return (
     <div>
-    {order_status == "PAID" ? <><div className={styles.container}>
+    {/* {order_status == "PAID" ?  */}
+    <><div className={styles.container}>
     <div>
     <div className={styles.orderId}>
       <h3 className={styles.id} >Order ID: {order._id}</h3>
@@ -118,9 +119,10 @@ const Order = ({ order ,chash}: OrderProps) => {
       <p>{order.address.Address}, {order.address.City} ,{order.address.State}, {order.address.pinCode}</p>
     </div>
     </div> 
-  </div></> : <div className={styles.Error}>
-    <Image src={myGif} alt=""  width={500}/>
-    </div>}
+  </div></> 
+  {/* // : <div className={styles.Error}>
+  //   <Image src={myGif} alt=""  width={500}/>
+  //   </div>} */}
   </div>
   );
 };
@@ -143,7 +145,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const resone = await fetch(`/api/order/chashfree/${params.id}`);
     const chash = await resone.json();
     const orderStatus =(chash.data.order_status)
-    
+
     // Find the order to be updated
     const order = await db.collection('orders').findOne({ _id: new ObjectId(params.id) });
        const data =(JSON.parse(JSON.stringify(order)));
