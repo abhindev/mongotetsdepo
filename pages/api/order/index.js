@@ -19,7 +19,7 @@ const handler = async (req, res) => {
     try {
       const order = await db.collection("orders").insertOne(req.body);
       res.status(201).json(order);
-      console.log(order.insertedId);
+      // console.log(order.insertedId);
     } catch (err) {
       res.status(500).json(err);
     }
