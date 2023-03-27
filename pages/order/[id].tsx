@@ -140,6 +140,10 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const client = await MongoClient.connect(uri);
     const db = client.db('kalianiammas');
 
+    const resone = await fetch(`/api/order/chashfree/${params.id}`);
+    const chash = await resone.json();
+    const orderStatus =(chash.data.order_status)
+    
     // Find the order to be updated
     const order = await db.collection('orders').findOne({ _id: new ObjectId(params.id) });
        const data =(JSON.parse(JSON.stringify(order)));
@@ -152,9 +156,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
     // console.log(updatedOrder);
     //get chashfree 
-    const resone = await fetch(`/api/order/chashfree/${params.id}`);
-    const chash = await resone.json();
-    const orderStatus =(chash.data.order_status)
+    
     
     if(orderStatus=="PAID" && status == 0 ){
       const updatedOrder = await db.collection('orders').updateOne(
