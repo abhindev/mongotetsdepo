@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import createOred from '../../hooks/createOredrDb'
+import createOred from '../../hooks/createOredr'
 // import createPayment from "../createPayment"
 import { useRouter } from 'next/router'
 import { useSelector,useDispatch } from 'react-redux'
