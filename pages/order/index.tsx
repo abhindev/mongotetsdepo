@@ -19,13 +19,15 @@ function index() {
   };
   const payLink=()=>{
     const res = createPayment(
-        "oredr_4826567402dhsgmg",
+        "oredr_4826567403ghdgmg",
       10,
       "customer_2547sagh2376ed",
       "customer_name",
       "abhindev4432@gmail.com",
       "6235354432"
-    )
+    ).then(function (result) {
+        console.log(result.payment_link);
+      })
   }
 
 
