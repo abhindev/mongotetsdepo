@@ -13,6 +13,7 @@ const handler = async (req, res) => {
   if (method === "GET") {
     try {
       const order = await db.collection("orders").findOne({ _id: id });
+      
       if (!order) {
         res.status(404).json({ message: "Order not found" });
       } else {

@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+.container
+{
+    /* width: 100vw; */
+    /* height: 80vh; */
+    /* background-color: rgba(0, 0, 0, 0.048); */
+    font-family: 'Montserrat', sans-serif;
+}
+.orderId {
+    /* background-color: aqua; */
+    display: flex;
+    /* font-size: 1rem; */
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+}
+.id {
+    font-size: 16px;
+    
+}
+.date{
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.item {
+    display: flex;
+    /* justify-content: space-between; */
+    margin-top: 10px;
+    /* background-color: blueviolet; */
+}
+
+.more {
+    width: 80vw;
+    /* background-color:red; */
+    display: flex;
+    justify-content: space-between;
+}
+.desc {
+    font-size: 10px;
+}
+/* .status {
+    border-top : 1px solid gray;
+    display: flex;
+} */
+.address {
+    border-top : 1px solid gray;
+    border-bottom : 1px solid gray;
+}
+
+/* ////////sttyes */
+
+.order_track {
+    margin-top: 2rem;
+    padding: 0 1rem;
+    border-top: 1px dashed #2c3e50;
+    padding-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.order_track_step {
+    display: flex;
+    height: 7rem;
+}
+.order_track_step:last-child {
+    overflow: hidden;
+    height: 4rem;
+}
+.order_track_step:last-child .order_track_status span:last-of-type {
+    display: none;
+}
+.order_track_status {
+    margin-right: 1.5rem;
+    position: relative;
+}
+.order_track_status_dot {
+    display: block;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: #77a31f;
+}
+.order_track_status_line {
+    display: block;
+    margin: 0 auto;
+    width: 2px;
+    height: 7rem;
+    background: #77a31f;
+}
+.order_track_text_stat {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 1px;
+}
+.order_track_text_sub {
+    font-size: 1rem;
+    font-weight: 300;
+}
+.order_track {
+    transition: all 0.3s height 0.3s;
+    transform-origin: top center;
+}
+.Error {
+   width: 100vw;
+   height: 80vh;
+   display: flex;
+   background-color: #eff1f3;
+   align-items: center;
+   justify-content: center;
+}
