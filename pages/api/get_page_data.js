@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     try {
-      const response = await fetch(process.env.CASHFREE_URL, {
+      const response = await fetch('https://sandbox.cashfree.com/pg/orders', {
         method: "POST",
         body: JSON.stringify(req.body),
         headers: {
