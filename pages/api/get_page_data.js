@@ -6,8 +6,8 @@ export default async function handler(req, res) {
         headers: {
           "Content-Type": "application/json",
           "x-api-version": "2022-01-01",
-          "x-client-id": process.env.CASHFREE_CLIENT_ID,
-          "x-client-secret": process.env.CASHFREE_CLIENT_SECRET,
+          "x-client-id": '315764e438e7781950770c97a4467513',
+          "x-client-secret": '4de62862e69a3713931bfd75910f48d68b533b5c',
         },
       });
   
