@@ -28,7 +28,7 @@ async function createOrder(
   item: string,
   total: number
 ): Promise<Order> {
-  const res = await fetch("http://localhost:3000/api/order", {
+  const res = await fetch("/api/order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
