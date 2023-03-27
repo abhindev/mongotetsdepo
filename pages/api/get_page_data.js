@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       res.status(response.status).json(responseData);
     } catch (error) {
       console.error("Error:", error);
-      res.status(500).json({ message: "An error occurred." });
+      res.status(500).json({ message: "An error occurred." + error });
     }
   }
   
