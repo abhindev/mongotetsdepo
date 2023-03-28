@@ -10,6 +10,7 @@ import Link from "next/link";
 import Details from "../../components/template/products/Details";
 import { useRouter } from "next/router";
 // import Slider from "../../components/slider"
+import Slider from "../../components/tools/Slider";
 
 const Product = ({ product, products }: any) => {
   // console.log(pizzas)
@@ -52,6 +53,8 @@ const Product = ({ product, products }: any) => {
   //     // setExtras(extras.filter((extra) => extra._id !== option._id));
   //   }
   // };
+  
+
   const addQuantity = () => {
     setQuantity(Number(quantity) + 1);
   };
@@ -72,18 +75,7 @@ const Product = ({ product, products }: any) => {
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.imgContainer}>
-          {img.map((image: any, i: number) => (
-        <div key={i}>
-          <Image
-            src={image}
-            //   // objectFit="contain"
-            //   // layout="fill"
-            alt=""
-            width={300}
-            height={300}
-          />
-        </div>
-      ))}
+          <Slider imageArray={img}/> 
           </div>
         </div>
         <div className={styles.right}>
@@ -107,7 +99,7 @@ const Product = ({ product, products }: any) => {
                       handleClickPrice(size);
                     }
                     setSelection(i);
-                    setImg(product.prices[i].img)
+                    setImg(product.prices[i].img);
                   }}
                 >
                   {size.text}
@@ -157,18 +149,6 @@ const Product = ({ product, products }: any) => {
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>
       </div>
-      {img.map((image: any, i: number) => (
-        <div key={i}>
-          <Image
-            src={image}
-            //   // objectFit="contain"
-            //   // layout="fill"
-            alt=""
-            width={100}
-            height={100}
-          />
-        </div>
-      ))}
     </>
   );
 };
