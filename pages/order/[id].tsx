@@ -1,29 +1,29 @@
 import { MongoClient, ObjectId } from "mongodb";
 
-// interface OrderProps {
-//   order:
-//     | {
-//         _id: string;
-//         customer: string;
-//         method: number;
-//         item: any;
-//         status: number;
-//       }
-//     | any;
-//   chash: any;
-// }
+interface OrderProps {
+  order:
+    | {
+        _id: string;
+        customer: string;
+        method: number;
+        item: any;
+        status: number;
+      }
+    | any;
+  chash: any;
+}
 
-// const Order = ({ order }: OrderProps) => {
-//   console.log(order);
-//   // console.log(chash);
+const Order = ({ order }: OrderProps) => {
+  console.log(order);
+  // console.log(chash);
 
-//   return (
-//     <div>
-//       <h1>hay</h1>
-//       {/* <h1>{order._id}</h1> */}
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <h1>hay</h1>
+      <h1>{order._id}</h1>
+    </div>
+  );
+};
 
 interface Params {
   id: string;
@@ -70,7 +70,7 @@ interface Params {
 //     }
 // };
 
-// export default Order;
+export default Order;
 
 export const getServerSideProps = async ({ params }: { params: Params }) => {
   try {
