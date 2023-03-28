@@ -30,7 +30,8 @@
 
 //   return (
 //     <div>
-//     {order_status == "PAID" ? <><div className={styles.container}>
+//     {order_status == "PAID" ? <>
+// <div className={styles.container}>
 //     <div>
 //     <div className={styles.orderId}>
 //       <h3 className={styles.id} >Order ID: {order._id}</h3>
