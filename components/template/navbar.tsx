@@ -17,6 +17,12 @@ function navbar() {
            </div>
          </Link>
        </div>
+       <Link href={"/order"} passHref>     
+           <h1>
+           <BiShoppingBag />
+           </h1>
+
+       </Link>
        <Link href={"/cart"} passHref>
          <div className={styles.item}>
        <div className={styles.cart}>
