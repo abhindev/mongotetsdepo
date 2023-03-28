@@ -1,14 +1,14 @@
 import styles from "../../styles/Product.module.css";
 import Image from "next/image";
 import { useState } from "react";
-import clientPromise from '../../lib/mongodb'
-import { MongoClient, ObjectId } from 'mongodb';
+import clientPromise from "../../lib/mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 // import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../lib/redux/cartSlice";
 import Link from "next/link";
 import Details from "../../components/template/products/Details";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 // import Slider from "../../components/slider"
 
 const Product = ({ product, products }: any) => {
@@ -17,20 +17,24 @@ const Product = ({ product, products }: any) => {
   const [selection, setSelection] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [variant, serVariant] = useState(product.prices[0].text);
+  const [img, setImg] = useState(product.prices[selection].img);
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleClickPrice=(size:any) => {
-    console.log(size.price)
-    console.log(size.text)
-    setPrice(size.price) 
-    serVariant(size.text)
-  }
+  console.log(product);
+  console.log(img);
+
+  const handleClickPrice = (size: any) => {
+    console.log(size.price);
+    console.log(size.text);
+    setPrice(size.price);
+    serVariant(size.text);
+  };
   // console.log(product.prices[0].text);
   // const changePrice = (number: any) => {
   //   setPrice(price + number);
   // };
-  
+
   // const handleSize = (sizeIndex: any) => {
   //   const difference = product.prices[sizeIndex] - product.prices[size];
   //   setSize(sizeIndex);
@@ -49,18 +53,18 @@ const Product = ({ product, products }: any) => {
   //   }
   // };
   const addQuantity = () => {
-    setQuantity(Number(quantity)+1)
-  }
+    setQuantity(Number(quantity) + 1);
+  };
   const removeQuantity = () => {
-    setQuantity(Number(quantity)-1)
-  }
+    setQuantity(Number(quantity) - 1);
+  };
 
   const handleClickAddtoCart = () => {
-    dispatch(addProduct({ ...product,  price, quantity,variant }));
+    dispatch(addProduct({ ...product, price, quantity, variant }));
   };
   const handleClickBuy = () => {
-    dispatch(addProduct({ ...product,  price, quantity,variant }));
-    router.push('/cart')
+    dispatch(addProduct({ ...product, price, quantity, variant }));
+    router.push("/cart");
   };
 
   return (
@@ -68,36 +72,67 @@ const Product = ({ product, products }: any) => {
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.imgContainer}>
-            <Image
-              src={product.img[0]}
-              objectFit="contain"
-              layout="fill"
-              alt=""
-            />
+          {img.map((image: any, i: number) => (
+        <div key={i}>
+          <Image
+            src={image}
+            //   // objectFit="contain"
+            //   // layout="fill"
+            alt=""
+            width={300}
+            height={300}
+          />
+        </div>
+      ))}
           </div>
         </div>
         <div className={styles.right}>
           <p className={styles.title}>{product.title}</p>
           <span className={styles.price}>₹ {price}</span>
           <div className={styles.decsDiv}>
-          <p className={styles.desc}>{product.desc}</p>
+            <p className={styles.desc}>{product.desc}</p>
           </div>
           <h3 className={styles.choose}>Choose the size</h3>
           <div className={styles.sizes}>
             {product.prices.map((size: any, i: number) => (
-              <div className={styles.size} key={i} >
-                <h1 style={{backgroundColor: i==selection? "#76A11F":"white", color: i==selection? "white":"black" }} className={styles.number} onClick={(e)=>{{handleClickPrice(size)}; setSelection(i)}} >{size.text}</h1>
+              <div className={styles.size} key={i}>
+                <h1
+                  style={{
+                    backgroundColor: i == selection ? "#76A11F" : "white",
+                    color: i == selection ? "white" : "black",
+                  }}
+                  className={styles.number}
+                  onClick={(e) => {
+                    {
+                      handleClickPrice(size);
+                    }
+                    setSelection(i);
+                    setImg(product.prices[i].img)
+                  }}
+                >
+                  {size.text}
+                </h1>
               </div>
             ))}
-
           </div>
 
           <div className={styles.add}>
-            
             <div className={styles.quantity}>
-              <button className={styles.quantity_button} onClick={()=>{quantity>1? removeQuantity() : null}}>-</button>
+              <button
+                className={styles.quantity_button}
+                onClick={() => {
+                  quantity > 1 ? removeQuantity() : null;
+                }}
+              >
+                -
+              </button>
               <p>{quantity}</p>
-              <button className={styles.quantity_button} onClick={()=>addQuantity()}>+</button>
+              <button
+                className={styles.quantity_button}
+                onClick={() => addQuantity()}
+              >
+                +
+              </button>
             </div>
             <button
               className={styles.button}
@@ -106,18 +141,15 @@ const Product = ({ product, products }: any) => {
             >
               BUY NOW
             </button>
-            <button className={styles.button} 
-            onClick={handleClickAddtoCart}
-            >
+            <button className={styles.button} onClick={handleClickAddtoCart}>
               ADD TO CART
             </button>
-            
           </div>
         </div>
       </div>
       <div>
-        <Details />
-        <p style={{ textAlign: "center", fontSize: "13px",  }}>
+        <Details product={product} />
+        <p style={{ textAlign: "center", fontSize: "13px" }}>
           Related Products
         </p>
         {/* <Slider pizza={pizzas}/> */}
@@ -125,43 +157,55 @@ const Product = ({ product, products }: any) => {
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>
       </div>
+      {img.map((image: any, i: number) => (
+        <div key={i}>
+          <Image
+            src={image}
+            //   // objectFit="contain"
+            //   // layout="fill"
+            alt=""
+            width={100}
+            height={100}
+          />
+        </div>
+      ))}
     </>
   );
 };
 
 interface Params {
-    id: string;
-  }
-
-export const getServerSideProps = async ({ params }: { params: Params }) => {
-    try {
-        const uri = process.env.MONGODB_URI;
-
-if (!uri) {
-  throw new Error('MongoDB connection string is missing.');
+  id: string;
 }
 
-const client = await MongoClient.connect(uri);
-const db = client.db('kalianiammas');
-      const product = await db
-        .collection('products')
-        .findOne({ _id: new ObjectId(params.id) });
-  
-      // console.log(product);
-  
-      return {
-        props: {
-          product: JSON.parse(JSON.stringify(product)),
-        },
-      };
-    } catch (error) {
-      console.error(error);
-      return {
-        props: {
-          product: null,
-        },
-      };
+export const getServerSideProps = async ({ params }: { params: Params }) => {
+  try {
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+      throw new Error("MongoDB connection string is missing.");
     }
-  };
+
+    const client = await MongoClient.connect(uri);
+    const db = client.db("kalianiammas");
+    const product = await db
+      .collection("products")
+      .findOne({ _id: new ObjectId(params.id) });
+
+    // console.log(product);
+
+    return {
+      props: {
+        product: JSON.parse(JSON.stringify(product)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        product: null,
+      },
+    };
+  }
+};
 
 export default Product;
