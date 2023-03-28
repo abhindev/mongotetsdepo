@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId } from "mongodb";
+import { useState } from "react";
 
 interface OrderProps {
   order:
@@ -10,20 +11,27 @@ interface OrderProps {
         status: number;
       }
     | any;
-    error: any;
+  error: any;
 }
 
 const Order = ({ order, error }: OrderProps) => {
-  console.log(error);
+  console.log(order);
+  const [isorder,setIsorder] = useState(false)
   // console.log(chash);
+  
 
+  var isDisplayed = false;
+  if (isDisplayed == false) {
+    if(order &&  isorder==false ){
+      setIsorder(true)
+      isDisplayed=true
+    }
+  }
   return (
     <div>
-      {error==null? <h1>error</h1>:
-      <>
-      <h1>hay</h1>
-     <h1>{order._id}</h1>
-     </>}
+      {
+        isorder!==true ? <h1>error</h1> : <h1>no</h1>
+      }
     </div>
   );
 };
@@ -45,24 +53,23 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
     const uri = process.env.MONGODB_URI;
     if (!uri) {
-      throw new Error('MongoDB connection string is missing.');
+      throw new Error("MongoDB connection string is missing.");
     }
     const client = await MongoClient.connect(uri);
-    const db = client.db('kalianiammas');
+    const db = client.db("kalianiammas");
 
-    if (orderStatus == 'PAID') {
+    if (orderStatus == "PAID") {
       const orders = await db
-        .collection('orders')
+        .collection("orders")
         .findOne({ _id: new ObjectId(params.id) });
       const order = JSON.parse(JSON.stringify(orders));
       const status = order.status;
       if (status < 1) {
-        console.log('true');
+        console.log("true");
         // Update the order with method: 1
-        const updatedOrder = await db.collection('orders').updateOne(
-          { _id: new ObjectId(params.id) },
-          { $set: { status: 1 } }
-        );
+        const updatedOrder = await db
+          .collection("orders")
+          .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
       }
       return {
         props: {
@@ -71,16 +78,15 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       };
     } else {
       const deletOrder = await db
-        .collection('orders')
+        .collection("orders")
         .deleteOne({ _id: new ObjectId(params.id) });
+      return {
+        props: {
+          error: "ERROR",
+        },
+      };
     }
-  } catch (err:any) {
+  } catch (err: any) {
     console.log(err);
-    return { 
-      props: {
-        order: null,
-      },
-    };
   }
 };
-
