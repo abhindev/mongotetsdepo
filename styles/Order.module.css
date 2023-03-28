@@ -1,0 +1,11 @@
+.imagecontainer {
+    /* background-color: aquamarine; */
+    /* margin: 10px; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.rev {
+    display: flex;
+    flex-direction: column-reverse;
+}

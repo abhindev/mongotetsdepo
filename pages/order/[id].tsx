@@ -2,6 +2,9 @@ import { MongoClient, ObjectId } from "mongodb";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/OrderID.module.css";
+// import { reset, addOrder } from "../../lib/redux/cartSlice";
+import {addOrder} from "../../lib/redux/orderSlice"
+import { useDispatch } from "react-redux";
 interface OrderProps {
   order:
     | {
@@ -21,12 +24,13 @@ const Order = ({ order, error }: OrderProps) => {
   // console.log(chash);
   const orderItems = order?.item.products;
   const orderstatus = order?.status;
-
+  const dispatch = useDispatch();
   var isDisplayed = false;
   if (isDisplayed == false) {
     if (order && isorder == false) {
       setIsorder(true);
       isDisplayed = true;
+      dispatch(addOrder({ ...order }));
     }
   }
   return (
