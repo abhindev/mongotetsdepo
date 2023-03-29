@@ -83,7 +83,10 @@ function ProductCard({ product, i }: any) {
                   width < 600 ? styles.button_cart_mob : styles.button_cart
                 }
               >
+                <div>
+
                 <BiShoppingBag />
+                </div>
               </button>
             </div>
       </div>

@@ -2,7 +2,8 @@
 .container_mob {
  /* background-color: aquamarine; */
  gap: 10px;
- margin: 10px;
+ margin: 30px;
+ margin-bottom: 100px;
  max-height: 300px;
 }
 .left_mob {
@@ -130,8 +131,8 @@
   border-style: none;
   border-radius: 10px;
   margin-right: 10px;
-  font-size: 1.4rem;
-  padding: 1rem 5rem;
+  font-size: 1rem;
+  padding: 0.2rem 5rem;
   color: whitesmoke;
 }
 .button_cart {
@@ -157,4 +158,26 @@
     width: 30vw;
     height: 30vw;
   }
+  .button_buy {
+    /* height: 41px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* width: 41px; */
+    height: 41px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button_cart {
+    width: 41px;
+    height: 41px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
