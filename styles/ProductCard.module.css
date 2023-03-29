@@ -1,4 +1,10 @@
 /* mobail ui  */
+.container_mob {
+ /* background-color: aquamarine; */
+ gap: 10px;
+ margin: 10px;
+ max-height: 300px;
+}
 .left_mob {
   width: 100%;
   height: 40vw;
@@ -8,16 +14,16 @@
   margin-top: 40px;
 }
 .imgcont_mob {
-  border: 1px solid grey;
+  border: 1px solid #e1e1e1;
   border-radius: 10px;
-  height: 130%;
+  height: 140%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .img_mob {
   width: 40vw;
-  height: 30vw;
+  height: 40vw;
   position: relative;
 }
 .right_mob {
@@ -40,6 +46,7 @@
   height: 10px;
   display: flex;
   align-items: center;
+  font-size: 1rem;
 }
 .button_mob {
   margin-top: 10px;
@@ -52,8 +59,9 @@
   width: 20vw;
   margin-right: 20px;
   color: white;
-  font-size: 3vw;
+  font-size: 2.8vw;
   size-adjust: none;
+  /* display: none; */
 }
 .button_cart_mob {
   background-color: hsl(80, 68%, 38%);
@@ -65,26 +73,32 @@
 /* mobail ui end */
 
 .container {
-  margin: 20vh 30px 20vh 30px;
+  margin: 10vh 5% 10vh 5%;
   display: flex;
-  flex-direction: row;
-  
+  flex: 3;
+  /* background-color: aqua; */
+  /* flex-direction: row; */
+  padding: 10px;
 }
-.left {
-  width: 100%;
+ .left {
+  /* width: 100%;
   justify-content: center;
   display: flex;
-}
+  flex: 1; */
+  /* background-color: chocolate; */
+} 
 .right {
+/* 
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   flex-direction: column;
-}
+  flex: 2; */
+  /* background-color: coral; */
+} 
 .imgcont {
   position: relative;
-  width: 45vw;
+  /* width: 45vw; */
   height: 45vw;
 }
 .img {
@@ -94,8 +108,11 @@
 }
 .title {
   /* font-family: "Montserrat", sans-serif; */
+  margin: 0;
 }
 .desc {
+  max-width: 500px;
+  margin: 0;
 /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 }
 .price {
@@ -106,7 +123,7 @@
 }
 .button {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .button_buy {
   background-color: hsl(80, 68%, 38%);
@@ -114,7 +131,7 @@
   border-radius: 10px;
   margin-right: 10px;
   font-size: 1.4rem;
-  padding: 1rem 2rem;
+  padding: 1rem 5rem;
   color: whitesmoke;
 }
 .button_cart {
@@ -122,8 +139,9 @@
   border-style: none;
   border-radius: 10px;
   padding: 1rem 1rem;
-  font-size: 1rem;
+  font-size: 1.8rem;
   color: whitesmoke;
+  font-weight: lighter;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

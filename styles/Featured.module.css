@@ -1,0 +1,80 @@
+.outer {
+    padding: 5px;
+    /* background-color: black; */
+    border-radius: 20px;
+  }
+  .container {
+    height: 26vh;
+    background-color: #fafafa;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+  }
+  
+  .arrowContainer {
+    position: absolute;
+    width: 10%;
+    height: 20%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .arrowleft {
+    font-size: 2.5rem;
+    text-align: center;
+    position: absolute;
+    left: 0;
+  }
+  .arrowright {
+    font-size: 2.5rem;
+    text-align: center;
+    position: absolute;
+    right: 0;
+  }
+  .wrapper {
+    width: 300vw;
+    height: 100%;
+    display: flex;
+    transition: all 1.5s ease-in-out;
+  }
+  
+  .imgContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    .container {
+      height: 35vh;
+      /* background: green; */
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .container {
+      height: 40vh;
+      /* background: blue; */
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .container {
+      height: 30vh;
+      /* background: orange; */
+      /* display: none; */
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .container {
+      height: 60vh;
+      /* background: pink; */
+    }
+  }

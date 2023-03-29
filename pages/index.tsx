@@ -2,7 +2,7 @@ import Head from 'next/head'
 import clientPromise from '../lib/mongodb'
 import { InferGetServerSidePropsType } from 'next'
 import styles from "../styles/Home.module.css"
-
+import Featured from "../components/tools/Featured"
 import PoductList from "../components/template/products/productlist"
 
 
@@ -32,6 +32,7 @@ export default function Home({
       </Head>
 
       <main>
+        <Featured/>
       <PoductList products={products}/>
       </main>
     </div> 
