@@ -36,7 +36,9 @@ const Order = ({ order, error }: OrderProps) => {
   return (
     <div>
       {isorder !== true ? (
-        <h1>error</h1>
+        <div className={styles.error}>
+          <Image src={'/img/error.gif'} alt="" height={200} width={250}/>
+        </div>
       ) : (
         <>
           <div className={styles.container}>

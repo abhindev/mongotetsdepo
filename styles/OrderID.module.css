@@ -100,8 +100,8 @@
     transition: all 0.3s height 0.3s;
     transform-origin: top center;
 }
-.Error {
-   width: 100vw;
+.error {
+   width: 99vw;
    height: 80vh;
    display: flex;
    background-color: #eff1f3;

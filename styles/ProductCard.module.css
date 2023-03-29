@@ -54,15 +54,15 @@
 }
 .button_buy_mob {
   background-color: hsl(80, 68%, 38%);
-  border-style: none;
+  border: none;
   border-radius: 5px;
   width: 20vw;
   margin-right: 20px;
-  color: white;
+  color: #fff;
   font-size: 2.8vw;
   size-adjust: none;
-  /* display: none; */
 }
+
 .button_cart_mob {
   background-color: hsl(80, 68%, 38%);
   border-style: none;
