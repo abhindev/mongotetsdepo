@@ -47,6 +47,7 @@ function Cart() {
   console.log(redux.total);
   return (
     <div className={width>600 ?styles.cart :styles.mob}>
+      <button onClick={()=>clear()}>clear</button>
       {width>600 ?<div className={styles.container}>
         <div className={styles.left}>
           {ckeckout==true ? <CheckOut />:<CartItem cart={redux} />}
