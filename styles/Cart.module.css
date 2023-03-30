@@ -1,42 +1,52 @@
-.head {
-    display: flex;
-    justify-content: space-between;
-}
-.title {
-    font-weight: 300;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.price{
-    font-weight:100;
-    margin-right: 20px;
-}
-.total{
-    margin: 10px;
-    border-bottom: 1px solid gray;
-}
-.subtotal {
-    display: flex;
-    justify-content: space-between;
+.mob {
     
 }
-.sum {
+.cart {
+    overflow-x: none; 
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+}
+.container {
+    /* background-color: chocolate; */
+    width: 80vw;
+    display: flex;
+}
+.left{
+    /* background-color: rgb(157, 149, 149); */
+    width: 100%;
+    margin-right:20px ;
+    /* height: 100%; */
+}
+.right {
+    /* position: relative; */
+    /* background-color: brown; */
+    width: 100%;
+    margin-bottom: 13px;
+    /* height: 100%; */
+}
+
+.totalDiv {
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.total {
     display: flex;
     justify-content: space-between;
-    font-family:    "Helvetica Neue",Helvetica,Arial;
-    margin-left: 20px;
-    margin-right: 20px;
 }
-.checkout{
+.btn {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
-.checkout_btn {
-    font-size: 1.2rem;
-    width: 80vw;
-    justify-content: center;
+.button {
+    width: 80%;
+    height: 40px;
     background-color: hsl(80, 68%, 38%);
-    color: white;
     border-radius: 10px;
     border-style: none;
-    padding: 10px;
 }
+

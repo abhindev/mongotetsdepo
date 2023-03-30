@@ -1,0 +1,39 @@
+.list {
+    display: flex;
+    justify-content: space-between;
+    flex: 3;
+    /* background-color: rgb(224, 224, 224); */
+    /* border-bottom: 1px solid rgb(41, 41, 41); */
+}
+.imagediv {
+    flex: 1;
+}
+.image {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    /* background-color: aquamarine; */
+}
+.text {
+    font-size: 0.7rem;
+    /* flex: start; */
+    margin: 10px;
+    flex: 2;
+    /* background-color: blueviolet; */
+    display: flex;
+}
+.price {
+    margin: 10px;
+}
+
+.lineDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.line {
+    width: 80%;
+    height: 1px;
+    background-color: rgb(89, 96, 94);
+}

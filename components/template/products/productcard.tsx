@@ -41,64 +41,74 @@ function ProductCard({ product, i }: any) {
           : { flexDirection: "row-reverse" }
       }
     >
-      <Link href={`/product/${product._id}`} className={width < 600 ? "" : styles.container}
-      style={
-        index % 2 == 0
-          ? { flexDirection: "row" }
-          : { flexDirection: "row-reverse" }
-      }>
-      <div style={{flex:1}} className={styles.left}>
-      <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
-                 <div className={width < 600 ? styles.img_mob : styles.img}>
-                  <Image src={product.img[0]} alt="" fill objectFit="cover" />
-                 </div>
-              </div>
-      </div>
-      <div style={{flex:2 ,display:"flex",flexDirection:"column",justifyContent: "center"}} className={styles.right}>
-      <Link
-              href={`/product/${product._id}`}
-              passHref
-              style={{ textDecoration: "none", color: "#000" }}
-            >
-              <h1 className={width < 600 ? styles.title_mob : styles.title}>
-                {product.title}
-              </h1>
-              <p className={width < 600 ? styles.desc_mob : styles.desc}>
-                {product.desc}
-              </p>
-              <p className={width < 600 ? styles.price_mob : styles.price}>
-                <h2>Rs. {price}/-</h2>
-              </p>
-            </Link>
-            <div className={width < 600 ? styles.button_mob : styles.button}>
-              <button
-                onClick={() => handleClickBuyNow()}
-                className={width < 600 ? styles.button_buy_mob : styles.button_buy}
-              >
-                BUY NOW
-              </button>
-              <button
-                onClick={() => handleClickAddToCart()}
-                className={
-                  width < 600 ? styles.button_cart_mob : styles.button_cart
-                }
-              >
-                <div>
-
-                <BiShoppingBag />
-                </div>
-              </button>
+      <div
+        className={width < 600 ? "" : styles.container}
+        style={
+          index % 2 == 0
+            ? { flexDirection: "row" }
+            : { flexDirection: "row-reverse" }
+        }
+      >
+        <div style={{ flex: 1 }} className={styles.left}>
+          <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
+          <Link href={`/product/${product._id}`} >
+            <div className={width < 600 ? styles.img_mob : styles.img}>
+              <Image src={product.img[0]} alt="" fill objectFit="cover" />
             </div>
+          </Link>
+          </div>
+        </div>
+        <div
+          style={{
+            flex: 2,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+          className={styles.right}
+        >
+          <Link
+            href={`/product/${product._id}`}
+            passHref
+            style={{ textDecoration: "none", color: "#000" }}
+          >
+            <h1 className={width < 600 ? styles.title_mob : styles.title}>
+              {product.title}
+            </h1>
+            <p className={width < 600 ? styles.desc_mob : styles.desc}>
+              {product.desc}
+            </p>
+            <p className={width < 600 ? styles.price_mob : styles.price}>
+              <h2>Rs. {price}/-</h2>
+            </p>
+          </Link>
+          <div className={width < 600 ? styles.button_mob : styles.button}>
+            <button
+              onClick={() => handleClickBuyNow()}
+              className={
+                width < 600 ? styles.button_buy_mob : styles.button_buy
+              }
+            >
+              BUY NOW
+            </button>
+            <button
+              onClick={() => handleClickAddToCart()}
+              className={
+                width < 600 ? styles.button_cart_mob : styles.button_cart
+              }
+            >
+              <div>
+                <BiShoppingBag />
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
-      </Link>
     </div>
   );
 }
 
 export default ProductCard;
-
-
-
 
 // <Link
 //             href={`/product/${product._id}`}

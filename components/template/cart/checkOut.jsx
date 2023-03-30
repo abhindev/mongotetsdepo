@@ -119,10 +119,11 @@ function CheckOut() {
     createOrder(customer, Address, City,State,pinCode, phone , phone2, item, total)
   .then(function(result) {
     console.log(result.insertedId); // "initResolve"
-    setOrderId(result.insertedId)
     //loading
     setLoading(true)
     //loadingend
+    setOrderId(result.insertedId)
+    
     const order_id = result.insertedId
     // handilClickBuy()
     createPayment(
