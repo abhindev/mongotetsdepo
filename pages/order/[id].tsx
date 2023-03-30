@@ -5,6 +5,7 @@ import styles from "../../styles/OrderID.module.css";
 // import { reset, addOrder } from "../../lib/redux/cartSlice";
 import {addOrder} from "../../lib/redux/orderSlice"
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 interface OrderProps {
   order:
     | {
@@ -138,6 +139,11 @@ const Order = ({ order, error }: OrderProps) => {
                         <p className={styles.order_track_text_stat}>
                           Order Dispatched
                         </p>
+                        {order?.Trackingnumber ? <>
+                        <a target="_blank" href={`https://www.google.com/search?q=dtdc+tracking+R60309980&sxsrf=APwXEdclAnqAEtOFPKFPlVzEn-Xih1xt8Q%3A1680161514618&ei=6jolZJWsJcDZ4-EPo_uz8A8&ved=0ahUKEwiVyfmxkYP-AhXA7DgGHaP9DP4Q4dUDCA8&uact=5&oq=dtdc+tracking+${order.Trackingnumber}&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzoKCAAQRxDWBBCwAzoECAAQAzoGCAAQFhAeSgQIQRgAUPMBWPkGYPMKaAFwAXgAgAFoiAHPAZIBAzAuMpgBAKABAaABAsgBCMABAQ&sclient=gws-wiz-serp`}>
+                        <div>tracking id:  {order.Trackingnumber}</div>
+                          </a>
+                        </> :''} 
                       </div>
                     </div>
                     <div className={styles.order_track_step}>
@@ -148,8 +154,10 @@ const Order = ({ order, error }: OrderProps) => {
                             backgroundColor:
                               orderstatus > 3 ? "#77a31f" : "gray",
                           }}
-                        ></span>
+                        >
+                        </span>
                         <span className={styles.order_track_status_line}></span>
+                        
                       </div>
                       <div className={styles.order_track_text}>
                         <p className={styles.order_track_text_stat}>
