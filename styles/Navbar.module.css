@@ -1,14 +1,8 @@
 .container{
-    height: 60px;
-    padding: 10px 50px;
-    background-color: whitesmoke;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0px;
-    z-index: 10; 
-    margin-bottom: 10px ;
+    justify-content: space-around;
+    background-color: hsl(210, 3%, 74%);
+    z-index: 9;
 }
 
 .logo {
@@ -45,3 +39,51 @@
     margin: 1px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+
+.Hamburgerflase {
+    animation: 1s ease-out 0s 1 slideInRight;
+    width: 98vw;
+    height: 100vh;
+    background-color: crimson;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    transition-delay:1000s;
+    transition: width 2s linear 1s;
+}
+.Hamburger {
+    animation: 1s ease-out 0s 1 slideInLeft;
+    width: 98vw;
+    height: 100vh;
+    background-color: hsl(80, 68%, 38%);;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    transition-delay:1000s;
+    transition: width 2s linear 1s;
+}
+.closeIcon {
+    margin: 40px;
+    font-size: 2rem;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    /* background-color: teal; */
+    margin-left: 40px;
+    font-size: 2.4rem ;
+}
+.items :hover {
+    width: 100%;
+    color: white;
+}
+@keyframes slideInLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }

@@ -44,7 +44,7 @@ function Cart() {
   };
 
   const cart = redux.products;
-  console.log(redux.total);
+  console.log(cart.length);
   return (
     <div className={width>600 ?styles.cart :styles.mob}>
       
@@ -63,10 +63,11 @@ function Cart() {
               <p>Subtotal</p>
               <p>₹{redux.total}.00</p>
             </div>
-            <div className={styles.total}>
+            {cart.length==0? '' :<div className={styles.total}>
               <p>Shipping</p>
               <p>₹50.00</p>
-            </div>
+            </div> }
+            
             <div
               style={{
                 display: "flex",
@@ -87,7 +88,7 @@ function Cart() {
                 <h4>Total</h4>
                 <p>ncluding 18% in taxes</p>
               </div>
-              <h2>INR {redux.total + 50}.00</h2>
+              {cart.length==0? "" : <h2>INR {redux.total + 50}.00</h2>}
             </div>
             <div className={styles.btn}>
               {
@@ -104,10 +105,11 @@ function Cart() {
               <p>Subtotal</p>
               <p>₹{redux.total}.00</p>
             </div>
-            <div className={styles.total}>
+            {cart.length==0? "" :<div className={styles.total}>
               <p>Shipping</p>
               <p>₹50.00</p>
-            </div>
+            </div> }
+            
             <div
               style={{
                 display: "flex",
@@ -128,7 +130,7 @@ function Cart() {
                 <h4>Total</h4>
                 <p>ncluding 18% in taxes</p>
               </div>
-              <h2>INR {redux.total + 50}.00</h2>
+              {cart.length==0? "" : <h2>INR {redux.total + 50}.00</h2>}
             </div>
             <div className={styles.btn}>
               {

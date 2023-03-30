@@ -1,0 +1,8 @@
+.Hamburger {
+    width: 99vw;
+    height: 100vh;
+    background-color: crimson;
+    position: absolute;
+    left: 0;
+    z-index: 999;
+}

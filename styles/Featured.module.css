@@ -1,7 +1,8 @@
 .outer {
-    padding: 5px;
+    padding: 0px;
     /* background-color: black; */
     border-radius: 20px;
+    width: 99vw;
   }
   .container {
     height: 26vh;
