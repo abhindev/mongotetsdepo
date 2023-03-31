@@ -122,13 +122,15 @@ function CheckOut() {
   ///////////////////////////
    const onLaoded = () => {
     if(isSubmit && err==0 &&  val<7 && loading==false) {
-      setLoading(true)
+
     
+   console.log("ruuu")
   
     createOrder(customer, Address, City,State,pinCode, phone , phone2, item, total)
   .then(function(result) {
     console.log(result.insertedId); // "initResolve"
     //loading
+    setLoading(true)
     //loadingend
     setOrderId(result.insertedId)
     
@@ -278,7 +280,7 @@ function CheckOut() {
       {/* <div className={styles.btn}>
       <div className={styles.button} onClick={()=>onLaoded()}>conform</div>
       </div>  */}
-      <div onLoad={onLaoded()}>-</div>
+      <div onLoad={onLaoded()}></div>
       {/* <button onClick={()=>Conform()}>propst</button> */}
       </>
     ) : (
