@@ -21,7 +21,7 @@ function Cart() {
 
   const router = useRouter();
   const [width, height] = useDeviceSize();
-  const h = height + 1000;
+  const h = height - 200;
 
   const setCheckoutbtnFn = () => {
     setSubmit(true);

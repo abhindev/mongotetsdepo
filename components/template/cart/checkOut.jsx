@@ -114,8 +114,18 @@ function CheckOut() {
   const customer_email = email
   const customer_phone = phone
   ////////////////////////////
+  const err = Object.keys(formErrors).length
+  const val = Object.keys(setFormValues).length
+
+  console.log(Object.keys(formErrors).length)
+  console.log(Object.keys(formValues).length)
+  ///////////////////////////
+   const onLaoded = () => {
+    if(isSubmit && err==0 &&  val<7 && loading==false) {
+
+    
+   console.log("ruuu")
   
-  const handilClick=()=>{
     createOrder(customer, Address, City,State,pinCode, phone , phone2, item, total)
   .then(function(result) {
     console.log(result.insertedId); // "initResolve"
@@ -142,7 +152,10 @@ function CheckOut() {
      })
     return "normalReturn";
   })
-  } 
+}else {
+  console.log("error")
+}
+}
   // Object.keys(formErrors).length === 0 && isSubmit ?(handilClick)  : null
   ////////////////create order end////////////////
 //////////////////pay///////////////////////
@@ -264,9 +277,10 @@ function CheckOut() {
         
         {Object.keys(formErrors).length === 0 && isSubmit ? (
       <>
-      <div className={styles.btn}>
-      <button className={styles.button} onClick={()=>handilClick()}>conform</button>
-      </div> 
+      {/* <div className={styles.btn}>
+      <div className={styles.button} onClick={()=>onLaoded()}>conform</div>
+      </div>  */}
+      <div onLoad={onLaoded()}>-</div>
       {/* <button onClick={()=>Conform()}>propst</button> */}
       </>
     ) : (

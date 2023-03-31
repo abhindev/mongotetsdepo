@@ -2,7 +2,7 @@
 .container {
     /* background-color: aquamarine; */
     
-    
+    margin: 20px;
 }
 .title{ 
     margin:10px ;
@@ -45,7 +45,7 @@
 }
 .button {
     font-size: 1.2rem;
-    /* width: 80vw; */
+    width: 60vw;
     justify-content: center;
     background-color: hsl(80, 68%, 38%);
     color: white;
