@@ -1,8 +1,9 @@
 .container{
     display: flex;
     justify-content: space-around;
-    background-color: hsl(210, 3%, 74%);
+    background-color: #cfff70af;
     z-index: 9;
+    height: 70px;
 }
 
 .logo {
@@ -27,11 +28,11 @@
     position: absolute;
     top: -15px;
     right: -15px; 
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    color: whitesmoke;
-    background-color: orangered;
+    /* width: 8px; */
+    /* height: 8px; */
+    /* border-radius: 50%; */
+    color: rgb(0, 0, 0);
+    /* background-color: orangered; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,22 +42,12 @@
 }
 
 
-.Hamburgerflase {
-    animation: 1s ease-out 0s 1 slideInRight;
-    width: 98vw;
-    height: 100vh;
-    background-color: crimson;
-    position: absolute;
-    left: 0;
-    z-index: 999;
-    transition-delay:1000s;
-    transition: width 2s linear 1s;
-}
+
 .Hamburger {
     animation: 1s ease-out 0s 1 slideInLeft;
-    width: 98vw;
+    width: 100vw;
     height: 100vh;
-    background-color: hsl(80, 68%, 38%);;
+    background-color: #cfff70;
     position: absolute;
     left: 0;
     z-index: 999;

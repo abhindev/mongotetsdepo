@@ -70,6 +70,7 @@
   border-radius: 5px;
   padding: 10px;
   color: white;
+  width: 80vw;
 }
 /* mobail ui end */
 
@@ -99,12 +100,12 @@
 } 
 .imgcont {
   position: relative;
-  /* width: 45vw; */
+  width: 45vw;
   height: 45vw;
 }
 .img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   border-radius: 10px;
 }
 .title {
@@ -126,7 +127,7 @@
   display: flex;
   /* justify-content: center; */
 }
-.button_buy {
+/* .button_buy {
   background-color: hsl(80, 68%, 38%);
   border-style: none;
   border-radius: 10px;
@@ -134,43 +135,39 @@
   font-size: 1rem;
   padding: 0.2rem 5rem;
   color: whitesmoke;
-}
+} */
 .button_cart {
   background-color: hsl(80, 68%, 38%);
   border-style: none;
   border-radius: 10px;
   padding: 1rem 1rem;
-  font-size: 1.8rem;
+  /* font-size: 1.8rem; */
   color: whitesmoke;
   font-weight: lighter;
+  width: 200px;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .left {
-    width: 50vw;
+    width: 60vw;
     /* height: 80vh; */
     align-items: center;
     
   }
   .imgcont {
     position: relative;
-    width: 30vw;
-    height: 30vw;
+    /* width: 30vw; */
+    /* height: 30vw; */
   }
-  .button_buy {
-    /* height: 41px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center; */
-    /* width: 41px; */
+  /* .button_buy {
+    
     height: 41px;
     font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   .button_cart {
     width: 41px;
     height: 41px;
@@ -178,6 +175,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 200px;
   }
 
 }

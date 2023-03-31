@@ -51,11 +51,13 @@ function ProductCard({ product, i }: any) {
       >
         <div style={{ flex: 1 }} className={styles.left}>
           <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
-          <Link href={`/product/${product._id}`} >
+          {/* <Link href={`/product/${product._id}`} > */}
+          <div onClick={()=>router.push(`/product/${product._id}`)}>
             <div className={width < 600 ? styles.img_mob : styles.img}>
-              <Image src={product.img[0]} alt="" fill objectFit="cover" />
+              <Image src={product.img[0]} alt="" fill  />
             </div>
-          </Link>
+          </div>
+          {/* </Link> */}
           </div>
         </div>
         <div
@@ -67,11 +69,12 @@ function ProductCard({ product, i }: any) {
           }}
           className={styles.right}
         >
-          <Link
+          {/* <Link
             href={`/product/${product._id}`}
             passHref
             style={{ textDecoration: "none", color: "#000" }}
-          >
+          > */}
+          <div onClick={()=>router.push(`/product/${product._id}`)}>
             <h1 className={width < 600 ? styles.title_mob : styles.title}>
               {product.title}
             </h1>
@@ -81,16 +84,16 @@ function ProductCard({ product, i }: any) {
             <p className={width < 600 ? styles.price_mob : styles.price}>
               <h2>Rs. {price}/-</h2>
             </p>
-          </Link>
+            </div>
           <div className={width < 600 ? styles.button_mob : styles.button}>
-            <button
+            {/* <button
               onClick={() => handleClickBuyNow()}
               className={
                 width < 600 ? styles.button_buy_mob : styles.button_buy
               }
             >
               BUY NOW
-            </button>
+            </button> */}
             <button
               onClick={() => handleClickAddToCart()}
               className={
@@ -109,50 +112,3 @@ function ProductCard({ product, i }: any) {
 }
 
 export default ProductCard;
-
-// <Link
-//             href={`/product/${product._id}`}
-//             passHref
-//             style={{ textDecoration: "none", color: "#000" , flex:3}}
-//           >
-//             <div className={width < 600 ? styles.left_mob : styles.left} style={{flex:1, backgroundColor:"blue"}}>
-//               <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
-//                 <div className={width < 600 ? styles.img_mob : styles.img}>
-//                   <Image src={product.img[0]} alt="" fill objectFit="cover" />
-//                 </div>
-//               </div>
-//             </div>
-//           </Link>
-//           <div className={width < 600 ? styles.right_mob : styles.right} style={{flex:2, backgroundColor:"red"}}>
-//             <Link
-//               href={`/product/${product._id}`}
-//               passHref
-//               style={{ textDecoration: "none", color: "#000" }}
-//             >
-//               <h1 className={width < 600 ? styles.title_mob : styles.title}>
-//                 {product.title}
-//               </h1>
-//               <p className={width < 600 ? styles.desc_mob : styles.desc}>
-//                 {product.desc}
-//               </p>
-//               <p className={width < 600 ? styles.price_mob : styles.price}>
-//                 MRP ₹<h2>{price}</h2>
-//               </p>
-//             </Link>
-//             <div className={width < 600 ? styles.button_mob : styles.button}>
-//               <button
-//                 onClick={() => handleClickBuyNow()}
-//                 className={width < 600 ? styles.button_buy_mob : styles.button_buy}
-//               >
-//                 BUY NOW
-//               </button>
-//               <button
-//                 onClick={() => handleClickAddToCart()}
-//                 className={
-//                   width < 600 ? styles.button_cart_mob : styles.button_cart
-//                 }
-//               >
-//                 <BiShoppingBag />
-//               </button>
-//             </div>
-//           </div>

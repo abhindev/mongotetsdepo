@@ -84,28 +84,30 @@ const Product = ({ product, products }: any) => {
           <div className={styles.decsDiv}>
             <p className={styles.desc}>{product.desc}</p>
           </div>
-          <h3 className={styles.choose}>Choose the size</h3>
+          {Object.keys(product.prices).length !== 1 ?<h3 className={styles.choose}>Choose the size</h3> : ""}
+          
           <div className={styles.sizes}>
-            {product.prices.map((size: any, i: number) => (
+            {Object.keys(product.prices).length !== 1 ? <>{product.prices.map((size: any, i: number) => (
               <div className={styles.size} key={i}>
-                <h1
-                  style={{
-                    backgroundColor: i == selection ? "#76A11F" : "white",
-                    color: i == selection ? "white" : "black",
-                  }}
-                  className={styles.number}
-                  onClick={(e) => {
-                    {
-                      handleClickPrice(size);
-                    }
-                    setSelection(i);
-                    setImg(product.prices[i].img);
-                  }}
-                >
-                  {size.text}
-                </h1>
-              </div>
-            ))}
+              <h1
+                style={{
+                  backgroundColor: i == selection ? "#76A11F" : "white",
+                  color: i == selection ? "white" : "black",
+                }}
+                className={styles.number}
+                onClick={(e) => {
+                  {
+                    handleClickPrice(size);
+                  }
+                  setSelection(i);
+                  setImg(product.prices[i].img);
+                }}
+              >
+                {size.text}
+              </h1>
+            </div> 
+            ))} </>: ''}
+            
           </div>
 
           <div className={styles.add}>
