@@ -137,13 +137,13 @@ function Cart() {
                 ckeckout==false ?<button className={styles.button} onClick={()=>handile_mobsubmit()}>CkeckOut</button>: ""
               }
             </div>
-            <button onClick={()=>clear()}>clear</button>
+            {/* <button onClick={()=>clear()}>clear</button> */}
           </div>
-      {
+      {/* {
         ckeckout==false ? <button onClick={()=>handile_mobsubmit()}>
         submit
         </button> : ""
-      }
+      } */}
       
       {
         ckeckout!==false ? <CheckOut /> : ""

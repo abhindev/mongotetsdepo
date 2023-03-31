@@ -21,11 +21,9 @@ function Order() {
   //   router.push(href)
   // }
   return (
-    <div>
+    <div className={styles.orderindex}>
       <h1>order</h1>
-      <button onClick={()=>{
-        on()
-      }}>clear</button>
+      {/* <button onClick={()=>{  on()}}>clear</button> */}
       {order.orders.map((order:any, i:number)=>
       <Link href={`order/${order._id}`} style={{textDecoration:"none"}}>
         <div key={i} className={styles.rev}>
@@ -44,8 +42,8 @@ function Order() {
               </>
               }</span>
             </div>
-            <div>{order.item.total}</div>
-            <div>{order.status}</div>
+            {/* <div>{order.item.total}</div> */}
+            {/* <div>{order.status}</div> */}
             <div>
             {/* {console.log("getBackgroundColor")} */}
             {/* {order.status==0 ? handleRemove(i, order,orderItem) : demo()} */}
