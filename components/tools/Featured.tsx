@@ -67,9 +67,8 @@ import "../../styles/Featured.module.css"
 interface Props {
   imageArray: string[];
 }
-
-const Featured: React.FC<Props> = () => {  
-  const imageArray = ["/hero/web home3.webp", "/hero/web home.webp", "/hero/hompaage 2.webp"];
+const Featured: React.FC<Props> = ({ imageArray }) => {  
+  
   return (
     <Carousel autoPlay interval={4000} transitionTime={1000} infiniteLoop showThumbs={false}>
       {imageArray.map((image, i) => (
