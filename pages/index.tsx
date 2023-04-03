@@ -35,7 +35,7 @@ export default function Home({
       </Head>
 
       <main>
-        <Featured imageArray={imageArray}/>
+        <Featured imageArray={["/hero/web home3.webp", "/hero/web home.webp", "/hero/hompaage 2.webp"]}/>
       <PoductList products={products}/>
       </main>
     </div> 
