@@ -67,7 +67,7 @@ import "../../styles/Featured.module.css"
 interface Props {
   imageArray: string[];
 }
-const Featured: React.FC<Props> = ({ imageArray }:any) => {  
+const Featured: React.FC<Props> = ( imageArray :any) => {  
   
   return (
     <Carousel autoPlay interval={4000} transitionTime={1000} infiniteLoop showThumbs={false}>
