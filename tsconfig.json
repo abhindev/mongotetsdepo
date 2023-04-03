@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/redux/store.js", "lib/redux/orderSlice.js", "lib/redux/cartSlice.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/redux/store.js", "lib/redux/orderSlice.js", "lib/redux/cartSlice.js", "pages/product/loading.js"],
   "exclude": ["node_modules"]
 }
