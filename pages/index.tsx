@@ -21,9 +21,6 @@ export async function getServerSideProps() {
   }
 }
 
-const imageArray = ["/hero/web home3.webp", "/hero/web home.webp", "/hero/hompaage 2.webp"];
-
-
 export default function Home({
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -35,7 +32,7 @@ export default function Home({
       </Head>
 
       <main>
-        <Featured imageArray={["/hero/web home3.webp", "/hero/web home.webp", "/hero/hompaage 2.webp"]}/>
+        <Featured/>
       <PoductList products={products}/>
       </main>
     </div> 
