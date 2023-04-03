@@ -6,6 +6,7 @@ import { BsFacebook } from "react-icons/bs";
 import { BsWhatsapp } from "react-icons/bs";
 
 import useDeviceSize from "../hooks/useWindowSize";
+import Link from "next/link";
 
 function footer() {
   const [width, height] = useDeviceSize();
@@ -15,13 +16,19 @@ function footer() {
         <h1 className={styles.title}>Connect with us</h1>
         <div className={styles.social}>
           <div className={styles.icon}>
+            <Link href={""}>
           <BsFacebook/>
+            </Link>
           </div>
           <div className={styles.icon}>
+          <Link href={""}>
           <BsInstagram/>
+          </Link>
           </div>
           <div className={styles.icon}>
+          <Link href={""}>
           <BsWhatsapp/>
+          </Link>
           </div>
         </div>
       </div>
