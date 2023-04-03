@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from "../../styles/Navbar.module.css";
-import logo from "/img/logo.png";
+import Logo from "../../public/logo.png";
 import { useSelector } from "react-redux";
 import { BiShoppingBag } from "react-icons/bi";
 import { HiMenuAlt2 } from "react-icons/hi";
@@ -34,29 +34,16 @@ function navbar() {
         </div>
       </div> : 
       ''}
-      
-
-
-
-
-
-
-
-
-
-
-
-
 
       <div onClick={()=>handilclickOppen()}>
-           <h1>
-           <HiMenuAlt2 />
+           <h1 style={{marginLeft:"10px"}}>
+           <HiMenuAlt2 color="white"/>
            </h1>
         </div>
        <div className={styles.item}>
          <Link href="/">
            <div className={styles.logo}>
-             <Image src='/img/logo.png' alt="" className={styles.logoImage} fill />
+             <Image src={Logo} alt="" className={styles.logoImage} fill />
            </div>
          </Link>
        </div>
@@ -65,11 +52,11 @@ function navbar() {
          <div className={styles.item}>
        <div className={styles.cart}>
          <div className={styles.cartIcon}>
-           <h1>
-           <BiShoppingBag />
+           <h1 style={{marginRight:"15px"}}>
+           <BiShoppingBag color="white"/>
            </h1>
             </div>
-            <div className={styles.cartcounter}>{quantity}</div>
+            <div className={styles.cartcounter} style={{color:"white"}}>{quantity}</div>
           </div>
          </div>
        </Link>

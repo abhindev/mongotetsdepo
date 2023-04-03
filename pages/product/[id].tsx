@@ -111,8 +111,8 @@ const Product = ({ product, products }: any) => {
           </div>
 
           <div className={styles.add}>
-            <div className={styles.quantity}>
-              <button
+            {/*<div className={styles.quantity}>
+               <button
                 className={styles.quantity_button}
                 onClick={() => {
                   quantity > 1 ? removeQuantity() : null;
@@ -127,7 +127,7 @@ const Product = ({ product, products }: any) => {
               >
                 +
               </button>
-            </div>
+            </div> */}
             <button
               className={styles.button}
               onClick={handleClickBuy}
@@ -143,8 +143,9 @@ const Product = ({ product, products }: any) => {
       </div>
       <div>
         <Details product={product} />
-        <p style={{ textAlign: "center", fontSize: "13px" }}>
-          Related Products
+        <p style={{ textAlign: "center", fontSize: "13px" ,whiteSpace: 'pre'}}>
+          {/* `{"xhmvb \n ashgjdbc"}` */}
+          {"line1 \n line w"}
         </p>
         {/* <Slider pizza={pizzas}/> */}
       </div>
@@ -191,3 +192,5 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 };
 
 export default Product;
+
+

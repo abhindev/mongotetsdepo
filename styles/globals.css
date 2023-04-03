@@ -1,29 +1,31 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-*{
-    font-family: 'Poppins', sans-serif;
-    /* font-family: 'Nunito', sans-serif; */
-    /* font-family: 'Montserrat', sans-serif; */
-    text-decoration: none;
-    animation-duration: 3s;
-}  
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+* {
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 230;
+  /* font-family: 'Nunito', sans-serif; */
+  /* font-family: 'Montserrat', sans-serif; */
+  text-decoration: none;
+  animation-duration: 3s;
+}
 
-
-a{
-    text-decoration: none;
-    color: black;
+a {
+  text-decoration: none;
+  color: black;
 }
 .carousel-status {
-    display: none;
+  display: none;
 }
- .thumbs {
+.thumbs {
   display: flex;
-    flex-flow: row wrap;
-    place-content: center;
-    align-items: center;
-    margin: 0px;
-    padding: 0px;
+  flex-flow: row wrap;
+  place-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
 }
 /*
 .animated {
@@ -36,26 +38,31 @@ a{
   white-space: nowrap;
 } */
 
-body{
-    margin: 0;
+body {
+  margin: 0;
 }
 /* //////////////////////////// */
 
 .page-enter {
-    opacity: 0;
-  }
-  
-  .page-enter-active {
-    opacity: 1;
-    transition: opacity 800ms;
-  }
-  
-  .page-exit {
-    opacity: 1;
-  }
-  
-  .page-exit-active {
-    opacity: 0;
-    transition: opacity 800ms;
-  }
-  
+  opacity: 0;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 800ms;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 800ms;
+}
+
+/* slider */
+
+.control-dots{
+  display: none;
+}

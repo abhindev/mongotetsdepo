@@ -8,11 +8,12 @@
 .title{
     display: flex;
     justify-content: center;
+    font-size: 1.6rem;
 }
 .social {
     display: flex;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 .icon {
     margin: 10px;
@@ -20,9 +21,12 @@
 .bottom {
     display: flex;
     justify-content: space-around;
+    /* margin: 20px; */
 }
 .bottom_mob {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    /* margin: 20px; */
+    padding: 30px;
 }

@@ -54,7 +54,7 @@ function ProductCard({ product, i }: any) {
           {/* <Link href={`/product/${product._id}`} > */}
           <div onClick={()=>router.push(`/product/${product._id}`)}>
             <div className={width < 600 ? styles.img_mob : styles.img}>
-              <Image src={product.img[0]} alt="" fill  />
+              <Image src={product.img[0]} alt="" fill sizes="100vw"/>
             </div>
           </div>
           {/* </Link> */}
@@ -95,13 +95,14 @@ function ProductCard({ product, i }: any) {
               BUY NOW
             </button> */}
             <button
-              onClick={() => handleClickAddToCart()}
+              onClick={() => handleClickBuyNow()}
               className={
                 width < 600 ? styles.button_cart_mob : styles.button_cart
               }
             >
               <div>
-                <BiShoppingBag />
+              BUY NOW
+                {/* <BiShoppingBag /> */}
               </div>
             </button>
           </div>

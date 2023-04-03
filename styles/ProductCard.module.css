@@ -3,7 +3,7 @@
  /* background-color: aquamarine; */
  gap: 10px;
  margin: 30px;
- margin-bottom: 100px;
+ margin-bottom: 20px;
  max-height: 300px;
 }
 .left_mob {
@@ -15,17 +15,22 @@
   margin-top: 40px;
 }
 .imgcont_mob {
-  border: 1px solid #e1e1e1;
-  border-radius: 10px;
-  height: 140%;
+  
+  /* height: 130%; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .img_mob {
+  border: 1px solid hsla(0, 0%, 74%, 0.264);
+  border-radius: 10px;
+  /* z-index: 9; */
   width: 40vw;
   height: 40vw;
   position: relative;
+}
+.img_mob :first-child {
+  z-index: -1;
 }
 .right_mob {
   padding: 10%;
@@ -38,7 +43,7 @@
   font-size: 80%;
 }
 .title_mob {
-  font-size: 4.5vw;
+  font-size: 3vw;
 }
 .desc_mob {
   display: none;
