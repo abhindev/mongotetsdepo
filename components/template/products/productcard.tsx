@@ -45,13 +45,13 @@ function ProductCard({ product, i }: any) {
       >
         <div style={{ flex: 1 }} className={styles.left}>
           <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
-            <Link href={`/product/${product._id}`}>
+            <a href={`/product/${product._id}`}>
               {/* <div onClick={()=>handleClick() }> */}
               <div className={width < 600 ? styles.img_mob : styles.img}>
                 <Image src={product.img[0]} alt="" fill sizes="100vw" />
               </div>
               {/* </div> */}
-            </Link>
+            </a>
           </div>
         </div>
         <div
@@ -63,9 +63,9 @@ function ProductCard({ product, i }: any) {
           }}
           className={styles.right}
         >
-          <Link
+          <a
             href={`/product/${product._id}`}
-            passHref
+            // passHref
             style={{ textDecoration: "none", color: "#000" }}
           >
             {/* <div onClick={()=>handleClick()}> */}
@@ -80,7 +80,7 @@ function ProductCard({ product, i }: any) {
                 <h2>Rs. {price}/-</h2>
               </p>
             </div>
-          </Link>
+          </a>
 
           <div className={width < 600 ? styles.button_mob : styles.button}>
             <button

@@ -18,7 +18,7 @@
   .imgContainer{
     /* background-color: aquamarine; */
     width: 100%;
-    /* height: 100%; */
+    /* height: 100px; */
     /* margin-bottom: 100px; */
   }
   
@@ -27,10 +27,11 @@
     margin: 10px 0 10px 0 ;
   }
   .price {
+    /* text-decoration: none; */
     color: #090909;
     font-size: 24px;
     font-weight: 400;
-    border-bottom: 1px solid #d1411e;
+    /* border-bottom: 1px solid #d1411e; */
   }
   .desc {
     font-size: 2vw;
@@ -46,8 +47,9 @@
     flex-wrap: wrap;
     align-items: center;
     transition:  5s ease; 
+    /* background-color: #d1411e; */
   }
-  
+     
   .size {
     margin-bottom: 20px; 
     border-radius: 19px;
@@ -66,9 +68,9 @@
     padding:5px 20px;
     margin: 5px;
     border-radius: 19px;
-    border: 2px solid black;
+    border: 1px solid rgba(46, 46, 46, 0.11);
   }
-  .quantity{
+  /* .quantity{
     display: flex;
     align-items: center;
   }
@@ -79,7 +81,7 @@
     border-radius: 50%;
     margin: 0px 10px;
     
-  }
+  } */
   
   .button {
     height: 45px;
@@ -105,6 +107,7 @@
     .imgContainer {
       /* width: 70vw; */
       /* height: 70vw; */
+      /* color: #d3ff7ce0; */
     }
     .title {
       font-size: 6vw;

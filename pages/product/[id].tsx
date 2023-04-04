@@ -6,7 +6,8 @@ import { addProduct } from "../../lib/redux/cartSlice";
 import Details from "../../components/template/products/Details";
 import { useRouter } from "next/router";
 import Slider from "../../components/tools/Slider";
-
+import CarouselSlider from "../../components/tools/productSilde"
+import Link from "next/link";
 
 interface Params {
   id: string;
@@ -25,10 +26,12 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const product = await db
       .collection("products")
       .findOne({ _id: new ObjectId(params.id) });
-
+    const Data = await db.collection("products").find({}).toArray();
+    
     return {
       props: {
         product: JSON.parse(JSON.stringify(product)),
+        products: JSON.parse(JSON.stringify(Data))
       },
     };
   } catch (error) {
@@ -53,12 +56,12 @@ const Product = ({ product, products }: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  console.log(product);
-  console.log(img);
+  console.log(products);
+  // console.log(img);
 
   const handleClickPrice = (size: any) => {
-    console.log(size.price);
-    console.log(size.text);
+    // console.log(size.price);
+    // console.log(size.text);
     setPrice(size.price);
     serVariant(size.text);
   };
@@ -128,6 +131,26 @@ const Product = ({ product, products }: any) => {
       </div>
       <div>
         <Details product={product} />
+      </div>
+      <div>
+     
+                  <div style={{display:"flex", justifyContent:"center"}}><h3 style={{fontSize:"1.3rem"}}>Related Products</h3></div>
+      <CarouselSlider>
+        {products.map((item :any ,i :number)=> (
+          
+        <div key={i}>
+          <a href={`/product/${item._id}`}>
+          <img src={item.img[0]} alt={`Image ${i+1}`} style={{maxHeight:"250px",minHeight:"30px",height:"30vw"}}/>
+          </a>
+        </div>
+        ))}
+      </CarouselSlider>
+
+
+
+
+
+     {/* < RelatedProducts products={products}/> */}
       </div>
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>
