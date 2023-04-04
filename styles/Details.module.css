@@ -20,7 +20,8 @@
 }
 .panels {
     margin: 0 10% 10% 10%;
-    font-size: 3.5vw;
+    font-size: 1.2rem;
+
 } 
 
 @media screen and (max-width: 480px) {
