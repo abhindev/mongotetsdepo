@@ -3,7 +3,7 @@ import createOrder from '../../hooks/createOredr'
 import createPayment from "../../hooks/createPayment"
 import { useRouter } from 'next/router'
 import { useSelector,useDispatch } from 'react-redux'
-import { reset } from "../../../lib/redux/cartSlice";
+
 
 import styles from "../../..//styles/Checkout.module.css"
 
@@ -156,19 +156,8 @@ function CheckOut() {
   console.log("error")
 }
 }
-  // Object.keys(formErrors).length === 0 && isSubmit ?(handilClick)  : null
-  ////////////////create order end////////////////
-//////////////////pay///////////////////////
-
-
-    
   /////////////////pay-end////////////////
-  const Conform=()=>{
-    setTimeout(function() {
-      window.scrollTo(0, h);
-    }, 1);
-    
-  }
+ 
   return (
     <div className={styles.container}>
 
@@ -277,11 +266,7 @@ function CheckOut() {
         
         {Object.keys(formErrors).length === 0 && isSubmit ? (
       <>
-      {/* <div className={styles.btn}>
-      <div className={styles.button} onClick={()=>onLaoded()}>conform</div>
-      </div>  */}
       <div onLoad={onLaoded()}></div>
-      {/* <button onClick={()=>Conform()}>propst</button> */}
       </>
     ) : (
         <div className={styles.btn}>

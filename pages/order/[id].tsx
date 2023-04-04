@@ -2,10 +2,8 @@ import { MongoClient, ObjectId } from "mongodb";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/OrderID.module.css";
-// import { reset, addOrder } from "../../lib/redux/cartSlice";
 import {addOrder} from "../../lib/redux/orderSlice"
 import { useDispatch } from "react-redux";
-import Link from "next/link";
 interface OrderProps {
   order:
     | {
@@ -18,6 +16,57 @@ interface OrderProps {
     | any;
   error: any;
 }
+
+
+export const getServerSideProps = async ({ params }: { params: Params }) => {
+  try {
+    const resone = await fetch(
+      `${process.env.DOM}/api/order/chashfree/${params.id}`
+    );
+    const chash = await resone.json();
+    const orderStatus = chash.data.order_status;
+    console.log(orderStatus);
+
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+      throw new Error("MongoDB connection string is missing.");
+    }
+    const client = await MongoClient.connect(uri);
+    const db = client.db("kalianiammas");
+
+    if (orderStatus == "PAID") {
+      const orders = await db
+        .collection("orders")
+        .findOne({ _id: new ObjectId(params.id) });
+      const order = JSON.parse(JSON.stringify(orders));
+      const status = order.status;
+      if (status < 1) {
+        console.log("true");
+        // Update the order with method: 1
+        const updatedOrder = await db
+          .collection("orders")
+          .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
+      }
+      return {
+        props: {
+          order: order,
+        },
+      };
+    } else {
+      const deletOrder = await db
+        .collection("orders")
+        .deleteOne({ _id: new ObjectId(params.id) });
+      return {
+        props: {
+          error: "ERROR",
+        },
+      };
+    }
+  } catch (err: any) {
+    console.log(err);
+  }
+};
+
 
 const Order = ({ order, error }: OrderProps) => {
   console.log(order);
@@ -46,9 +95,7 @@ const Order = ({ order, error }: OrderProps) => {
             <div>
               <div className={styles.orderId}>
                 <h3 className={styles.id}>Order ID: {order._id}</h3>
-                {/* <h4 className={styles.date}>{formattedDate}</h4> */}
               </div>
-              {/* <button onClick={()=>clear()}>clear </button> */}
               <div style={{ borderTop: "1px solid gray", marginTop: "10px" }}>
                 {orderItems.map((item: any, i: any) => (
                   <div key={i} className={styles.item}>
@@ -192,52 +239,3 @@ interface Params {
 }
 
 export default Order;
-
-export const getServerSideProps = async ({ params }: { params: Params }) => {
-  try {
-    const resone = await fetch(
-      `${process.env.DOM}/api/order/chashfree/${params.id}`
-    );
-    const chash = await resone.json();
-    const orderStatus = chash.data.order_status;
-    console.log(orderStatus);
-
-    const uri = process.env.MONGODB_URI;
-    if (!uri) {
-      throw new Error("MongoDB connection string is missing.");
-    }
-    const client = await MongoClient.connect(uri);
-    const db = client.db("kalianiammas");
-
-    if (orderStatus == "PAID") {
-      const orders = await db
-        .collection("orders")
-        .findOne({ _id: new ObjectId(params.id) });
-      const order = JSON.parse(JSON.stringify(orders));
-      const status = order.status;
-      if (status < 1) {
-        console.log("true");
-        // Update the order with method: 1
-        const updatedOrder = await db
-          .collection("orders")
-          .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
-      }
-      return {
-        props: {
-          order: order,
-        },
-      };
-    } else {
-      const deletOrder = await db
-        .collection("orders")
-        .deleteOne({ _id: new ObjectId(params.id) });
-      return {
-        props: {
-          error: "ERROR",
-        },
-      };
-    }
-  } catch (err: any) {
-    console.log(err);
-  }
-};

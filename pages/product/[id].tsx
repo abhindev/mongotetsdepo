@@ -1,15 +1,10 @@
 import styles from "../../styles/Product.module.css";
-import Image from "next/image";
 import { useState } from "react";
-import clientPromise from "../../lib/mongodb";
 import { MongoClient, ObjectId } from "mongodb";
-// import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../lib/redux/cartSlice";
-import Link from "next/link";
 import Details from "../../components/template/products/Details";
 import { useRouter } from "next/router";
-// import Slider from "../../components/slider"
 import Slider from "../../components/tools/Slider";
 
 
@@ -31,8 +26,6 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       .collection("products")
       .findOne({ _id: new ObjectId(params.id) });
 
-    // console.log(product);
-
     return {
       props: {
         product: JSON.parse(JSON.stringify(product)),
@@ -52,7 +45,6 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
 
 const Product = ({ product, products }: any) => {
-  // console.log(pizzas)
   const [price, setPrice] = useState(product.prices[0].price);
   const [selection, setSelection] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -70,36 +62,7 @@ const Product = ({ product, products }: any) => {
     setPrice(size.price);
     serVariant(size.text);
   };
-  // console.log(product.prices[0].text);
-  // const changePrice = (number: any) => {
-  //   setPrice(price + number);
-  // };
-
-  // const handleSize = (sizeIndex: any) => {
-  //   const difference = product.prices[sizeIndex] - product.prices[size];
-  //   setSize(sizeIndex);
-  //   changePrice(difference);
-  // };
-
-  // const handleChange = (e: any, option: any) => {
-  //   const checked = e.target.checked;
-
-  //   if (checked) {
-  //     changePrice(option.price);
-  //     setExtras((prev): any => [...prev, option]);
-  //   } else {
-  //     changePrice(-option.price);
-  //     // setExtras(extras.filter((extra) => extra._id !== option._id));
-  //   }
-  // };
   
-
-  const addQuantity = () => {
-    setQuantity(Number(quantity) + 1);
-  };
-  const removeQuantity = () => {
-    setQuantity(Number(quantity) - 1);
-  };
 
   const handleClickAddtoCart = () => {
     dispatch(addProduct({ ...product, price, quantity, variant }));
@@ -150,23 +113,6 @@ const Product = ({ product, products }: any) => {
           </div>
 
           <div className={styles.add}>
-            {/*<div className={styles.quantity}>
-               <button
-                className={styles.quantity_button}
-                onClick={() => {
-                  quantity > 1 ? removeQuantity() : null;
-                }}
-              >
-                -
-              </button>
-              <p>{quantity}</p>
-              <button
-                className={styles.quantity_button}
-                onClick={() => addQuantity()}
-              >
-                +
-              </button>
-            </div> */}
             <button
               className={styles.button}
               onClick={handleClickBuy}
@@ -182,11 +128,6 @@ const Product = ({ product, products }: any) => {
       </div>
       <div>
         <Details product={product} />
-        <p style={{ textAlign: "center", fontSize: "13px" ,whiteSpace: 'pre'}}>
-          {/* `{"xhmvb \n ashgjdbc"}` */}
-          {"line1 \n line w"}
-        </p>
-        {/* <Slider pizza={pizzas}/> */}
       </div>
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>

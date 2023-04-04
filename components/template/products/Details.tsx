@@ -12,9 +12,6 @@ export default function Details(product: any) {
     <div className={styles.Group}>
       <Tab.Group>
         <Tab.List className={styles.title}>
-          {/* <Tab className={styles.tab}>Discription</Tab>
-          <Tab className={styles.tab}>Ingrediance</Tab>
-          <Tab className={styles.tab}>Usage</Tab> */}
           {details.map((item: any, i: number) => (
             <div key={i}>
               <Tab className={styles.tab}>{item.title}</Tab>
@@ -24,8 +21,6 @@ export default function Details(product: any) {
         <Tab.Panels className={styles.panels}>
           {details.map((item: any, i: number) => (
             <div key={i}>
-              {/* {console.log(item.text)} */}
-              {}
               <Tab.Panel className={styles.panel}>
                 {item.text.split("\n").map((line: any, index:number) => (
                   <div key={index}>
@@ -36,15 +31,6 @@ export default function Details(product: any) {
               </Tab.Panel>
             </div>
           ))}
-          {/* <Tab.Panel className={styles.panel}>
-            <p>
-              Replenish your scalp with our rejuvenating Hair Growth Oil. This
-              magic elixir makes your hair strong, lustrous and healthy while
-              repairing the scalp as well. <br/> <br/> Net Quantity - 100ML
-            </p>
-          </Tab.Panel>
-          <Tab.Panel>Content 2</Tab.Panel>
-          <Tab.Panel>Content 3</Tab.Panel> */}
         </Tab.Panels>
       </Tab.Group>
     </div>

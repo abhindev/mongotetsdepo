@@ -5,8 +5,7 @@ import styles from "../../../styles/CartItem.module.css"
 import { addQuantity ,removeQuantity,removeItem} from "../../../lib/redux/cartSlice";
 
 function CartItem({cart}) {
-  const [qty, setQty] = useState('')
-  const [total, setTotal] = useState(0) 
+  
   const cartItem = useSelector((state) => state.cart.products);
   console.log(cartItem)
   const dispatch = useDispatch();
@@ -15,12 +14,7 @@ function CartItem({cart}) {
 
   cart.products.map((product) =>{
       cartItems.push(product)})
-
-  // console.log(cartItems)
-
-  // const quan =  []
   const handleAddQty = (i,product)=> {
-    // const price = product
       dispatch(addQuantity({i, product}));
   }
   const handleRemoveQty = (i,product)=> {
@@ -30,22 +24,8 @@ function CartItem({cart}) {
     dispatch(removeItem({i, product,cartItem}))
   }
 
-  // console.log(qty)
   return (
-    // <div>
-    //   <h1>item</h1>
-    //   {cart.products.map((product, i) =>(
-    //     <div key={i}>
-    //         {console.log(product.title)}
-    //         <div><h1>{product.title}</h1></div>
-    //         <div><h1>{product.quantity }</h1>
-    //         <h2>{product.price}</h2></div>
-    //         <h2>{product.variant}</h2>
-    //     </div>
-    //   )
-    //   )}
-    //   <p>porducts</p>
-    // </div>
+    
     <div>
       <div>
        {cartItems.map((product, i) => (

@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { BiShoppingBag } from "react-icons/bi";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
-import Hamburger from '../tools/Hamburger'
 
 import Link from 'next/link';
 import Image from 'next/image';

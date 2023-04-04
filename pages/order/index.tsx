@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { reset } from "../../lib/redux/orderSlice";
 import styles from "../.././styles/Order.module.css"
 import Link from 'next/link';
-import { useRouter } from 'next/router'
 
 function Order() {
   const order = useSelector((state: any) => state.order);
-  const router = useRouter()
   const dispatch = useDispatch();
   const on = ()=>{
     dispatch(reset());
@@ -16,14 +14,9 @@ function Order() {
   }
   const orders = order.orders
   console.log(orders);
-  // const handleClick = (e) => {
-  //   e.preventDefault()
-  //   router.push(href)
-  // }
   return (
     <div className={styles.orderindex}>
       <h1>order</h1>
-      {/* <button onClick={()=>{  on()}}>clear</button> */}
       {order.orders.map((order:any, i:number)=>
       <Link href={`order/${order._id}`} style={{textDecoration:"none"}}>
         <div key={i} className={styles.rev}>
@@ -42,13 +35,9 @@ function Order() {
               </>
               }</span>
             </div>
-            {/* <div>{order.item.total}</div> */}
-            {/* <div>{order.status}</div> */}
+            
             <div>
-            {/* {console.log("getBackgroundColor")} */}
-            {/* {order.status==0 ? handleRemove(i, order,orderItem) : demo()} */}
             </div>
-            {/* {order.item.products.length>1? <h1>{order.item.products.length}</h1> : null} */}
           </div>
           
         </div>
