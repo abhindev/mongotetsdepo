@@ -10,9 +10,8 @@ const Slider: React.FC<Props> = ({ imageArray }) => {
   return (
     <Carousel autoPlay interval={5000} transitionTime={1000} infiniteLoop>
       {imageArray.map((image, i) => (
-        <div key={i}>
-          {/* <Image src={image} alt="" fill/> */}
-          <img src={image} alt="" />
+        <div key={i} >
+          <img src={image} alt={`${i}`} />
         </div>
       ))}
     </Carousel>
