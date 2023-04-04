@@ -61,13 +61,13 @@ function ProductCard({ product, i }: any) {
         >
           <div style={{ flex: 1 }} className={styles.left}>
             <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
-              {/* <Link href={`/product/${product._id}`}> */}
-                <div onClick={()=>handleClick() }>
+              <Link href={`/product/${product._id}`}>
+                {/* <div onClick={()=>handleClick() }> */}
                 <div className={width < 600 ? styles.img_mob : styles.img}>
                   <Image src={product.img[0]} alt="" fill sizes="100vw" />
                 </div>
-                </div>
-              {/* </Link> */}
+                {/* </div> */}
+              </Link>
             </div>
           </div>
           <div
