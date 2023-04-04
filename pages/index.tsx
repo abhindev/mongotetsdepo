@@ -4,7 +4,7 @@ import { InferGetServerSidePropsType } from "next";
 import styles from "../styles/Home.module.css";
 import Featured from "../components/tools/Featured";
 import PoductList from "../components/template/products/productlist";
-
+import {Helmet} from "react-helmet";
 export async function getServerSideProps() {
   try {
     const client = await clientPromise;
@@ -25,6 +25,7 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className={styles.container}>
+      
       <Head>
         <title>Create App</title>
         <link rel="icon" href="/favicon.ico" />

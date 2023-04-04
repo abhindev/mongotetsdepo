@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import Slider from "../../components/tools/Slider";
 import CarouselSlider from "../../components/tools/productSilde";
 import Link from "next/link";
-
 interface Params {
   id: string;
 }
@@ -73,6 +72,7 @@ const Product = ({ product, products }: any) => {
 
   return (
     <>
+    
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.imgContainer}>
