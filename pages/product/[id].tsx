@@ -12,6 +12,45 @@ import { useRouter } from "next/router";
 // import Slider from "../../components/slider"
 import Slider from "../../components/tools/Slider";
 
+
+interface Params {
+  id: string;
+}
+
+export const getServerSideProps = async ({ params }: { params: Params }) => {
+  try {
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+      throw new Error("MongoDB connection string is missing.");
+    }
+
+    const client = await MongoClient.connect(uri);
+    const db = client.db("kalianiammas");
+    const product = await db
+      .collection("products")
+      .findOne({ _id: new ObjectId(params.id) });
+
+    // console.log(product);
+
+    return {
+      props: {
+        product: JSON.parse(JSON.stringify(product)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        product: null,
+      },
+    };
+  }
+};
+
+
+
+
 const Product = ({ product, products }: any) => {
   // console.log(pizzas)
   const [price, setPrice] = useState(product.prices[0].price);
@@ -156,40 +195,7 @@ const Product = ({ product, products }: any) => {
   );
 };
 
-interface Params {
-  id: string;
-}
 
-export const getServerSideProps = async ({ params }: { params: Params }) => {
-  try {
-    const uri = process.env.MONGODB_URI;
-
-    if (!uri) {
-      throw new Error("MongoDB connection string is missing.");
-    }
-
-    const client = await MongoClient.connect(uri);
-    const db = client.db("kalianiammas");
-    const product = await db
-      .collection("products")
-      .findOne({ _id: new ObjectId(params.id) });
-
-    // console.log(product);
-
-    return {
-      props: {
-        product: JSON.parse(JSON.stringify(product)),
-      },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      props: {
-        product: null,
-      },
-    };
-  }
-};
 
 export default Product;
 

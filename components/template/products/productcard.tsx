@@ -44,13 +44,13 @@ function ProductCard({ product, i }: any) {
           : { flexDirection: "row-reverse" }
       }
     >
-      {load ? (
+      {/* {load ? (
         <>
           <div className={styles.loading}>
             <div className={styles.load}></div>
           </div>
         </>
-      ) : (
+      ) : ( */}
         <div
           className={width < 600 ? "" : styles.container}
           style={
@@ -113,7 +113,7 @@ function ProductCard({ product, i }: any) {
           </div>
           </div>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }
