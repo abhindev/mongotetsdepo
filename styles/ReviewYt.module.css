@@ -48,7 +48,7 @@
 }
 .image {
     border-radius: 20px;
-    width: 20vw;
+    width: 25vw;
     -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
     filter: hue-rotate(#76A11F)
 }
