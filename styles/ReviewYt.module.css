@@ -52,7 +52,7 @@
     -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
     filter: hue-rotate(#76A11F)
 }
-
+/* //== */
 @media screen and (min-width: 480px) {
     .title {
         font-size: 3vw;
