@@ -4,7 +4,7 @@ import { InferGetServerSidePropsType } from "next";
 import styles from "../styles/Home.module.css";
 import Featured from "../components/tools/Featured";
 import PoductList from "../components/template/products/productlist";
-import {Helmet} from "react-helmet";
+import Review from "../components/tools/Review";
 export async function getServerSideProps() {
   try {
     const client = await clientPromise;
@@ -39,6 +39,7 @@ export default function Home({
       <main>
         <Featured />
         <PoductList products={products} />
+        <Review />
       </main>
     </div>
   );
