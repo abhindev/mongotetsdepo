@@ -8,7 +8,7 @@ interface Props {
 
 const Slider: React.FC<Props> = ({ imageArray }) => {
   return (
-    <Carousel autoPlay interval={5000} transitionTime={1000} infiniteLoop>
+    <Carousel  interval={5000} transitionTime={1000} infiniteLoop>
       {imageArray.map((image, i) => (
         <div key={i} >
           <img src={image} alt={`${i}`} />
