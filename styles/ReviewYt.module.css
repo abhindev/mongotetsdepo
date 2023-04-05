@@ -1,63 +1,78 @@
 .title {
-    position: relative;
-    top: 20px;
-    margin-left: 15%;
-    font-size: 4vw;
-    transform: translateY(20px);
-    /* color: red; */
+  position: relative;
+  top: 20px;
+  margin-left: 15%;
+  font-size: 4vw;
+  transform: translateY(20px);
+  /* color: red; */
 }
 .customerText {
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-    
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
 .ExperienceText {
-    font-weight: 400;
-    margin: 0;
-    margin-left: 10px;
-    padding: 0;
+  font-weight: 400;
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
 }
 .grid {
-    margin-top: 40px;
-    width: 100vw;
-    display: grid;
-    justify-content: center;
-    /* background-color: aquamarine; */
-    grid-template-columns: auto auto auto;
-    margin-bottom: 40px;
+  margin-top: 40px;
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+  /* background-color: aquamarine; */
+  grid-template-columns: auto auto auto;
+  margin-bottom: 40px;
 }
 .pin {
-    width: 100%;
-    /* background-color: blue; */
-    justify-content: center;
-    margin: 10px;
-    /* border-radius: 10%; */
+  width: 100%;
+  /* background-color: blue; */
+  justify-content: center;
+  margin: 10px;
+  /* border-radius: 10%; */
 }
 .zero {
-    transform: translateY(20px);
-    border-radius: 20px;
+  transform: translateY(20px);
+  border-radius: 20px;
 }
 .one {
-    transform: translateY(-20px);
-    border-radius: 20px;
+  transform: translateY(-20px);
+  border-radius: 20px;
 }
 .two {
-    transform: translateY(40px);
-    border-radius: 20px;
+  transform: translateY(40px);
+  border-radius: 20px;
 }
 .image {
-    border-radius: 20px;
-    width: 25vw;
-    -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
-    filter: hue-rotate(#76A11F)
+  border-radius: 20px;
+  width: 25vw;
+  -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
+  filter: hue-rotate(#76a11f);
 }
-/* //== */
+.buttoncontainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  /* background-color: aqua; */
+}
+.button {
+  display: flex;
+  justify-content: center;
+align-items: center;
+  background-color: hsl(80, 68%, 38%);
+  border: none;
+  border-radius: 5px;
+  width: 20vw;
+  height: 40px;
+  margin-right: 20px;
+  color: #fff;
+  font-size: 2vw;
+  size-adjust: none;
+}
 @media screen and (min-width: 480px) {
-    .title {
-        font-size: 3vw;
-    }
+  .title {
+    font-size: 3vw;
+  }
 }
-
-
-
