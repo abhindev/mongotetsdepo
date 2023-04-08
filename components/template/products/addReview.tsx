@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import getLoggedIn from "../../hooks/getLoggedIn";
 import Login from "../../hooks/login"
 import Form from "../form"
+import { RxCross2 } from 'react-icons/rx';
 
 function Review({id}:any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,12 +13,14 @@ function Review({id}:any) {
   const customStyles = {
     overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
     content: {
-      top: "100px",
+      top: "50%",
       left: "50%",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      backgroundColor: "#77a31f",
+      border: "1px solid #77a31f"
     },
   };
 
@@ -41,9 +44,10 @@ function Review({id}:any) {
           onRequestClose={() => setIsOpen(false)}
           style={customStyles}
         >
-          <h1>login model</h1>
+          <h1>Login</h1>
+          <div onClick={() => setIsOpen(false)} style={{position: "absolute", top: "20px",right: "20px" }}><RxCross2/></div>
           <Login setIsOpen />
-          <button onClick={() => setIsOpen(false)}>x</button>
+          
         </Modal>
       )}
     </div>

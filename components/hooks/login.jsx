@@ -7,7 +7,8 @@ import styles from "../../styles/Login.module.css";
 function Login(setIsOpen) {
   const [OTP, setOTP] = useState();
   const [phonenumber, setPhonenumber] = useState("");
-  const [code, setCode] = useState("91")
+  const [FormChainge, setFormChainge] = useState(false);
+  const [code, setCode] = useState("91");
   const [user, setUser] = useState("");
 
   const router = useRouter();
@@ -28,8 +29,8 @@ function Login(setIsOpen) {
 
   const requestOtp = () => {
     generateRecaptchaVerifier();
-    let phone = "+"+ code+ phonenumber;
-console.log(phone)
+    let phone = "+" + code + phonenumber;
+    // console.log(phone)
     let captcha = window.recaptchaVerifier;
     signInWithPhoneNumber(auth, phone, captcha)
       .then((confirmationResult) => {
@@ -38,6 +39,7 @@ console.log(phone)
         window.confirmationResult = confirmationResult;
         // ...
         console.log("sentOtp");
+        setFormChainge(true);
       })
       .catch((error) => {
         // Error; SMS not sent
@@ -59,7 +61,7 @@ console.log(phone)
           setUser(user.phoneNumber);
           Cookies.set("loggedin");
           // router.push("/");
-          router.reload()
+          router.reload();
           // ...
         })
         .catch((error) => {
@@ -68,14 +70,14 @@ console.log(phone)
         });
     }
   };
-  
+
   const handleChange = (event) => {
     setPhonenumber(event.target.value);
 
     // console.log("value is:", event.target.value);
   };
   const handleChangeCode = (event) => {
-    setCode("+"+event.target.value);
+    setCode(event.target.value);
 
     // console.log("value is:", event.target.value);
   };
@@ -84,37 +86,45 @@ console.log(phone)
       <div id="recaptcha-container"></div>
       <div className={styles.box}>
         <div className={styles.imgcontainer}>
-
-        <img src="/logo.png" alt="" className={styles.img}/>
+          <img src="/logo.png" alt="" className={styles.img} />
         </div>
         <div className={styles.title}>
           <h3>Create an acount</h3>
-          <button>X</button>
         </div>
-        <div className={styles.input}>
+        {!FormChainge ? 
+        <div className={styles.field}>
           <input
             placeholder="+91"
+            maxlength="4"
             type="number"
-            id=""
-            name=""
+            id="code"
+            name="code"
             onChange={handleChangeCode}
             value={code}
+            className={styles.code}
+            // className={styles.input}
           />
           <input
             placeholder="phone"
             type="text"
-            id="message"
-            name="message"
+            id="phone"
+            name="phone"
             onChange={handleChange}
             value={phonenumber}
+            className={styles.input}
           />
-        </div>
+        </div> : <div className={styles.field}><input
+        className={styles.input}
+            type="number"
+            id="otp-input"
+            value={OTP}
+            onChange={verifyOtp}
+          /> </div>}
 
-        <button onClick={() => requestOtp()}>ok</button>
-
-        <input type="number" id="otp-input" value={OTP} onChange={verifyOtp} />
+        <button onClick={() => requestOtp() } className={styles.button}>
+          <div>Send Otp</div>
+        </button>
       </div>
-      <h1>{user}</h1>
     </div>
   );
 }
