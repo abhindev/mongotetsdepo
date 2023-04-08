@@ -2,8 +2,9 @@
     width: 100vw;
     /* color:white; */
     background-color: #cfff70af;
-    position: sticky;
+    /* position: sticky; */
     bottom: 0;
+    position: relative;
 }
 .title{
     display: flex;

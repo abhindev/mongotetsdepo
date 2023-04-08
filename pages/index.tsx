@@ -4,7 +4,9 @@ import { InferGetServerSidePropsType } from "next";
 import styles from "../styles/Home.module.css";
 import Featured from "../components/tools/Featured";
 import PoductList from "../components/template/products/productlist";
-import Review from "../components/tools/Review";
+import Review from "../components/tools/ytReview";
+
+
 export async function getServerSideProps() {
   try {
     const client = await clientPromise;

@@ -6,9 +6,16 @@ import CartList from "../components/template/cart/cartList";
 import useDeviceSize from "../components/hooks/useWindowSize";
 import CheckOut from "../components/template/cart/checkOut";
 import styles from "../styles/Cart.module.css";
+
+import Cookies from "js-cookie"
+import { useRouter } from "next/router";
+import getLoggedIn from "../components/hooks/getLoggedIn"
+import Login from "../components/hooks/login";
+
 function Cart() {
   const redux = useSelector((state: any) => state.cart);
-
+  const router = useRouter();
+  const log = getLoggedIn();
   const [ckeckout, setCkeckout] = useState(false);
 
   const [width, height] = useDeviceSize();
@@ -22,17 +29,23 @@ function Cart() {
     setTimeout(function () {
       window.scrollTo(0, h);
     }, 1);
+    
     setCkeckout(true);
   };
 
   const cart = redux.products;
   console.log(cart.length);
+
+  
   return (
     <div className={width > 600 ? styles.cart : styles.mob}>
+      
       {width > 600 ? (
         <div className={styles.container}>
           <div className={styles.left}>
-            {ckeckout == true ? <CheckOut /> : <CartItem cart={redux} />}
+            {ckeckout == true ? (
+              log ? <CheckOut /> : <Login/>
+            ) : <CartItem cart={redux} />}
           </div>
           <div className={styles.right}>
             {cart.map((product: any, i: number) => (
@@ -79,7 +92,7 @@ function Cart() {
               <div className={styles.btn}>
                 {ckeckout == false ? (
                   <button className={styles.button} onClick={() => CkeckOut()}>
-                    CkeckOut
+                    {log ? "CkeckOut" : "Login"}
                   </button>
                 ) : (
                   ""
@@ -133,14 +146,14 @@ function Cart() {
                   className={styles.button}
                   onClick={() => handile_mobsubmit()}
                 >
-                  CkeckOut
+                  {log ? "CkeckOut" : "login"}
                 </button>
               ) : (
                 ""
               )}
             </div>
           </div>
-          {ckeckout !== false ? <CheckOut /> : ""}
+          {ckeckout !== false ? <>{ log ? <CheckOut/> : <Login/>}</> : ""}
         </>
       )}
     </div>

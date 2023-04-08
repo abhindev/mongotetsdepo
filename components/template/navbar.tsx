@@ -9,6 +9,7 @@ import { GrClose } from "react-icons/gr";
 import Link from 'next/link';
 import Image from 'next/image';
 
+import Cookies from "js-cookie"
 
 function navbar() {
   const quantity:number = useSelector((state:any) => state.cart.quantity);
@@ -20,16 +21,20 @@ function navbar() {
   const handilcliceClosr=()=>{
     setOppen(false)
   }
+  const logOut = () => {
+    Cookies.remove("loggedin");
+    // router.push('/login')
+    console.log("logout")
+  };
   return (
     <div className={styles.container}>
-
-
 
       {oppen == true ? 
       <div className={styles.Hamburger} >
         <div className={styles.closeIcon} onClick={()=>handilcliceClosr()}><GrClose/></div>
         <div className={styles.items}>
           <Link href="/order" onClick={()=>handilcliceClosr()}>Order</Link>
+          <button onClick={()=> logOut()} style={{width:"20%"}}>logOut</button>
         </div>
       </div> : 
       ''}

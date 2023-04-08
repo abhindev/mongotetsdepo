@@ -1,0 +1,46 @@
+.container {
+    /* background-color: gray; */
+    margin: 2vw;
+}
+.imageContainer {
+    /* width: 100%; */
+    /* height: 100%; */
+    /* margin: 1vw; */
+    padding: 1vw;
+    display: flex;
+    /* background-color: aquamarine; */
+}
+.textContainer {
+    /* background-color: blue; */
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+.username {
+    margin: 0;
+    padding: 0;
+    /* background-color: brown; */
+}
+.p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+/* .image {
+    width: 60%;
+    height: 60%;
+    margin: 1vw;
+    border-radius: 50%;
+} */
+
+.startContainer {
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+}
+.review {
+    margin-top: -20px;
+   margin-left: 70px;
+}
