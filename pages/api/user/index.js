@@ -14,7 +14,7 @@ const handler = async (req, res) => {
       res.status(500).json(err);
     }
   }
-  if (method === "PUT") {
+  if (method === "POST") {
     try {
       const userData = await db.collection("users").find({ "phoneNumber": req.body.phoneNumber }).toArray();
       console.log(userData)
@@ -28,7 +28,7 @@ const handler = async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  } if (method === "POST") {
+  } if (method === "PUT") {
     try {
       const order = await db.collection("users").updateOne(
         { "phoneNumber": req.body.phoneNumber },

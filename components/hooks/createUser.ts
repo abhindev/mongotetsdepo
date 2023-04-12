@@ -14,7 +14,7 @@ import clientPromise from "../../lib/mongodb"
     console.log(user)
     // db.collection("users").find({})
     const res = await fetch("/api/user", {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

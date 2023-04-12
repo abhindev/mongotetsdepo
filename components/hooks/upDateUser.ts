@@ -5,7 +5,7 @@ import clientPromise from "../../lib/mongodb"
     console.log(order+" order")
     const newFieldValue = order
     const res = await fetch("/api/user", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
