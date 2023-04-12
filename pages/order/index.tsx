@@ -5,6 +5,27 @@ import { reset } from "../../lib/redux/orderSlice";
 import styles from "../.././styles/Order.module.css"
 import Link from 'next/link';
 
+export const getServerSideProps = async () => {
+  try {
+    const orders = "ordsde"
+    
+    return {
+      props: {
+        orders: JSON.parse(JSON.stringify(orders)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        orders: null,
+      },
+    };
+  }
+  
+};
+
+
 function Order() {
   const order = useSelector((state: any) => state.order);
   const dispatch = useDispatch();
