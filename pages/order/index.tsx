@@ -38,7 +38,7 @@ function Order() {
   return (
     <div className={styles.orderindex}>
       <h1>order</h1>
-      <button onClick={()=>resetOrder}>clear</button>
+      <button onClick={()=>resetOrder()}>clear</button>
       {order.orders.map((order:any, i:number)=>
       <Link href={`order/${order._id}`} style={{textDecoration:"none"}}>
         <div key={i} className={styles.rev}>
