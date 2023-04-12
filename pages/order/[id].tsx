@@ -2,8 +2,10 @@ import { MongoClient, ObjectId } from "mongodb";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/OrderID.module.css";
-import {addOrder} from "../../lib/redux/orderSlice"
-import { useDispatch } from "react-redux";
+import addOrder from "../../components/hooks/upDateUser"
+// import {addOrder} from "../../lib/redux/orderSlice"
+// import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 interface OrderProps {
   order:
     | {
@@ -74,13 +76,22 @@ const Order = ({ order, error }: OrderProps) => {
   // console.log(chash);
   const orderItems = order?.item.products;
   const orderstatus = order?.status;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  // const cooke = Cookies.get()
+  // console.log(cooke + "cokekekeke")
   var isDisplayed = false;
   if (isDisplayed == false) {
     if (order && isorder == false) {
       setIsorder(true);
       isDisplayed = true;
-      dispatch(addOrder({ ...order }));
+      let value:any = Cookies.get("loggedin");
+      const phoneNumber= value
+      addOrder(phoneNumber,{...order})
+      // dispatch(addOrder({ ...order }));
+      console.log("adde")
+      console.log("phone"+phoneNumber )
+      console.log("order"+{...order})
+
     }
   }
   return (
