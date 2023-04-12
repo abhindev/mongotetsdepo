@@ -29,7 +29,7 @@ export const getServerSideProps = async () => {
 function Order() {
   const order = useSelector((state: any) => state.order);
   const dispatch = useDispatch();
-  const on = ()=>{
+  const resetOrder = ()=>{
     dispatch(reset());
     console.log(order);
   }
@@ -38,6 +38,7 @@ function Order() {
   return (
     <div className={styles.orderindex}>
       <h1>order</h1>
+      <button onClick={()=>resetOrder}>clear</button>
       {order.orders.map((order:any, i:number)=>
       <Link href={`order/${order._id}`} style={{textDecoration:"none"}}>
         <div key={i} className={styles.rev}>
