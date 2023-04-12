@@ -1,5 +1,5 @@
 import clientPromise from "../../lib/mongodb"
-  async function createuser(data:any){
+  async function Createuser(data:any){
 
     // const client = await clientPromise;
     // const db = client.db();
@@ -25,5 +25,5 @@ import clientPromise from "../../lib/mongodb"
     return await res.json();
   }
   
-  export default createuser;
+  export default Createuser;
   

@@ -4,7 +4,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import styles from "../../styles/Login.module.css";
-import createuser from "./createuser"
+import Createuser from "./createUser"
 function Login(setIsOpen) {
   const [OTP, setOTP] = useState();
   const [phonenumber, setPhonenumber] = useState("");
@@ -62,7 +62,7 @@ function Login(setIsOpen) {
           setUser(user.phoneNumber);
           Cookies.set("loggedin", user.phoneNumber);
           console.log(user.phoneNumber);
-          createuser(user);
+          Createuser(user);
           // router.push("/");
           router.reload();
           // ...
