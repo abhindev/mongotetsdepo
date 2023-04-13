@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 interface Address {
   Address: string;
   City: string;
@@ -28,12 +30,34 @@ async function createOrder(
   item: string,
   total: number
 ): Promise<Order> {
+  let Schema = mongoose.Schema
+  //get coocki value
+  function getCookieValue(cookieName:any) {
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookieArray = decodedCookie.split(';');
+    for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return "";
+}
+
+// Usage: Pass the name of the cookie you want to retrieve
+var loggedinValue = getCookieValue("loggedin");
+// console.log(loggedinValue);
+//end 
+  let costomerID = loggedinValue
   const res = await fetch("/api/order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      _id : Schema.Types.ObjectId,
+      costomer_id: costomerID,
       customer,
       address: {
         Address: address,
