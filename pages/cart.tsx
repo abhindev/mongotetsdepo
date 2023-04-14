@@ -178,7 +178,7 @@ function Cart() {
                   className={styles.button}
                   onClick={() => handile_mobsubmit()}
                 >
-                  {log ? "CkeckOut" : "login"}
+                  CkeckOut
                 </button>
               ) : (
                 ""
