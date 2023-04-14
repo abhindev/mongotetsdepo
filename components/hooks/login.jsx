@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import styles from "../../styles/Login.module.css";
 import Createuser from "./createUser"
+
 function Login(setIsOpen) {
   const [OTP, setOTP] = useState();
   const [phonenumber, setPhonenumber] = useState("");

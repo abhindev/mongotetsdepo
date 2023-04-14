@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CartItem from "../components/template/cart/cartItem";
 import CartList from "../components/template/cart/cartList";
 
@@ -7,14 +7,15 @@ import useDeviceSize from "../components/hooks/useWindowSize";
 import CheckOut from "../components/template/cart/checkOut";
 import styles from "../styles/Cart.module.css";
 
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import getLoggedIn from "../components/hooks/getLoggedIn"
+import getLoggedIn from "../components/hooks/getLoggedIn";
 import Login from "../components/hooks/login";
-
+import Modal from "react-modal";
 function Cart() {
   const redux = useSelector((state: any) => state.cart);
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const log = getLoggedIn();
   const [ckeckout, setCkeckout] = useState(false);
 
@@ -22,30 +23,60 @@ function Cart() {
   const h = height - 200;
 
   const CkeckOut = () => {
-    window.scrollTo(0, 0);
-    setCkeckout(true);
+    // window.scrollTo(0, 0);
+    if (!log) {
+      setIsOpen(true);
+    } else {
+      setCkeckout(true);
+    }
   };
   const handile_mobsubmit = () => {
-    setTimeout(function () {
-      window.scrollTo(0, h);
-    }, 1);
-    
-    setCkeckout(true);
+    // setTimeout(function () {
+    //   window.scrollTo(0, h);
+    // }, 1);
+    setIsOpen(true);
+    console.log("running"+ log)
+    // if (!log) {
+    //   setIsOpen(true);
+    // } else {
+    //   setIsOpen(true);
+    //   setCkeckout(true);
+      
+    // }
   };
-
+  const customStyles = {
+    overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
+    content: {
+      // width:"80vw",
+      
+      top: "10%",
+      left: "1%",
+      right: "1%",
+      bottom: "1%",
+      
+    },
+  };
   const cart = redux.products;
   console.log(cart.length);
 
-  
+  const modelClose = () => {
+    setIsOpen(false);
+      setCkeckout(false);
+  }
   return (
     <div className={width > 600 ? styles.cart : styles.mob}>
-      
       {width > 600 ? (
         <div className={styles.container}>
           <div className={styles.left}>
             {ckeckout == true ? (
-              log ? <CheckOut /> : <Login/>
-            ) : <CartItem cart={redux} />}
+              log ? (
+                <CheckOut />
+              ) : (
+                <Login />
+              )
+            ) : (
+              <CartItem cart={redux} />
+            )}
           </div>
           <div className={styles.right}>
             {cart.map((product: any, i: number) => (
@@ -153,7 +184,22 @@ function Cart() {
               )}
             </div>
           </div>
-          {ckeckout !== false ? <>{ log ? <CheckOut/> : <Login/>}</> : ""}
+          {/* {ckeckout !== false ? ( */}
+            <>
+              
+                <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles} >
+                <button onClick={() => modelClose()}>X</button>
+                {log ? (<CheckOut />) : (<Login />)}
+              </Modal>
+              
+                {/* // <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} >
+                //   <Login />
+                // </Modal> */}
+              
+            </>
+          {/* ) : (
+            ""
+          )} */}
         </>
       )}
     </div>

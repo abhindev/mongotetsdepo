@@ -124,16 +124,17 @@ const Product = ({ product, products }: any, ) => {
             )}
           </div>
 
-          <div className={styles.add}>
+          <div className={styles.add} >
+            
+            <button className={styles.button} onClick={handleClickAddtoCart}>
+              ADD TO CART
+            </button>
             <button
               className={styles.button}
               onClick={handleClickBuy}
               style={{ backgroundColor: "#76A11F" }}
             >
               BUY NOW
-            </button>
-            <button className={styles.button} onClick={handleClickAddtoCart}>
-              ADD TO CART
             </button>
           </div>
         </div>

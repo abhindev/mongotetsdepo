@@ -37,8 +37,14 @@
     right: 40px;
   
   }
+  .btn {
+    border: none;
+    /* background-color: blue; */
+  }
   .icon_x {
     background-color: transparent;
+    /* display: flex; */
+    font-size: 16px;
     border-radius: 50px;
     border: 1px solid black;
     position: absolute;
@@ -50,14 +56,18 @@
     background-color: transparent;
     border-radius: 50px;
     border: 1px solid black;
-    margin: 5px;
-    height: 20px;
-    width: 20px;
+    font-size: medium;
+    /* margin: 5px; */
+    /* height: 20px; */
+    /* width: 20px; */
   
   }
-   .icon_add {
+  .icon_remove {
+    
+  }
+   /* .icon_add {
     padding:2px;
-   }
+   } */
   .span {
     margin:0px 2px 0px 2px;
   }

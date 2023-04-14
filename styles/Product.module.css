@@ -82,6 +82,8 @@
     margin: 0px 10px;
     
   } */
+
+  
   
   .button {
     height: 45px;
@@ -131,7 +133,17 @@
       justify-content: center;
     }
     .button {
-      width: 90%;
-      border-radius: 8px;
+      width: 100%;
+      border-radius: 0px;
+      margin: 0;
+      padding: 0;
+    }
+    .add {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 100.1%;
+    flex-direction: row;
     }
   }
