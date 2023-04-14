@@ -24,18 +24,20 @@ function Cart() {
 
   const CkeckOut = () => {
     // window.scrollTo(0, 0);
-    if (!log) {
+    // if (!log) {
       setIsOpen(true);
-    } else {
+    // } else {
       setCkeckout(true);
-    }
+      console.log("ckeo")
+    // }
   };
   const handile_mobsubmit = () => {
     // setTimeout(function () {
     //   window.scrollTo(0, h);
     // }, 1);
     setIsOpen(true);
-    console.log("running"+ log)
+    setCkeckout(true);
+    console.log("running"+ ckeckout)
     // if (!log) {
     //   setIsOpen(true);
     // } else {
@@ -69,11 +71,10 @@ function Cart() {
         <div className={styles.container}>
           <div className={styles.left}>
             {ckeckout == true ? (
-              log ? (
-                <CheckOut />
-              ) : (
-                <Login />
-              )
+              <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles} >
+              <button onClick={() => modelClose()}>X</button>
+              {log ? (<CheckOut />) : (<Login />)}
+            </Modal>
             ) : (
               <CartItem cart={redux} />
             )}
@@ -121,13 +122,13 @@ function Cart() {
                 {cart.length == 0 ? "" : <h2>INR {redux.total + 50}.00</h2>}
               </div>
               <div className={styles.btn}>
-                {ckeckout == false ? (
+                {/* {ckeckout == false ? ( */}
                   <button className={styles.button} onClick={() => CkeckOut()}>
                     {log ? "CkeckOut" : "Login"}
                   </button>
-                ) : (
+                {/* ) : (
                   ""
-                )}
+                )} */}
               </div>
             </div>
           </div>

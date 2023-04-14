@@ -76,34 +76,37 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
 
 const Order = ({order}: any, error : OrderProps) => {
-  console.log(order);
-  const [isorder, setIsorder] = useState(false);
+  const [isorder, setIsorder] = useState(order);
+  console.log(isorder);
+
+ 
+
   // console.log(chash);
   const orderItems = order?.item?.products;
-  console.log(orderItems)
+  // console.log(orderItems)
   const orderstatus = order?.status;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const cooke = Cookies.get()
   // console.log(cooke + "cokekekeke")
-  var isDisplayed = false;
-  if (isDisplayed == false) {
-    if (order && isorder == false) {
-      setIsorder(true);
-      isDisplayed = true;
-      let value:any = Cookies.get("loggedin");
-      const phoneNumber= value
-      // addOrder(phoneNumber,{...order})
-      dispatch(addOrder({ ...order }));
-      console.log("adde")
-      console.log("phone"+phoneNumber )
-      console.log("order"+{...order})
+  // var isDisplayed = false;
+  // if (isDisplayed == false) {
+  //   if (order && isorder == false) {
+  //     setIsorder(true);
+  //     isDisplayed = true;
+  //     let value:any = Cookies.get("loggedin");
+  //     const phoneNumber= value
+  //     // addOrder(phoneNumber,{...order})
+  //     // dispatch(addOrder({ ...order }));
+  //     console.log("adde")
+  //     console.log("phone"+phoneNumber )
+  //     console.log("order"+{...order})
 
-    }
-  }
+  //   }
+  // }
   return (
     <div>
       
-{isorder !== true ? (
+{isorder == "ERROR" ? (
   <div className={styles.error}>
     <Image src={'/img/error.gif'} alt="" height={200} width={250}/>
   </div>
@@ -115,7 +118,7 @@ const Order = ({order}: any, error : OrderProps) => {
           <h3 className={styles.id}>Order ID: {order._id}</h3>
         </div>
         <div style={{ borderTop: "1px solid gray", marginTop: "10px" }}>
-          {orderItems.map((item: any, i: any) => (
+          {orderItems?.map((item: any, i: any) => (
             <div key={i} className={styles.item}>
               <div className={styles.imgdiv}>
                 <Image src={item.img[0]} alt="" width="80" height="80" />

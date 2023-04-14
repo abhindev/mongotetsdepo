@@ -77,7 +77,7 @@ function ProductCard({ product, i }: any) {
                 {product.desc}
               </p>
               <p className={width < 600 ? styles.price_mob : styles.price}>
-                <h2>Rs. {price}/-</h2>
+                <h2>Rs. {price}.00</h2>
               </p>
             </div>
           </a>
