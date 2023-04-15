@@ -16,7 +16,7 @@ export async function getServerSideProps(context: any) {
   console.log(loggedIn);
 
   // Fetch data from an API with the "loggedIn" cookie value in the request headers
-  const response = await fetch('http://localhost:3000/api/order', {
+  const response = await fetch(`${process.env.DOM}/api/order`, {
     method: 'GET',
     headers: {
       'Cookie': `loggedin=${loggedIn}` // Include the cookie value in the request headers
