@@ -13,6 +13,7 @@ import Cookies from "js-cookie"
 
 import getLoggedIn from "../hooks/getLoggedIn";
 import Login from '../hooks/login';
+import useDeviceSize from '../hooks/useWindowSize';
 function navbar() {
   const quantity:number = useSelector((state:any) => state.cart.quantity);
   const [oppen, setOppen] =useState(false)
@@ -30,21 +31,43 @@ function navbar() {
   const logOut = () => {
     Cookies.remove("loggedin");
     // router.push('/login')
-    console.log("logout")
+    window.location.reload();
+    
   };
+  const [width, height] = useDeviceSize();
+  const customStyles = {
+    overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
+    content: {
+      border: "none",
+      backgroundColor:"#fff",
+      top: "10%",
+      left: "1%",
+      right: `${width>600 ? "70vw" : "1%"}`,
+      bottom: "1%",
+      
+    },
+  };
+
   return (
     <div className={styles.container}>
 
-      <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} >
+      <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles}>
       {log  ? 
       <div className={styles.Hamburger} >
         <div className={styles.closeIcon} onClick={()=>handilcliceClosr()}><GrClose/></div>
         <div className={styles.items}>
           <Link href="/order" onClick={()=>handilcliceClosr()}>Order</Link>
-          <button onClick={()=> logOut()} style={{width:"20%"}}>logOut</button>
+          <div className={styles.logoutcontainner}>
+          <button onClick={()=> logOut()} className={styles.logOut}>logOut</button>
+          </div>
         </div>
         
-      </div> :<Login/>}
+      </div> :
+      <div>
+        <div className={styles.closeIcon} onClick={()=>handilcliceClosr()}><GrClose/></div>
+        <Login/>
+      </div>
+      }
       </Modal>
 
       <div onClick={()=>handilclickOppen()}>

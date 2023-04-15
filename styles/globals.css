@@ -149,3 +149,9 @@ input[type=number] {
   border-radius: var(--card_border_radius);
   background-color: red;
 } */
+
+
+.control-arrow {
+  display: none;
+}
+

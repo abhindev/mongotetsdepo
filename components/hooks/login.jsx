@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { auth } from "../../lib/firebase/firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import styles from "../../styles/Login.module.css";
-import Createuser from "./createUser"
+import Createuser from "./createUser";
 
+let currentOTPindex = 0;
 function Login(setIsOpen) {
   const [OTP, setOTP] = useState();
   const [phonenumber, setPhonenumber] = useState("");
@@ -13,6 +14,15 @@ function Login(setIsOpen) {
   const [code, setCode] = useState("91");
   const [user, setUser] = useState("");
 
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [ActiveOTPIndex, setActiveOTPIndex] = useState(0);
+  const inputRef = useRef(null);
+  // const [finalotp ,setFinalOtp] = useState("")
+
+  // const [last ,setLast] = useState('')
+  
+  // let finalotp = (otp[0]+otp[1]+otp[2]+otp[3]+otp[4]+otp[5])
+  
   const router = useRouter();
   // console.log("+" + code + phonenumber);
   const generateRecaptchaVerifier = () => {
@@ -49,13 +59,14 @@ function Login(setIsOpen) {
         console.log(error);
       });
   };
-  const verifyOtp = (e) => {
-    let otp = e.target.value;
-    setOTP(otp);
-    if (otp.length === 6) {
+  const verifyOtp = (otp) => {
+    let otpconfirm = otp[0]+otp[1]+otp[2]+otp[3]+otp[4]+otp[5]
+    // setOTP(otp);
+    console.log(otpconfirm.length)
+    if (otpconfirm.length === 6) {
       let confirmationResult = window.confirmationResult;
       confirmationResult
-        .confirm(otp)
+        .confirm(otpconfirm)
         .then((result) => {
           // User signed in successfully.
           const user = result.user;
@@ -85,17 +96,47 @@ function Login(setIsOpen) {
 
     // console.log("value is:", event.target.value);
   };
+
+  
+
+  const handelChainge = ({ target }) => {
+    const { value } = target;
+    const newOtp = [...otp];
+    newOtp[currentOTPindex] = value.substring(value.length - 1);
+    setOtp(newOtp);
+    if (!value) {
+      setActiveOTPIndex(currentOTPindex - 1);
+    } else {
+      setActiveOTPIndex(currentOTPindex + 1);
+    }
+  };
+  const handleOnKeyDown = ({ key }, index) => {
+    currentOTPindex = index;
+    if (key === "Backspace") {
+      setActiveOTPIndex(currentOTPindex - 1);
+    }
+  };
+  useEffect(() => {
+    inputRef.current?.focus();
+    verifyOtp(otp)
+  }, [ActiveOTPIndex]);
+  
+  
+
   return (
     <div className={styles.container}>
       <div id="recaptcha-container"></div>
       <div className={styles.box}>
+      {FormChainge == false ?<>
         <div className={styles.imgcontainer}>
-          <img src="/logo.png" alt="" className={styles.img} />
+          <h1>Wellcome.</h1>
+          <p>Welcome to our website! We're thrilled that you've decided to sign up with us. As a valued member of our community, you'll gain access to exclusive features, benefits, and exciting opportunities. We can't wait to have you on board and provide you with an exceptional experience. Thank you for choosing us, and we look forward to serving you!</p>
         </div>
         <div className={styles.title}>
           <h3>Create an acount</h3>
         </div>
-        {!FormChainge ? (
+        </> : ""}
+        {FormChainge ==false ? (
           <div className={styles.field}>
             <input
               placeholder="+91"
@@ -119,57 +160,43 @@ function Login(setIsOpen) {
             />
           </div>
         ) : (
-          <div className={styles.field}>
-            <input
-              className={styles.input}
-              type="number"
-              id="otp-input"
-              value={OTP}
-              onChange={verifyOtp}
-            />{" "}
+          // <div className={styles.field}>
+          //   <input
+          //     className={styles.input}
+          //     type="number"
+          //     id="otp-input"
+          //     // value={OTP}
+          //     onChange={verifyOtp}
+          //   />
+          // </div>
+<>
+          <div className={styles.otpText}><h1>OTP</h1></div>
+          <div className={styles.otpbase}>
+            
+            {otp.map((_, index) => {
+              return (
+                <div key={index} >
+                  <input
+                  className={styles.inp}
+                    ref={index === ActiveOTPIndex ? inputRef : null}
+                    value={otp[index]}
+                    onKeyDown={(e) => handleOnKeyDown(e, index)}
+                    type="number"
+                    onChange={(e) => handelChainge(e)}
+                  />
+                </div>
+              );
+            })}
           </div>
+          </>
         )}
-
+{FormChainge == false ?
         <button onClick={() => requestOtp()} className={styles.button}>
           <div>Send Otp</div>
-        </button>
-      </div>
+        </button>: ''}
+      </div> 
     </div>
   );
 }
 
 export default Login;
-
-// firebase responce
-// UserImpl {
-//   providerId: 'firebase',
-//   proactiveRefresh: ProactiveRefresh,
-//   reloadUserInfo: {…},
-//   reloadListener: null,
-//   uid: 'ui9W1JdQPtSZXVKd1RDrX84fPIj1', …}
-//   accessToken: "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM4MjNkMWE0MTg5ZjI3NThjYWI4NDQ4ZmQ0MTIwN2ViZGZhMjVlMzkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXV0aC0xZGZmMyIsImF1ZCI6ImF1dGgtMWRmZjMiLCJhdXRoX3RpbWUiOjE2ODExMDE3NjUsInVzZXJfaWQiOiJ1aTlXMUpkUVB0U1pYVktkMVJEclg4NGZQSWoxIiwic3ViIjoidWk5VzFKZFFQdFNaWFZLZDFSRHJYODRmUElqMSIsImlhdCI6MTY4MTEwMTc2NSwiZXhwIjoxNjgxMTA1MzY1LCJwaG9uZV9udW1iZXIiOiIrOTE2MjM1MzU0NDMyIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJwaG9uZSI6WyIrOTE2MjM1MzU0NDMyIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGhvbmUifX0.QdmtJd-N9T6WeONm0kwoh-cGxO0bhkiyNmR0NBfjFbmcSXhCPgSvh1Pll1xgO-tj6RADYOtpCya7bb6UlzzEk8jdR1L2nrBVFpmc7KFAlLH_ZC6zEBFWZ0tG9TJnqAlZhBLJyZeFbBL8b5sbcMlkxqAuZEOUr_roiiGggcIH7e4KhY8F_E_sidschmAbTOEe51cWGyDoYQiB5nphoo3rMfL4jr9l2K6g5lMImXHWqQjM_SCCQ6bAStlZRVUXwls9_bRdLvbUy4-9dhSKfhvoR-zEs_HUy_YnvJn8zlv1rYZ33xDjmtWkIftQHjT7cGvnF1C9e_ExKMvmpXTzhZHqrA"
-//   auth: AuthImpl {
-//     app: FirebaseAppImpl,
-//     heartbeatServiceProvider: Provider,
-//     config: {…},
-//     currentUser: UserImpl,
-//     emulatorConfig: null, …}
-//     displayName: nullemail: nullemailVerified: falseisAnonymous: falsemetadata: UserMetadata
-//     {createdAt: '1680718500872', lastLoginAt: '1681101764998', lastSignInTime: 'Mon, 10 Apr 2023 04:42:44 GMT', creationTime: 'Wed, 05 Apr 2023 18:15:00 GMT'}
-//     createdAt: "1680718500872"
-//     creationTime: "Wed, 05 Apr 2023 18:15:00 GMT"
-//     lastLoginAt: "1681101764998"
-//     lastSignInTime: "Mon, 10 Apr 2023 04:42:44 GMT"[[Prototype]]:
-//      ObjectphoneNumber: "+916235354432"
-//     photoURL: nullproactiveRefresh: ProactiveRefresh
-//     {user:
-//       UserImpl, isRunning: false, timerId: null, errorBackoff: 30000
-//     }providerData: [{…}]providerId: "firebase"reloadListener: nullreloadUserInfo: {localId: 'ui9W1JdQPtSZXVKd1RDrX84fPIj1',
-//     providerUserInfo: Array(1), lastLoginAt: '1681101764998',
-//     createdAt: '1680718500872',
-//     phoneNumber: '+916235354432',
-//     stsTokenManager: StsTokenManager
-//     {refreshToken: 'APJWN8fECjOm7cvFtETPCc112UzAMiH0wxHhqjWw6TzJr_lbJB…xWoXRio1VT-wi56PLyiE5XRVixfjHpxJSvknfSzSzbK0RcjQj',
-//     accessToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImM4MjNkMWE0MTg5ZjI3NT…lv1rYZ33xDjmtWkIftQHjT7cGvnF1C9e_ExKMvmpXTzhZHqrA',
-//     expirationTime: 1681105365192}tenantId: nulluid: "ui9W1JdQPtSZXVKd1RDrX84fPIj1"
-//     refreshToken: (...)[[Prototype]]: Object
