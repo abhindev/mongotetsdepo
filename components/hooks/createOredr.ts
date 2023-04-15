@@ -13,6 +13,7 @@ interface Order {
   address: Address;
   phone: string;
   phone2: string;
+  email:string,
   item: string;
   total: number;
   status: number;
@@ -28,6 +29,7 @@ async function createOrder(
   phone: string,
   phone2: string,
   item: string,
+  email:string,
   total: number
 ): Promise<Order> {
   let Schema = mongoose.Schema
@@ -67,6 +69,7 @@ var loggedinValue = getCookieValue("loggedin");
       },
       phone,
       phone2,
+      email,
       item,
       total,
       status: 0,

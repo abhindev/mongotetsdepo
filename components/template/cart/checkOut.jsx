@@ -142,6 +142,7 @@ function CheckOut() {
         phone,
         phone2,
         item,
+        email,
         total
       ).then(function (result) {
         console.log(result.insertedId); // "initResolve"
