@@ -26,7 +26,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     );
     const chash = await resone.json();
     const orderStatus = chash.data.order_status;
-    console.log(orderStatus);
+    // console.log(orderStatus);
 
     const uri = process.env.MONGODB_URI;
     if (!uri) {
@@ -42,7 +42,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       const order = JSON.parse(JSON.stringify(orders));
       const status = order.status;
       if (status < 1) {
-        console.log("true");
+        // console.log("true");
         // Update the order with method: 1
         const updatedOrder = await db
           .collection("orders")
@@ -77,15 +77,33 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
   const [tracking, setTracking] = useState("");
-  const [token ,setToken] = useState()
+  const [token, setToken] = useState();
   // console.log(isorder);
 
   // console.log(chash);
   const orderItems = order?.item?.products;
   // console.log(orderItems)
   const orderstatus = order?.status;
+  //////////////////////get ships//////////
+  // var myHeaders = new Headers();
+  // myHeaders.append("Content-Type", "application/json");
+  // myHeaders.append("Authorization", `Bearer ${token}`);
 
-  console.log(orderstatus);
+  // var requestOptions: any = {
+  //   method: "GET",
+  //   headers: myHeaders,
+  //   redirect: "follow",
+  // };
+
+  // fetch(
+  //   "https://apiv2.shiprocket.in/v1/external/orders/show/335383658",
+  //   requestOptions
+  // )
+  //   .then((response) => response.text())
+  //   .then((result) => console.log(result))
+  //   .catch((error) => console.log("error", error));
+////////////////////////////////////////////////////////////
+  // console.log(orderstatus);
   // const dispatch = useDispatch();
   // const cooke = Cookies.get()
   // console.log(cooke + "cokekekeke")
@@ -107,39 +125,36 @@ const Order = ({ order }: any, error: OrderProps) => {
   //date//
   // Get the current date and time
   // console.log("process.env.email:" + process.env.SHIPROCKETID)
-/// Auth
-console.log(token)
-if (!token) {
-  var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+  /// Auth
+  // console.log(token)
+  if (!token) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({
-  "email": process.env.NEXT_PUBLIC_SHIPROCKETID,
-  "password": process.env.NEXT_PUBLIC_SHIPROCKETPASSWORD
-});
+    var raw = JSON.stringify({
+      email: process.env.NEXT_PUBLIC_SHIPROCKETID,
+      password: process.env.NEXT_PUBLIC_SHIPROCKETPASSWORD,
+    });
 
-var requestOptions:any = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+    var requestOptions: any = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    const data = {result}
-    // console.log(token)
-    const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
-    const token = parsedData.token; // Access the "token" value
-    setToken(token);
-    
-  })
-  .catch(error => console.log('error', error));
-
-}
-//////////////////////////////////////auuth/////////////////// 
-
+    fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        const data = { result };
+        // console.log(token)
+        const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
+        const token = parsedData.token; // Access the "token" value
+        setToken(token);
+      })
+      .catch((error) => console.log("error", error));
+  }
+  //////////////////////////////////////auuth///////////////////
 
   var currentDate = new Date();
 
@@ -174,16 +189,13 @@ fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
   // const value = arrayItem;
   // console.log(value + " : " + typeof value);
   if (order && orderstatus == 0) {
-    console.log("running");
+    // console.log("running");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      `Bearer ${token}`
-    );
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
     var raw = JSON.stringify({
-      order_id: order?._id,
+      order_id: order._id,
       order_date: formattedDate,
       pickup_location: "test",
       channel_id: "3744780",
@@ -242,10 +254,7 @@ fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
   if (orderstatus > 0) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      `Bearer ${token}`
-    );
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
     var requestOptions: any = {
       method: "GET",
@@ -262,7 +271,7 @@ fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
       .catch((error) => console.log("error", error));
   }
 
-  // console.log("track : " + tracking)
+  console.log("track : " + tracking);
   //  const track = {tracking}
   if (tracking.length > 10) {
     var trackingObj = JSON.parse(tracking);
@@ -328,9 +337,9 @@ fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
 
   // setAwbs()
 
-  console.log(tracking.length);
+  // console.log(tracking.length);
   const handelCancel = () => {
-    console.log(order?._id);
+    // console.log(order?._id);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
