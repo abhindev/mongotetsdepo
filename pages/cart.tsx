@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import getLoggedIn from "../components/hooks/getLoggedIn";
 import Login from "../components/hooks/login";
 import Modal from "react-modal";
+import { GrClose } from "react-icons/gr";
 function Cart() {
   const redux = useSelector((state: any) => state.cart);
   const router = useRouter();
@@ -72,7 +73,7 @@ function Cart() {
           <div className={styles.left}>
             {ckeckout == true ? (
               <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles} >
-              <button onClick={() => modelClose()}>X</button>
+              <GrClose onClick={() => modelClose()}/>
               {log ? (<CheckOut />) : (<Login />)}
             </Modal>
             ) : (

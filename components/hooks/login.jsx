@@ -17,6 +17,8 @@ function Login(setIsOpen) {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [ActiveOTPIndex, setActiveOTPIndex] = useState(0);
   const inputRef = useRef(null);
+
+  const [error,setError] = useState()
   // const [finalotp ,setFinalOtp] = useState("")
 
   // const [last ,setLast] = useState('')
@@ -80,6 +82,8 @@ function Login(setIsOpen) {
           // ...
         })
         .catch((error) => {
+          setError("error")
+          console.log("error")
           // User couldn't sign in (bad verification code?)
           // ...
         });
@@ -122,7 +126,7 @@ function Login(setIsOpen) {
   }, [ActiveOTPIndex]);
   
   
-
+console.log(error == 'error')
   return (
     <div className={styles.container}>
       <div id="recaptcha-container"></div>
@@ -171,8 +175,9 @@ function Login(setIsOpen) {
           // </div>
 <>
           <div className={styles.otpText}><h1>OTP</h1></div>
+          
           <div className={styles.otpbase}>
-            
+          
             {otp.map((_, index) => {
               return (
                 <div key={index} >
@@ -188,7 +193,11 @@ function Login(setIsOpen) {
               );
             })}
           </div>
+          <div className={styles.invalidOtp}>
+          {error == 'error' ? <p>Invalid OTP Code</p>:""}
+          </div>
           </>
+          
         )}
 {FormChainge == false ?
         <button onClick={() => requestOtp()} className={styles.button}>

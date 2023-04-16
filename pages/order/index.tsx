@@ -63,16 +63,16 @@ function Order({ data }: any) {
   //delet order
   
   const handleDelete = () => {
-    console.log("odd")
-    fetch('http://localhost:3000/api/order', {
+    console.log("delet")
+    fetch('https://mongotetsdepo.vercel.app/api/order', {
     method: 'DELETE',
   })
   }
-  if(loggedinValue){handleDelete()}
+  // if(loggedinValue){handleDelete()}
 
   return (
     <div className={styles.orderindex}>
-      <h1>order</h1>
+      <h1 onLoad={()=>handleDelete()}>order</h1>
       
       {data.map((order: any, i: number) => (
         <Link href={`order/${order._id}`} style={{ textDecoration: "none" }} key={i}>
