@@ -76,6 +76,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
 const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
+  const [tracking, setTracking] = useState("");
   // console.log(isorder);
 
   // console.log(chash);
@@ -83,7 +84,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   // console.log(orderItems)
   const orderstatus = order?.status;
 
-  console.log(orderstatus)
+  console.log(orderstatus);
   // const dispatch = useDispatch();
   // const cooke = Cookies.get()
   // console.log(cooke + "cokekekeke")
@@ -122,29 +123,29 @@ const Order = ({ order }: any, error: OrderProps) => {
   const item = order?.item?.products;
   const arrayItem: any = [];
   item?.map((item: any, i: number) => {
-    arrayItem.push(
-      { 
-        name: item?.title,
-          sku: item?._id+i,
-          units: item?.quantity,
-          selling_price: item.price,
-          discount: "",
-          tax: "",
-          hsn: 441122,
-      }
-      );
+    arrayItem.push({
+      name: item?.title,
+      sku: item?._id + i,
+      units: item?.quantity,
+      selling_price: item.price,
+      discount: "",
+      tax: "",
+      hsn: 441122,
+    });
   });
   // console.log(order);
-
 
   // const value = arrayItem;
   // console.log(value + " : " + typeof value);
 
-  if (order && orderstatus == 0 ) {
-    console.log("running")
+  if (order && orderstatus == 0) {
+    console.log("running");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g");
+    myHeaders.append(
+      "Authorization",
+      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g"
+    );
 
     var raw = JSON.stringify({
       order_id: order?._id,
@@ -174,7 +175,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       shipping_email: "",
       shipping_phone: "",
       order_items: arrayItem,
-        
+
       payment_method: "Prepaid",
       shipping_charges: 0,
       giftwrap_charges: 0,
@@ -203,7 +204,119 @@ const Order = ({ order }: any, error: OrderProps) => {
       .catch((error) => console.log("error", error));
   }
 
-  
+  if (orderstatus > 0) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g"
+    );
+
+    var requestOptions: any = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${order?._id}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => setTracking(result))
+      .catch((error) => console.log("error", error));
+  }
+
+  // console.log("track : " + tracking)
+  //  const track = {tracking}
+  if (tracking.length > 10) {
+    var trackingObj = JSON.parse(tracking);
+    var trackStatus = trackingObj.tracking_data.track_status;
+    console.log("track_status:", trackStatus);
+  }
+  // console.log(trackingObj?.tracking_data)
+  // const trackingObj = {
+  //   tracking_data: {
+  //     track_status: 1,
+  //     shipment_status: 42,
+  //     shipment_track: [
+  //       {
+  //         id: 185584215,
+  //         awb_code: "1091188857722",
+  //         courier_company_id: 10,
+  //         shipment_id: 168347943,
+  //         order_id: 168807908,
+  //         pickup_date: null,
+  //         delivered_date: null,
+  //         weight: "0.10",
+  //         packages: 1,
+  //         current_status: "PICKED UP",
+  //         delivered_to: "Mumbai",
+  //         destination: "Mumbai",
+  //         consignee_name: "Musarrat",
+  //         origin: "PALWAL",
+  //         courier_agent_details: null,
+  //         edd: "2021-12-27 23:23:18",
+  //       },
+  //     ],
+  //     shipment_track_activities: [
+  //       {
+  //         date: "2021-12-23 14:23:18",
+  //         status: "X-PPOM",
+  //         activity: "In Transit - Shipment picked up",
+  //         location: "Palwal_NewColony_D (Haryana)",
+  //         "sr-status": "42",
+  //       },
+  //       {
+  //         date: "2021-12-23 14:19:37",
+  //         status: "FMPUR-101",
+  //         activity: "Manifested - Pickup scheduled",
+  //         location: "Palwal_NewColony_D (Haryana)",
+  //         "sr-status": "NA",
+  //       },
+  //       {
+  //         date: "2021-12-23 14:19:34",
+  //         status: "X-UCI",
+  //         activity: "Manifested - Consignment Manifested",
+  //         location: "Palwal_NewColony_D (Haryana)",
+  //         "sr-status": "5",
+  //       },
+  //     ],
+  //     track_url: "https://shiprocket.co//tracking/1091188857722",
+  //     etd: "2021-12-28 10:19:35",
+  //   },
+  // };
+  // console.log(trackingObj.tracking_data.track_status);
+const [awbs ,setAwbs] = useState(trackingObj?.tracking_data?.shipment_track?.awb_code)
+
+// setAwbs()
+
+  console.log(tracking.length);
+  const handelCancel = () => {
+    console.log(order?._id)
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g");
+
+var raw = JSON.stringify({
+  "ids": [
+    order._id
+  ]
+});
+
+var requestOptions :any = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://apiv2.shiprocket.in/v1/external/orders/cancel", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  };
+
   return (
     <div>
       {isorder == "ERROR" ? (
@@ -238,101 +351,24 @@ const Order = ({ order }: any, error: OrderProps) => {
               </div>
 
               <div className={styles.order_track}>
-                <div className={styles.order_track_step}>
-                  <div className={styles.order_track_status}>
-                    <span className={styles.order_track_status_dot}></span>
-                    <span className={styles.order_track_status_line}></span>
-                  </div>
-
-                  <div className={styles.order_track_text}>
-                    <p className={styles.order_track_text_stat}>
-                      Order Received
-                    </p>
-                  </div>
+                {tracking.length == 143 ? <>order Prosessing</> : ""}
+                
+                <div>
+                  {trackingObj?.tracking_data?.shipment_track_activities?.map(
+                    (item: any, i: number) => (
+                      <div>
+                        <h6>{item?.activity}</h6>
+                        <p>{item.location}</p>
+                        
+                      </div>
+                    )
+                  )}
                 </div>
-                <div className={styles.order_track_step}>
-                  <div className={styles.order_track_status}>
-                    <span className={styles.order_track_status_dot}></span>
-                    <span className={styles.order_track_status_line}></span>
-                  </div>
-                  <div className={styles.order_track_text}>
-                    <p className={styles.order_track_text_stat}>
-                      Order Processed
-                    </p>
-                  </div>
-                </div>
-                <div className={styles.order_track_step}>
-                  <div className={styles.order_track_status}>
-                    <span
-                      className={styles.order_track_status_dot}
-                      style={{
-                        backgroundColor: orderstatus > 1 ? "#77a31f" : "gray",
-                      }}
-                    ></span>
-                    <span
-                      className={styles.order_track_status_line}
-                      style={{
-                        backgroundColor: orderstatus > 1 ? "#77a31f" : "gray",
-                      }}
-                    ></span>
-                  </div>
-                  <div className={styles.order_track_text}>
-                    <p className={styles.order_track_text_stat}>
-                      Manufracturing In Progress
-                    </p>
-                  </div>
-                </div>
-                <div className={styles.order_track_step}>
-                  <div className={styles.order_track_status}>
-                    <span
-                      className={styles.order_track_status_dot}
-                      style={{
-                        backgroundColor: orderstatus > 2 ? "#77a31f" : "gray",
-                      }}
-                    ></span>
-                    <span
-                      className={styles.order_track_status_line}
-                      style={{
-                        backgroundColor: orderstatus > 2 ? "#77a31f" : "gray",
-                      }}
-                    ></span>
-                  </div>
-                  <div className={styles.order_track_text}>
-                    <p className={styles.order_track_text_stat}>
-                      Order Dispatched
-                    </p>
-                    {order?.Trackingnumber ? (
-                      <>
-                        <a
-                          target="_blank"
-                          href={`https://www.google.com/search?q=dtdc+tracking+R60309980&sxsrf=APwXEdclAnqAEtOFPKFPlVzEn-Xih1xt8Q%3A1680161514618&ei=6jolZJWsJcDZ4-EPo_uz8A8&ved=0ahUKEwiVyfmxkYP-AhXA7DgGHaP9DP4Q4dUDCA8&uact=5&oq=dtdc+tracking+${order.Trackingnumber}&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzoKCAAQRxDWBBCwAzoECAAQAzoGCAAQFhAeSgQIQRgAUPMBWPkGYPMKaAFwAXgAgAFoiAHPAZIBAzAuMpgBAKABAaABAsgBCMABAQ&sclient=gws-wiz-serp`}
-                        >
-                          <div>tracking id: {order.Trackingnumber}</div>
-                        </a>
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div className={styles.order_track_step}>
-                  <div className={styles.order_track_status}>
-                    <span
-                      className={styles.order_track_status_dot}
-                      style={{
-                        backgroundColor: orderstatus > 3 ? "#77a31f" : "gray",
-                      }}
-                    ></span>
-                    <span className={styles.order_track_status_line}></span>
-                  </div>
-                  <div className={styles.order_track_text}>
-                    <p className={styles.order_track_text_stat}>
-                      Order Deliverd
-                    </p>
-                  </div>
-                </div>
+                <a href={trackingObj?.tracking_data?.track_url}>
+                  {trackingObj?.tracking_data?.track_url}
+                </a>
               </div>
-
+              <div onClick={() => handelCancel()} style={{color:"red"}}>Cancel</div>
               <div className={styles.address}>
                 <h3>Delivery</h3>
                 <p>Address</p>
