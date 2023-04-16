@@ -7,6 +7,7 @@ import PoductList from "../components/template/products/productlist";
 import Review from "../components/tools/ytReview";
 
 
+
 export async function getServerSideProps() {
   try {
     const client = await clientPromise;
@@ -25,6 +26,7 @@ export async function getServerSideProps() {
 export default function Home({
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+ 
   return (
     <div className={styles.container}>
       

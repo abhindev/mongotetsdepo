@@ -16,7 +16,7 @@ export async function getServerSideProps(context: any) {
   console.log(loggedIn);
 
   // Fetch data from an API with the "loggedIn" cookie value in the request headers
-  const response = await fetch(`${process.env.DOM}/api/order`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DOM}/api/order`, {
     method: 'GET',
     headers: {
       'Cookie': `loggedin=${loggedIn}` // Include the cookie value in the request headers
@@ -64,7 +64,7 @@ function Order({ data }: any) {
   
   const handleDelete = () => {
     console.log("delet")
-    fetch('https://mongotetsdepo.vercel.app/api/order', {
+    fetch(`${process.env.NEXT_PUBLIC_DOM}/api/order`, {
     method: 'DELETE',
   }).then(response => response.text())
   .then(result => console.log(result))

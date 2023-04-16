@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   
     try {
       // Make the GET request
-      const response = await fetch(`https://sandbox.cashfree.com/pg/orders/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_CASHFREE_URI}/${id}`, {
         method: 'GET',
         headers,
       });

@@ -22,7 +22,7 @@ interface OrderProps {
 export const getServerSideProps = async ({ params }: { params: Params }) => {
   try {
     const resone = await fetch(
-      `${process.env.DOM}/api/order/chashfree/${params.id}`
+      `${process.env.NEXT_PUBLIC_DOM}/api/order/chashfree/${params.id}`
     );
     const chash = await resone.json();
     const orderStatus = chash.data.order_status;
@@ -77,6 +77,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
   const [tracking, setTracking] = useState("");
+  const [token ,setToken] = useState()
   // console.log(isorder);
 
   // console.log(chash);
@@ -105,6 +106,41 @@ const Order = ({ order }: any, error: OrderProps) => {
   // }
   //date//
   // Get the current date and time
+  // console.log("process.env.email:" + process.env.SHIPROCKETID)
+/// Auth
+console.log(token)
+if (!token) {
+  var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "email": process.env.NEXT_PUBLIC_SHIPROCKETID,
+  "password": process.env.NEXT_PUBLIC_SHIPROCKETPASSWORD
+});
+
+var requestOptions:any = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    const data = {result}
+    // console.log(token)
+    const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
+    const token = parsedData.token; // Access the "token" value
+    setToken(token);
+    
+  })
+  .catch(error => console.log('error', error));
+
+}
+//////////////////////////////////////auuth/////////////////// 
+
+
   var currentDate = new Date();
 
   // Extract the components of the date and time
@@ -137,14 +173,13 @@ const Order = ({ order }: any, error: OrderProps) => {
 
   // const value = arrayItem;
   // console.log(value + " : " + typeof value);
-
   if (order && orderstatus == 0) {
     console.log("running");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Authorization",
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g"
+      `Bearer ${token}`
     );
 
     var raw = JSON.stringify({
@@ -209,7 +244,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Authorization",
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g"
+      `Bearer ${token}`
     );
 
     var requestOptions: any = {
@@ -231,7 +266,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   //  const track = {tracking}
   if (tracking.length > 10) {
     var trackingObj = JSON.parse(tracking);
-    var trackStatus = trackingObj.tracking_data.track_status;
+    var trackStatus = trackingObj?.tracking_data?.track_status;
     console.log("track_status:", trackStatus);
   }
   // console.log(trackingObj?.tracking_data)
@@ -287,34 +322,40 @@ const Order = ({ order }: any, error: OrderProps) => {
   //   },
   // };
   // console.log(trackingObj.tracking_data.track_status);
-const [awbs ,setAwbs] = useState(trackingObj?.tracking_data?.shipment_track?.awb_code)
+  const [awbs, setAwbs] = useState(
+    trackingObj?.tracking_data?.shipment_track?.awb_code
+  );
 
-// setAwbs()
+  // setAwbs()
 
   console.log(tracking.length);
   const handelCancel = () => {
-    console.log(order?._id)
+    console.log(order?._id);
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g"
+    );
 
-var raw = JSON.stringify({
-  "ids": [
-    order._id
-  ]
-});
+    var raw = JSON.stringify({
+      ids: [order._id],
+    });
 
-var requestOptions :any = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+    var requestOptions: any = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-fetch("https://apiv2.shiprocket.in/v1/external/orders/cancel", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+    fetch(
+      "https://apiv2.shiprocket.in/v1/external/orders/cancel",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   };
 
   return (
@@ -352,14 +393,13 @@ fetch("https://apiv2.shiprocket.in/v1/external/orders/cancel", requestOptions)
 
               <div className={styles.order_track}>
                 {tracking.length == 143 ? <>order Prosessing</> : ""}
-                
+
                 <div>
                   {trackingObj?.tracking_data?.shipment_track_activities?.map(
                     (item: any, i: number) => (
                       <div>
                         <h6>{item?.activity}</h6>
                         <p>{item.location}</p>
-                        
                       </div>
                     )
                   )}
@@ -368,7 +408,9 @@ fetch("https://apiv2.shiprocket.in/v1/external/orders/cancel", requestOptions)
                   {trackingObj?.tracking_data?.track_url}
                 </a>
               </div>
-              <div onClick={() => handelCancel()} style={{color:"red"}}>Cancel</div>
+              <div onClick={() => handelCancel()} style={{ color: "red" }}>
+                Cancel
+              </div>
               <div className={styles.address}>
                 <h3>Delivery</h3>
                 <p>Address</p>
