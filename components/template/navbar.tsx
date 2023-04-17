@@ -3,7 +3,7 @@ import styles from "../../styles/Navbar.module.css";
 import Logo from "../../public/logo.png";
 import { useSelector } from "react-redux";
 import { BiShoppingBag } from "react-icons/bi";
-import { RiUserSmileLine } from "react-icons/ri";
+import { HiOutlineUser } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
 import Modal from "react-modal";
 import Image from "next/image";
@@ -84,7 +84,7 @@ function navbar() {
 
       <div onClick={() => handilclickOppen()}>
         <h1 style={{ marginLeft: "10px" }}>
-          <RiUserSmileLine color="white" />
+          <HiOutlineUser color="white" />
         </h1>
       </div>
       <div className={styles.item}>

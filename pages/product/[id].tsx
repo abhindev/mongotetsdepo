@@ -9,13 +9,13 @@ import Slider from "../../components/tools/Slider";
 import CarouselSlider from "../../components/tools/productSilde";
 import Link from "next/link";
 // import AddReview from "../../components/template/products/addReview"
-import Review from "../../components/template/products/review"
+import Review from "../../components/template/products/review";
 import Form from "../../components/template/form";
 interface Params {
   id: string;
 }
 
-export const getServerSideProps = async ({ params }: { params: Params } ) => {
+export const getServerSideProps = async ({ params }: { params: Params }) => {
   try {
     const uri = process.env.MONGODB_URI;
 
@@ -29,7 +29,7 @@ export const getServerSideProps = async ({ params }: { params: Params } ) => {
       .collection("products")
       .findOne({ _id: new ObjectId(params.id) });
     const Data = await db.collection("products").find({}).toArray();
-    
+
     return {
       props: {
         product: JSON.parse(JSON.stringify(product)),
@@ -44,11 +44,11 @@ export const getServerSideProps = async ({ params }: { params: Params } ) => {
       },
     };
   }
-  
 };
 
-const Product = ({ product, products }: any, ) => {
+const Product = ({ product, products }: any) => {
   const [price, setPrice] = useState(product.prices[0].price);
+  const [ORprice, setOPrice] = useState(product.prices[0].originalPrice);
   const [selection, setSelection] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [variant, serVariant] = useState(product.prices[0].text);
@@ -56,13 +56,14 @@ const Product = ({ product, products }: any, ) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const originalPrice = price;
 
-
-  const reviews = product.reviews
+  const reviews = product.reviews;
   const handleClickPrice = (size: any) => {
     // console.log(size.price);
     // console.log(size.text);
     setPrice(size.price);
+    setOPrice(size.originalPrice);
     serVariant(size.text);
   };
 
@@ -73,19 +74,37 @@ const Product = ({ product, products }: any, ) => {
     dispatch(addProduct({ ...product, price, quantity, variant }));
     router.push("/cart");
   };
+  const getOffP = (price: any, originalPrice: any) => {
+    let discountPrice = price;
+    let a = (discountPrice * 100) / originalPrice;
+    let value = Math.round(100 - a);
+    return value;
+  };
+  const offp = getOffP(price, ORprice) + "%";
 
   return (
     <>
-    
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.imgContainer}>
-            <Slider imageArray={img}/> 
+            <Slider imageArray={img} />
           </div>
         </div>
         <div className={styles.right}>
           <p className={styles.title}>{product.title}</p>
-          <span className={styles.price}>₹ {price}</span>
+          <div className={styles.aa}>
+            <span className={styles.price}>₹ {price}</span>
+            {/* <div className={styles.nn}>
+              <del className={styles.del}>{ORprice}</del>
+              <p style={{ fontSize: "1.3rem" }}>{offp}</p>
+            </div> */}
+            <div className={styles.off}>
+                <del className={styles.del} style={{ fontSize: "1.3rem" }}>
+                  {ORprice}
+                </del>
+                <p className={styles.offp}>{offp}</p>
+              </div>
+          </div>
           <div className={styles.decsDiv}>
             <p className={styles.desc}>{product.desc}</p>
           </div>
@@ -124,8 +143,7 @@ const Product = ({ product, products }: any, ) => {
             )}
           </div>
 
-          <div className={styles.add} >
-            
+          <div className={styles.add}>
             <button className={styles.button} onClick={handleClickAddtoCart}>
               ADD TO CART
             </button>
@@ -173,10 +191,9 @@ const Product = ({ product, products }: any, ) => {
       </div>
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>
-        <Review reviews={reviews}/>
-      {/* <AddReview id={product}/> */}
+        <Review reviews={reviews} />
+        {/* <AddReview id={product}/> */}
       </div>
-      
     </>
   );
 };
