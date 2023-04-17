@@ -126,7 +126,7 @@
   .sizes {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 
   .quantity {
@@ -138,6 +138,9 @@
     border-radius: 0px;
     margin: 0;
     padding: 0;
+    height: 72px;
+    font-size: 19px;
+    font-weight: 400;
   }
   .add {
     position: sticky;
