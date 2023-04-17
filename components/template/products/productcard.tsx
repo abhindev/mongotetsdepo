@@ -53,14 +53,17 @@ function ProductCard({ product, i }: any) {
       >
         <div style={{ flex: 1 }} className={styles.left}>
           <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
-            <div onClick={() => router.push(`/product/${product._id}`)}>
+            <a
+            href={`/product/${product._id}`}
+            // onClick={() => router.push(`/product/${product._id}`)}
+            >
               {/* href={`/product/${product._id}`} */}
               {/* <div onClick={()=>handleClick() }> */}
               <div className={width < 600 ? styles.img_mob : styles.img}>
                 <Image src={product.img[0]} alt="" fill sizes="100vw" />
               </div>
               {/* </div> */}
-            </div>
+            </a>
           </div>
         </div>
         <div
@@ -72,9 +75,9 @@ function ProductCard({ product, i }: any) {
           }}
           className={styles.right}
         >
-          <div
-            onClick={() => router.push(`/product/${product._id}`)}
-            // href={`/product/${product._id}`}
+          <a
+            // onClick={() => router.push(`/product/${product._id}`)}
+            href={`/product/${product._id}`}
             // passHref
             style={{ textDecoration: "none", color: "#000" }}
           >
@@ -98,7 +101,7 @@ function ProductCard({ product, i }: any) {
               </div> */}
               
             </div>
-          </div>
+          </a>
 
           <div className={width < 600 ? styles.button_mob : styles.button}>
             <button
