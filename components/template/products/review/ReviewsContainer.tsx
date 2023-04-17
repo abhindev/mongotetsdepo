@@ -5,7 +5,7 @@ import { CiStar } from "react-icons/ci";
 import Avatar from "react-avatar";
 
 function ReviewsContainer({ review }: any) {
-  console.log(review);
+  // console.log(review);
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>

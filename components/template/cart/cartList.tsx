@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import React from 'react'
 import styles from '../../..//styles/list.module.css'
 function cartList({cart}:any) {
-  console.log(cart)
   const item = cart
   return (
     <>
@@ -21,7 +19,7 @@ function cartList({cart}:any) {
           </div>
         </div>
         <div className={styles.price}>
-           <h2>{item.quantity*item.price}</h2>
+          <h2>{item.quantity*item.price}</h2>
         </div>
       </div>
     </div>

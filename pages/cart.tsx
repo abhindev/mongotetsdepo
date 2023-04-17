@@ -7,7 +7,7 @@ import useDeviceSize from "../components/hooks/useWindowSize";
 import CheckOut from "../components/template/cart/checkOut";
 import styles from "../styles/Cart.module.css";
 
-import Cookies from "js-cookie";
+
 import { useRouter } from "next/router";
 import getLoggedIn from "../components/hooks/getLoggedIn";
 import Login from "../components/hooks/login";
@@ -29,7 +29,7 @@ function Cart() {
       setIsOpen(true);
     // } else {
       setCkeckout(true);
-      console.log("ckeo")
+      
     // }
   };
   const handile_mobsubmit = () => {
@@ -38,7 +38,7 @@ function Cart() {
     // }, 1);
     setIsOpen(true);
     setCkeckout(true);
-    console.log("running"+ ckeckout)
+    // console.log("running"+ ckeckout)
     // if (!log) {
     //   setIsOpen(true);
     // } else {
@@ -193,15 +193,8 @@ function Cart() {
                 <button onClick={() => modelClose()}>X</button>
                 {log ? (<CheckOut />) : (<Login />)}
               </Modal>
-              
-                {/* // <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} >
-                //   <Login />
-                // </Modal> */}
-              
             </>
-          {/* ) : (
-            ""
-          )} */}
+          
         </>
       )}
     </div>

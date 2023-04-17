@@ -4,7 +4,7 @@ import styles from "../../styles/ReviewYt.module.css"
 function Review() {
     const pins = [
         { id: 1, src: "https://picsum.photos/100/200" ,url:"https://youtu.be/bwTlcN1tnY0"},
-        { id: 2,  width:"100", height:"200" ,src:"https://www.youtube.com/embed/bwTlcN1tnY0", title:"YouTube video player" ,frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"},
+        { id: 2, src: "https://picsum.photos/100/200" },
         { id: 8, src: "https://picsum.photos/100/200" },
         { id: 3, src: "https://picsum.photos/100/200" },
         { id: 4, src: "https://picsum.photos/100/200" },
@@ -19,9 +19,7 @@ function Review() {
       }
 
     return (
-        <>
-        {}
-        
+        <div className={styles.container}>
         <div className={styles.title}>
             <p className={styles.customerText}>Customer </p>
             <p className={styles.ExperienceText}>Experience</p>
@@ -32,8 +30,10 @@ function Review() {
             <div className={
                 i%3 ===0 ? styles.zero : i%3 ===1? styles.one : styles.two
             }> 
-                {/* <img src={pin.src} alt=""  className ={styles.image}/> */}
-                <iframe width="100" height="200" src="https://www.youtube.com/embed/bwTlcN1tnY0" className ={styles.image} ></iframe>
+            <a href={pin?.url} target="_blank">
+                <img src={pin.src} alt=""  className ={styles.image}/>
+            </a>
+                {/* <iframe width="100" height="200" src="https://www.youtube.com/embed/Q6zsaJRNCOw" className ={styles.image} ></iframe> */}
             </div>
           </div>
         ))}
@@ -41,7 +41,7 @@ function Review() {
       <div className={styles.buttoncontainer}>
       <div className={styles.button} onClick={()=>viewMore()}>Show More</div>
       </div>
-      </>
+      </div>
     )
    }
 

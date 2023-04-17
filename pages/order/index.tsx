@@ -63,7 +63,7 @@ function Order({ data }: any) {
   //delet order
   
   const handleDelete = () => {
-    console.log("delet")
+    // console.log("delet")
     fetch(`${process.env.NEXT_PUBLIC_DOM}/api/order`, {
     method: 'DELETE',
   }).then(response => response.text())

@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/OrderID.module.css";
 // import addOrder from "../../components/hooks/upDateUser"
-import { addOrder } from "../../lib/redux/orderSlice";
-import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
+// import { addOrder } from "../../lib/redux/orderSlice";
+// import { useDispatch } from "react-redux";
+// import Cookies from "js-cookie";
 interface OrderProps {
   order:
     | {
@@ -26,7 +26,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     );
     const chash = await resone.json();
     const orderStatus = chash.data.order_status;
-    // console.log(orderStatus);
+    
 
     const uri = process.env.MONGODB_URI;
     if (!uri) {
@@ -42,8 +42,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       const order = JSON.parse(JSON.stringify(orders));
       const status = order.status;
       if (status < 1) {
-        // console.log("true");
-        // Update the order with method: 1
+       
         const updatedOrder = await db
           .collection("orders")
           .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
@@ -78,11 +77,11 @@ const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
   const [tracking, setTracking] = useState("");
   const [token, setToken] = useState();
-  // console.log(isorder);
 
-  // console.log(chash);
+
+
   const orderItems = order?.item?.products;
-  // console.log(orderItems)
+
   const orderstatus = order?.status;
   //////////////////////get ships//////////
   // var myHeaders = new Headers();
@@ -103,30 +102,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   //   .then((result) => console.log(result))
   //   .catch((error) => console.log("error", error));
 ////////////////////////////////////////////////////////////
-  // console.log(orderstatus);
-  // const dispatch = useDispatch();
-  // const cooke = Cookies.get()
-  // console.log(cooke + "cokekekeke")
-  // var isDisplayed = false;
-  // if (isDisplayed == false) {
-  //   if (order && isorder == false) {
-  //     setIsorder(true);
-  //     isDisplayed = true;
-  //     let value:any = Cookies.get("loggedin");
-  //     const phoneNumber= value
-  //     // addOrder(phoneNumber,{...order})
-  //     // dispatch(addOrder({ ...order }));
-  //     console.log("adde")
-  //     console.log("phone"+phoneNumber )
-  //     console.log("order"+{...order})
-
-  //   }
-  // }
-  //date//
-  // Get the current date and time
-  // console.log("process.env.email:" + process.env.SHIPROCKETID)
-  /// Auth
-  // console.log(token)
+  
   if (!token) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -147,7 +123,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       .then((response) => response.text())
       .then((result) => {
         const data = { result };
-        // console.log(token)
+        
         const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
         const token = parsedData.token; // Access the "token" value
         setToken(token);
@@ -229,10 +205,10 @@ const Order = ({ order }: any, error: OrderProps) => {
       transaction_charges: 0,
       total_discount: 0,
       sub_total: order?.total,
-      length: 10,
-      breadth: 15,
-      height: 20,
-      weight: 2.5,
+      length: 21.5,
+      breadth: 17.5,
+      height: 6,
+      weight: 0.5,
     });
 
     var requestOptions: any = {
@@ -271,66 +247,14 @@ const Order = ({ order }: any, error: OrderProps) => {
       .catch((error) => console.log("error", error));
   }
 
-  console.log("track : " + tracking);
+  // console.log("track : " + tracking);
   //  const track = {tracking}
   if (tracking.length > 10) {
     var trackingObj = JSON.parse(tracking);
     var trackStatus = trackingObj?.tracking_data?.track_status;
-    console.log("track_status:", trackStatus);
+    // console.log("track_status:", trackStatus);
   }
-  // console.log(trackingObj?.tracking_data)
-  // const trackingObj = {
-  //   tracking_data: {
-  //     track_status: 1,
-  //     shipment_status: 42,
-  //     shipment_track: [
-  //       {
-  //         id: 185584215,
-  //         awb_code: "1091188857722",
-  //         courier_company_id: 10,
-  //         shipment_id: 168347943,
-  //         order_id: 168807908,
-  //         pickup_date: null,
-  //         delivered_date: null,
-  //         weight: "0.10",
-  //         packages: 1,
-  //         current_status: "PICKED UP",
-  //         delivered_to: "Mumbai",
-  //         destination: "Mumbai",
-  //         consignee_name: "Musarrat",
-  //         origin: "PALWAL",
-  //         courier_agent_details: null,
-  //         edd: "2021-12-27 23:23:18",
-  //       },
-  //     ],
-  //     shipment_track_activities: [
-  //       {
-  //         date: "2021-12-23 14:23:18",
-  //         status: "X-PPOM",
-  //         activity: "In Transit - Shipment picked up",
-  //         location: "Palwal_NewColony_D (Haryana)",
-  //         "sr-status": "42",
-  //       },
-  //       {
-  //         date: "2021-12-23 14:19:37",
-  //         status: "FMPUR-101",
-  //         activity: "Manifested - Pickup scheduled",
-  //         location: "Palwal_NewColony_D (Haryana)",
-  //         "sr-status": "NA",
-  //       },
-  //       {
-  //         date: "2021-12-23 14:19:34",
-  //         status: "X-UCI",
-  //         activity: "Manifested - Consignment Manifested",
-  //         location: "Palwal_NewColony_D (Haryana)",
-  //         "sr-status": "5",
-  //       },
-  //     ],
-  //     track_url: "https://shiprocket.co//tracking/1091188857722",
-  //     etd: "2021-12-28 10:19:35",
-  //   },
-  // };
-  // console.log(trackingObj.tracking_data.track_status);
+  
   const [awbs, setAwbs] = useState(
     trackingObj?.tracking_data?.shipment_track?.awb_code
   );
@@ -401,7 +325,7 @@ const Order = ({ order }: any, error: OrderProps) => {
               </div>
 
               <div className={styles.order_track}>
-                {tracking.length == 143 ? <>order Prosessing</> : ""}
+                {tracking.length < 143 ? <>order Prosessing</> : ""}
 
                 <div>
                   {trackingObj?.tracking_data?.shipment_track_activities?.map(
@@ -417,9 +341,7 @@ const Order = ({ order }: any, error: OrderProps) => {
                   {trackingObj?.tracking_data?.track_url}
                 </a>
               </div>
-              <div onClick={() => handelCancel()} style={{ color: "red" }}>
-                Cancel
-              </div>
+              
               <div className={styles.address}>
                 <h3>Delivery</h3>
                 <p>Address</p>
@@ -428,6 +350,9 @@ const Order = ({ order }: any, error: OrderProps) => {
                   {order.address.Address}, {order.address.City} ,
                   {order.address.State}, {order.address.pinCode}
                 </p>
+              </div>
+              <div onClick={() => handelCancel()} style={{ color: "red" }}>
+                Cancel
               </div>
             </div>
           </div>

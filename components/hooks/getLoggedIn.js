@@ -20,11 +20,8 @@ const getLoggedIn = () => {
 
     // Check if the "loggedin" cookie has a value
     const hasLoggedInValue = checkCookieValue('loggedin');
-    // console.log(hasLoggedInValue);
     setValue(hasLoggedInValue)
   }, []);
-
-  console.log(value)
 
   return value
 };

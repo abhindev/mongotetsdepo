@@ -8,7 +8,7 @@ import Createuser from "./createUser";
 
 let currentOTPindex = 0;
 function Login(setIsOpen) {
-  const [OTP, setOTP] = useState();
+  
   const [phonenumber, setPhonenumber] = useState("");
   const [FormChainge, setFormChainge] = useState(false);
   const [code, setCode] = useState("91");
@@ -19,22 +19,16 @@ function Login(setIsOpen) {
   const inputRef = useRef(null);
 
   const [error,setError] = useState()
-  // const [finalotp ,setFinalOtp] = useState("")
-
-  // const [last ,setLast] = useState('')
-  
-  // let finalotp = (otp[0]+otp[1]+otp[2]+otp[3]+otp[4]+otp[5])
   
   const router = useRouter();
-  // console.log("+" + code + phonenumber);
+  
   const generateRecaptchaVerifier = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "recaptcha-container",
       {
         size: "invisible",
         callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          // onSignInSubmit();
+          
         },
       },
       auth
@@ -44,15 +38,13 @@ function Login(setIsOpen) {
   const requestOtp = () => {
     generateRecaptchaVerifier();
     let phone = "+" + code + phonenumber;
-    // console.log(phone)
+    
     let captcha = window.recaptchaVerifier;
     signInWithPhoneNumber(auth, phone, captcha)
       .then((confirmationResult) => {
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
         window.confirmationResult = confirmationResult;
         // ...
-        console.log("sentOtp");
+        
         setFormChainge(true);
       })
       .catch((error) => {
@@ -64,7 +56,7 @@ function Login(setIsOpen) {
   const verifyOtp = (otp) => {
     let otpconfirm = otp[0]+otp[1]+otp[2]+otp[3]+otp[4]+otp[5]
     // setOTP(otp);
-    console.log(otpconfirm.length)
+    
     if (otpconfirm.length === 6) {
       let confirmationResult = window.confirmationResult;
       confirmationResult
@@ -72,10 +64,10 @@ function Login(setIsOpen) {
         .then((result) => {
           // User signed in successfully.
           const user = result.user;
-          console.log(user.phoneNumber);
+          
           setUser(user.phoneNumber);
           Cookies.set("loggedin", user.phoneNumber);
-          console.log(user.phoneNumber);
+          
           Createuser(user);
           // router.push("/");
           router.reload();
@@ -93,12 +85,12 @@ function Login(setIsOpen) {
   const handleChange = (event) => {
     setPhonenumber(event.target.value);
 
-    // console.log("value is:", event.target.value);
+    
   };
   const handleChangeCode = (event) => {
     setCode(event.target.value);
 
-    // console.log("value is:", event.target.value);
+    
   };
 
   

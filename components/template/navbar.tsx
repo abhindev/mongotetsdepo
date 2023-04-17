@@ -20,7 +20,6 @@ function navbar() {
   const log = getLoggedIn();
   const router = useRouter();
   const handilclickOppen = () => {
-    console.log("oppen::" + oppen);
     setIsOpen(true);
   };
   const handilcliceClosr = () => {
@@ -96,7 +95,7 @@ function navbar() {
         </div>
       </div>
 
-      <div onClick={() => router.push("cart")}>
+      <div onClick={() => router.push("/cart")}>
         <div className={styles.item}>
           <div className={styles.cart}>
             <div className={styles.cartIcon}>

@@ -3,9 +3,9 @@ import styles from "../../../styles/Details.module.css";
 
 export default function Details(product: any) {
   const details = product.product.details;
-  console.log(details);
+  // console.log(details);
   details.map((item: any, i: any) => {
-    console.log(item.title);
+    // console.log(item.title);
   });
 
   return (

@@ -1,10 +1,12 @@
+.container {
+  margin-top: 20px;
+}
 .title {
   position: relative;
   top: 20px;
-  margin-left: 15%;
-  font-size: 4vw;
+  margin-left: 5%;
+  font-size: 5.6vw;
   transform: translateY(20px);
-  /* color: red; */
 }
 .customerText {
   font-weight: 400;
@@ -60,7 +62,7 @@
 .button {
   display: flex;
   justify-content: center;
-align-items: center;
+  align-items: center;
   background-color: hsl(80, 68%, 38%);
   border: none;
   border-radius: 5px;

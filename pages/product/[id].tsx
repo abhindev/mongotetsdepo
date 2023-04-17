@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import Slider from "../../components/tools/Slider";
 import CarouselSlider from "../../components/tools/productSilde";
 import Link from "next/link";
-import AddReview from "../../components/template/products/addReview"
+// import AddReview from "../../components/template/products/addReview"
 import Review from "../../components/template/products/review"
 import Form from "../../components/template/form";
 interface Params {
@@ -174,7 +174,7 @@ const Product = ({ product, products }: any, ) => {
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>
         <Review reviews={reviews}/>
-      <AddReview id={product}/>
+      {/* <AddReview id={product}/> */}
       </div>
       
     </>

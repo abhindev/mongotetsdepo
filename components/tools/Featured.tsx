@@ -4,9 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import "../../styles/Featured.module.css";
 
 const imageArray = [
-  "/hero/web home3.webp",
   "/hero/web home.webp",
   "/hero/hompaage 2.webp",
+  "/hero/web home3.webp",
 ];
 
 function Featured() {

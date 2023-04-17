@@ -10,11 +10,10 @@ function CheckOut() {
   const router = useRouter();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log(cart.total);
+  
   const num = cart.total + 50;
   const cartTotal = num.toString();
-  // console.log(numstring)
-  /////////////states//////////////////////
+ 
   const [orderId, setOrderId] = useState("");
 
   const [customername, setCustomername] = useState("");
@@ -26,8 +25,7 @@ function CheckOut() {
   const [customerphone, setCustomerPhone] = useState("");
   const [customerphone2, setCustomerPhone2] = useState("");
 
-  ///////////////states end /////////////////////
-  /////////////validation////////////////////
+  
   const initialValues = {
     name: "",
     email: "",
@@ -42,7 +40,7 @@ function CheckOut() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [runing , setRuning] = useState(false) 
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,9 +54,9 @@ function CheckOut() {
   };
 
   useEffect(() => {
-    console.log(formErrors);
+    
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues.name);
+      
       setCustomername(formValues.name);
       setCustomemail(formValues.email);
       setCustomeraddress(formValues.address);
@@ -126,8 +124,7 @@ function CheckOut() {
   const err = Object.keys(formErrors).length;
   const val = Object.keys(setFormValues).length;
 
-  console.log(Object.keys(formErrors).length);
-  console.log(Object.keys(formValues).length);
+  
   ///////////////////////////
   
   const onLaoded = () => {
@@ -145,7 +142,7 @@ function CheckOut() {
         email,
         total
       ).then(function (result) {
-        console.log(result.insertedId); // "initResolve"
+       
         //loading
         setLoading(true);
         //loadingend
@@ -161,9 +158,7 @@ function CheckOut() {
           customer_email,
           customer_phone
         ).then(function (result) {
-          console.log(result); // "initResolve"
-          console.log(result.payment_link);
-          router.push(result.payment_link);
+          router.push(result?.payment_link);
           return "normalReturn";
         });
         return "normalReturn";

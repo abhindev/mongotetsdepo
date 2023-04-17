@@ -216,20 +216,36 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.offBig{
+  position: relative;
+  top: 40px;
+  left: 150px;
+  display: flex;
+
+}
+.offp{
+  position: relative;
+  top: 25px;
+  margin: 0;
+  font-weight: 400;
+  margin-left: 10px;
+}
 .off{
   margin-top: 10px;
+  display: flex;
+  align-items: baseline;
 }
 .del{
   text-decoration:none;
   position:relative;
-  margin: 5px;
+  /* margin: 5px; */
   margin-top: 20px;
   color: gray;
-  font-size: 1rem;
+  /* font-size: 1rem; */
 }
 .del::before{
     top: 50%; /*tweak this to adjust the vertical position if it's off a bit due to your font family */
-    background:black; /*this is the color of the line*/
+    background:rgb(206, 35, 33); /*this is the color of the line*/
     opacity:.7;
     content: '';
     width: 110%;
