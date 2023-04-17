@@ -86,15 +86,17 @@ function ProductCard({ product, i }: any) {
               <p className={width < 600 ? styles.desc_mob : styles.desc}>
                 {product.desc}
               </p>
-              <div className={width < 600 ? styles.off : styles.offBig}>
-                <del className={styles.del} style={{ fontSize: "1.3rem" }}>
-                  {originalPrice}
-                </del>
-                <p className={width < 600 ? "" : styles.offp}>{offp}</p>
-              </div>
               <p className={width < 600 ? styles.price_mob : styles.price}>
                 <h1 className={styles.ins}>Rs. {price}.00</h1>
+                <p className={width < 600 ? "" : styles.offp} style={{ marginLeft: "7px",fontSize: "9px", fontWeight: 400, color: "hsl(80, 68%, 38%)"}}>{offp} off</p>
               </p>
+              {/* <div className={width < 600 ? styles.off : styles.offBig}>
+                <del className={styles.del} style={{ fontSize: "1.3rem" ,margin:"0px 15px 0px 0px"}}>
+                  {originalPrice}
+                </del> 
+                <p className={width < 600 ? "" : styles.offp} >{offp} off</p>
+              </div> */}
+              
             </div>
           </div>
 
