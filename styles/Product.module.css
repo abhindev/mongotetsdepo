@@ -134,21 +134,27 @@
     justify-content: center;
   }
   .button {
-    width: 100%;
-    border-radius: 0px;
-    margin: 0;
-    padding: 0;
-    height: 72px;
-    font-size: 19px;
+    width: 164px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    height: 44px;
+    font-size: 14px;
     font-weight: 400;
   }
   .add {
-    position: sticky;
-    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    bottom: 0px;
+    /* transition: matrix(100px); */
     left: 0;
     display: flex;
     width: 100.1%;
     flex-direction: row;
+    z-index: 99999;
   }
   .aa {
     display: flex;
