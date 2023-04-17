@@ -10,7 +10,7 @@ let currentOTPindex = 0;
 function Login(setIsOpen) {
   const [phonenumber, setPhonenumber] = useState("+91");
   const [FormChainge, setFormChainge] = useState(false);
-  const [code, setCode] = useState("91");
+  const [load, setLoad] = useState(false);
   const [user, setUser] = useState("");
 
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -31,10 +31,34 @@ function Login(setIsOpen) {
       auth
     );
   };
+  
 
   const requestOtp = () => {
     generateRecaptchaVerifier();
-    let phone = phonenumber;
+
+    const phonenum = (phone) =>{
+      // console.log(phone.length)
+
+      if (phone.length == 10) {
+        const phone1 = ("+91"+phone)
+        console.log(phone1)
+        return(phone1)
+      }if(phone.length == 12){
+        const phone1 = ("+"+phone)
+        console.log(phone1)
+        return(phone1)
+      }else {
+        console.log(phone)
+        return(phone)
+      }
+
+    }
+    
+    let phone = phonenum(phonenumber)
+
+    
+    // console.log(phone)
+
 
     let captcha = window.recaptchaVerifier;
     signInWithPhoneNumber(auth, phone, captcha)
@@ -166,7 +190,7 @@ function Login(setIsOpen) {
         </button>: ''}
           </>
         ) : (
-          
+          <div>
           <div className={styles.otpbase}>
             <div className={styles.container}>
             {otp.map((_, index) => {
@@ -180,17 +204,25 @@ function Login(setIsOpen) {
                     type="number"
                     onChange={(e) => handelChainge(e)}
                   />
+                  
                 </div>
               );
             })}
             </div>
+            
             <div className={styles.invalidOtp}>
               {error == "error" ? <p>Invalid OTP Code</p> : ""}
             </div>
+            
           </div>
+          {/* <button onClick={()=>setLoad(true)}>verify</button> */}
+          </div>
+          
           
         )}
       </div>
+      {/* {load ?<div style={{width:"100vw",height:"100vh",backgroundColor:"red"}}>hay</div>:""} */}
+      
     </div>
   );
 }
