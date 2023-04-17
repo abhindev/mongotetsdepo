@@ -7,7 +7,6 @@ import useDeviceSize from "../components/hooks/useWindowSize";
 import CheckOut from "../components/template/cart/checkOut";
 import styles from "../styles/Cart.module.css";
 
-
 import { useRouter } from "next/router";
 import getLoggedIn from "../components/hooks/getLoggedIn";
 import Login from "../components/hooks/login";
@@ -26,10 +25,10 @@ function Cart() {
   const CkeckOut = () => {
     // window.scrollTo(0, 0);
     // if (!log) {
-      setIsOpen(true);
+    setIsOpen(true);
     // } else {
-      setCkeckout(true);
-      
+    setCkeckout(true);
+
     // }
   };
   const handile_mobsubmit = () => {
@@ -44,10 +43,21 @@ function Cart() {
     // } else {
     //   setIsOpen(true);
     //   setCkeckout(true);
-      
+
     // }
   };
   const customStyles = {
+    overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
+    content: {
+      borderRadius: "0",
+      backgroundColor: "rgb(218 215 215)",
+      top: "8%",
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+    },
+  };
+  const customStyless = {
     overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
     content: {
       border: "none",
@@ -58,35 +68,44 @@ function Cart() {
       bottom: "10%",
     },
   };
-  // const customStyles = {
-  //   overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
-  //   content: {
-  //     // width:"80vw",
-      
-  //     top: "10%",
-  //     left: "1%",
-  //     right: "1%",
-  //     bottom: "1%",
-      
-  //   },
-  // };
   const cart = redux.products;
   console.log(cart.length);
 
   const modelClose = () => {
     setIsOpen(false);
-      setCkeckout(false);
-  }
+    setCkeckout(false);
+  };
   return (
     <div className={width > 600 ? styles.cart : styles.mob}>
       {width > 600 ? (
         <div className={styles.container}>
           <div className={styles.left}>
             {ckeckout == true ? (
-              <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles} >
-              <GrClose onClick={() => modelClose()}/>
-              {log ? (<CheckOut />) : (<Login />)}
-            </Modal>
+              <>
+              {log ? (
+                <Modal
+                  isOpen={isOpen}
+                  onRequestClose={() => setIsOpen(false)}
+                  style={customStyles}
+                >
+                  <div className={styles.close} onClick={() => modelClose()}>
+                    <GrClose />
+                  </div>
+                    <div className={styles.checkoutmodel}>
+                      <CheckOut />
+                    </div>
+                </Modal> ):(
+                <Modal
+                  isOpen={isOpen}
+                  onRequestClose={() => setIsOpen(false)}
+                  style={customStyless}
+                >
+                  <div className={styles.close} onClick={() => modelClose()}>
+                    <GrClose />
+                  </div>
+                    <Login />
+                </Modal>)}
+              </>
             ) : (
               <CartItem cart={redux} />
             )}
@@ -129,15 +148,15 @@ function Cart() {
               <div className={styles.total}>
                 <div>
                   <h4>Total</h4>
-                  <p>ncluding 18% in taxes</p>
+                  <p>Including 18% in taxes</p>
                 </div>
                 {cart.length == 0 ? "" : <h2>INR {redux.total + 50}.00</h2>}
               </div>
               <div className={styles.btn}>
                 {/* {ckeckout == false ? ( */}
-                  <button className={styles.button} onClick={() => CkeckOut()}>
-                    {log ? "CkeckOut" : "Login"}
-                  </button>
+                <button className={styles.button} onClick={() => CkeckOut()}>
+                  {log == true ? "CONTINU" : "CHECKOUT"}
+                </button>
                 {/* ) : (
                   ""
                 )} */}
@@ -180,7 +199,7 @@ function Cart() {
             <div className={styles.total}>
               <div>
                 <h4>Total</h4>
-                <p>ncluding 18% in taxes</p>
+                <p>Including 18% in taxes</p>
               </div>
               {cart.length == 0 ? "" : <h2>INR {redux.total + 50}.00</h2>}
             </div>
@@ -190,7 +209,7 @@ function Cart() {
                   className={styles.button}
                   onClick={() => handile_mobsubmit()}
                 >
-                  CkeckOut
+                  {log == true ? "CONTINU" : "CHECKOUT"}
                 </button>
               ) : (
                 ""
@@ -198,14 +217,23 @@ function Cart() {
             </div>
           </div>
           {/* {ckeckout !== false ? ( */}
-            <>
-              
-                <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles} >
-                <button onClick={() => modelClose()}>X</button>
-                {log ? (<CheckOut />) : (<Login />)}
-              </Modal>
-            </>
-          
+          <>
+            <Modal
+              isOpen={isOpen}
+              onRequestClose={() => setIsOpen(false)}
+              style={customStyles}
+            >
+              <div style={{ width: "100%" }}>
+                <button
+                  onClick={() => modelClose()}
+                  className={styles.closebtn}
+                >
+                  <GrClose />
+                </button>
+              </div>
+              {log ? <CheckOut /> : <Login />}
+            </Modal>
+          </>
         </>
       )}
     </div>

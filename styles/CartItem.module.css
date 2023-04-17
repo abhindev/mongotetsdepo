@@ -39,14 +39,14 @@
   }
   .btn {
     border: none;
-    /* background-color: blue; */
+    background-color: transparent;
   }
   .icon_x {
     background-color: transparent;
     /* display: flex; */
     font-size: 16px;
     border-radius: 50px;
-    border: 1px solid black;
+    border: none;
     position: absolute;
     top: 20px;
     right: 20px;

@@ -1,5 +1,5 @@
 import styles from "../../styles/Product.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MongoClient, ObjectId } from "mongodb";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../lib/redux/cartSlice";
@@ -55,7 +55,7 @@ const Product = ({ product, products }: any) => {
   const [img, setImg] = useState(product.prices[selection].img);
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const [showDiv, setShowDiv] = useState(false);
   const originalPrice = price;
 
   const reviews = product.reviews;
@@ -69,6 +69,7 @@ const Product = ({ product, products }: any) => {
 
   const handleClickAddtoCart = () => {
     dispatch(addProduct({ ...product, price, quantity, variant }));
+    setShowDiv(true);
   };
   const handleClickBuy = () => {
     dispatch(addProduct({ ...product, price, quantity, variant }));
@@ -82,6 +83,20 @@ const Product = ({ product, products }: any) => {
   };
   const offp = getOffP(price, ORprice) + "%";
 
+  useEffect(() => {
+    let timer: any;
+    if (showDiv) {
+      // After 5 seconds, hide the div
+      timer = setTimeout(() => {
+        setShowDiv(false);
+      }, 3000);
+    }
+
+    // Clean up the timer when component unmounts or when showDiv changes
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [showDiv]);
   return (
     <>
       <div className={styles.container}>
@@ -99,11 +114,13 @@ const Product = ({ product, products }: any) => {
               <p style={{ fontSize: "1.3rem" }}>{offp}</p>
             </div> */}
             <div className={styles.off}>
-                <del className={styles.del} style={{ fontSize: "1rem" }}>
-                  {ORprice}
-                </del>
-                <p className={styles.offp} style={{color:"#77a31f"}}>{offp}</p>
-              </div>
+              <del className={styles.del} style={{ fontSize: "1rem" }}>
+                {ORprice}
+              </del>
+              <p className={styles.offp} style={{ color: "#77a31f" }}>
+                {offp}
+              </p>
+            </div>
           </div>
           <div className={styles.decsDiv}>
             <p className={styles.desc}>{product.desc}</p>
@@ -188,6 +205,14 @@ const Product = ({ product, products }: any) => {
             ))}
           </CarouselSlider>
         </div>
+      </div>
+      <div className={styles.notify}>
+        {showDiv && (
+          <div className={styles.noItem}>
+            <div className={styles.noItmeText}>ADDED TO CART</div>
+          </div>
+        )}
+        {/* <div className={styles.notify}>ha</div> */}
       </div>
       <div>
         <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>

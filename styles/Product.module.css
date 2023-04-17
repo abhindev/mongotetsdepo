@@ -205,3 +205,51 @@
   left: -1%;
   width: 102%;
 }
+
+.notify{
+  width: 100%;
+  /* background-color: #c1cfa6; */
+  height: 100px;
+  position: fixed;
+  bottom: 50px;
+  display: flex;
+justify-content: center;
+  }
+
+.noItem {
+  width: 60vw;
+  height: 80px;
+  /* left: -110px; */
+  position: absolute;
+  background-color: #77a31f;
+  border-radius: 10px;
+  /* padding: 20px; */
+  transform: translateY(200px);
+  animation-duration: 1.5s;
+  animation-name: slidein;
+  /* animation-iteration-count: infinite; */
+  animation-direction: alternate;
+  /* animation-name: slidein; */
+}
+.noItmeText {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /* background-color: aqua; */
+    height: 100%;
+    color: #fff;
+}
+@keyframes slidein {
+  0% {
+    transform: translateY(200px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(200px);
+  }
+}
+
+
