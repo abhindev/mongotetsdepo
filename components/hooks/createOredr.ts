@@ -33,7 +33,6 @@ async function createOrder(
   total: number
 ): Promise<Order> {
   let Schema = mongoose.Schema
-  //get coocki value
   function getCookieValue(cookieName:any) {
     var name = cookieName + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -47,10 +46,8 @@ async function createOrder(
     return "";
 }
 
-// Usage: Pass the name of the cookie you want to retrieve
 var loggedinValue = getCookieValue("loggedin");
-// console.log(loggedinValue);
-//end 
+
   let costomerID = loggedinValue
   const res = await fetch("/api/order", {
     method: "POST",

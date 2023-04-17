@@ -6,18 +6,20 @@ import { BsWhatsapp } from "react-icons/bs";
 
 import useDeviceSize from "../hooks/useWindowSize";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 function footer() {
   const [width, height] = useDeviceSize();
+  const router = useRouter()
   return (
     <div className={styles.footer}>
       <div className={styles.top}>
         <h1 className={styles.title}>Connect with us</h1>
         <div className={styles.social}>
           <div className={styles.icon}>
-            <Link href={""}>
+            <div onClick={()=>window.open("https://facebook.com")}>
           <BsFacebook/>
-            </Link>
+            </div>
           </div>
           <div className={styles.icon}>
           <Link href={""}>

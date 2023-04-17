@@ -14,10 +14,11 @@ function ProductCard({ product, i }: any) {
 
   const router = useRouter();
   const dispatch = useDispatch();
-
+console.log(product)
   const item = product;
   const index = i;
   const price = item.prices[0].price;
+  const off = item.prices[0].off
   const quantity = 1;
 
   const variant = item.prices[0].text;
@@ -76,8 +77,15 @@ function ProductCard({ product, i }: any) {
               <p className={width < 600 ? styles.desc_mob : styles.desc}>
                 {product.desc}
               </p>
+              <div className={styles.off}>
+
+              <del className={styles.del}>{off}</del>
+              </div>
               <p className={width < 600 ? styles.price_mob : styles.price}>
-                <h2>Rs. {price}.00</h2>
+                
+                <h1 className={styles.ins}>Rs. {price}.00</h1>
+                
+                
               </p>
             </div>
           </a>
