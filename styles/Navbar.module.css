@@ -108,7 +108,7 @@
   animation-name: slidein;
   /* animation-iteration-count: infinite; */
   animation-direction: alternate;
-  /* animation-name: slidein; */
+  animation-name: slidein;
 }
 .noItmeText {
     display: flex;
@@ -118,7 +118,7 @@
     /* background-color: aqua; */
     height: 100%;
 }
-/* @keyframes slidein {
+@keyframes slidein {
   0% {
     transform: translateX(100px);
   }
@@ -128,4 +128,4 @@
   100% {
     transform: translateX(200px);
   }
-} */
+}
