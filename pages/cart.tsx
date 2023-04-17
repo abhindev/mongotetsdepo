@@ -50,15 +50,26 @@ function Cart() {
   const customStyles = {
     overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
     content: {
-      // width:"80vw",
-      
-      top: "10%",
-      left: "1%",
-      right: "1%",
-      bottom: "1%",
-      
+      border: "none",
+      backgroundColor: "rgb(218 215 215)",
+      top: "17%",
+      left: "5%",
+      right: `${width > 600 ? "70vw" : "5%"}`,
+      bottom: "10%",
     },
   };
+  // const customStyles = {
+  //   overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
+  //   content: {
+  //     // width:"80vw",
+      
+  //     top: "10%",
+  //     left: "1%",
+  //     right: "1%",
+  //     bottom: "1%",
+      
+  //   },
+  // };
   const cart = redux.products;
   console.log(cart.length);
 

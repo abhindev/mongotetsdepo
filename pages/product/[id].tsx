@@ -99,10 +99,10 @@ const Product = ({ product, products }: any) => {
               <p style={{ fontSize: "1.3rem" }}>{offp}</p>
             </div> */}
             <div className={styles.off}>
-                <del className={styles.del} style={{ fontSize: "1.3rem" }}>
+                <del className={styles.del} style={{ fontSize: "1rem" }}>
                   {ORprice}
                 </del>
-                <p className={styles.offp}>{offp}</p>
+                <p className={styles.offp} style={{color:"#77a31f"}}>{offp}</p>
               </div>
           </div>
           <div className={styles.decsDiv}>

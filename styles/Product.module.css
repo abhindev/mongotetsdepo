@@ -121,7 +121,8 @@
     width: 100%;
   }
   .desc {
-    font-size: 4vw;
+    font-size: 3.33vw;
+    margin: 0px 35px;
   }
   .sizes {
     display: flex;
@@ -175,7 +176,7 @@
 .off {
   margin-left: 10px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
 }
 .del {
   text-decoration: none;

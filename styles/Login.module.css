@@ -21,7 +21,7 @@
   height: 30px;
   padding: 5px;
   padding-left: 10px;
-  border: 1px solid gray;
+  border: none;
   border-radius: 5px;
   font-size: 1rem;
   /* text-align: center; */
@@ -72,22 +72,30 @@
     justify-content: space-around;
     align-items: center;
 } */
+.container {
+/* background-color: blue; */
+display: flex;
+justify-content: center;
+align-items: center;
+}
 .otpbase {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: center;
-  margin-top: 200px;
+  /* background-color: aqua; */
+  /* margin-top: 200px; */
 }
 
 .inp {
   /* background-color: aquamarine; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  border: none;
   width: 30px;
   height: 35px;
   font-size: 30px;
   margin: 2px;
-  border-radius: 5%;
+  border-radius: 10%;
   /* border-style: none; */
   padding: 1px;
   text-align: center;
@@ -102,9 +110,9 @@
 }
 .invalidOtp {
   
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(208, 55, 55);
+  color: rgb(228, 228, 228);
 }

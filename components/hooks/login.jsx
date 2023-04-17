@@ -8,8 +8,7 @@ import Createuser from "./createUser";
 
 let currentOTPindex = 0;
 function Login(setIsOpen) {
-  
-  const [phonenumber, setPhonenumber] = useState("");
+  const [phonenumber, setPhonenumber] = useState("+91");
   const [FormChainge, setFormChainge] = useState(false);
   const [code, setCode] = useState("91");
   const [user, setUser] = useState("");
@@ -18,18 +17,16 @@ function Login(setIsOpen) {
   const [ActiveOTPIndex, setActiveOTPIndex] = useState(0);
   const inputRef = useRef(null);
 
-  const [error,setError] = useState()
-  
+  const [error, setError] = useState();
+
   const router = useRouter();
-  
+
   const generateRecaptchaVerifier = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "recaptcha-container",
       {
         size: "invisible",
-        callback: (response) => {
-          
-        },
+        callback: (response) => {},
       },
       auth
     );
@@ -37,14 +34,14 @@ function Login(setIsOpen) {
 
   const requestOtp = () => {
     generateRecaptchaVerifier();
-    let phone = "+" + code + phonenumber;
-    
+    let phone = phonenumber;
+
     let captcha = window.recaptchaVerifier;
     signInWithPhoneNumber(auth, phone, captcha)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         // ...
-        
+
         setFormChainge(true);
       })
       .catch((error) => {
@@ -54,9 +51,9 @@ function Login(setIsOpen) {
       });
   };
   const verifyOtp = (otp) => {
-    let otpconfirm = otp[0]+otp[1]+otp[2]+otp[3]+otp[4]+otp[5]
+    let otpconfirm = otp[0] + otp[1] + otp[2] + otp[3] + otp[4] + otp[5];
     // setOTP(otp);
-    
+
     if (otpconfirm.length === 6) {
       let confirmationResult = window.confirmationResult;
       confirmationResult
@@ -64,18 +61,18 @@ function Login(setIsOpen) {
         .then((result) => {
           // User signed in successfully.
           const user = result.user;
-          
+
           setUser(user.phoneNumber);
           Cookies.set("loggedin", user.phoneNumber);
-          
+
           Createuser(user);
           // router.push("/");
           router.reload();
           // ...
         })
         .catch((error) => {
-          setError("error")
-          console.log("error")
+          setError("error");
+          console.log("error");
           // User couldn't sign in (bad verification code?)
           // ...
         });
@@ -84,16 +81,10 @@ function Login(setIsOpen) {
 
   const handleChange = (event) => {
     setPhonenumber(event.target.value);
-
-    
   };
   const handleChangeCode = (event) => {
     setCode(event.target.value);
-
-    
   };
-
-  
 
   const handelChainge = ({ target }) => {
     const { value } = target;
@@ -114,67 +105,75 @@ function Login(setIsOpen) {
   };
   useEffect(() => {
     inputRef.current?.focus();
-    verifyOtp(otp)
+    verifyOtp(otp);
   }, [ActiveOTPIndex]);
-  
-  
-console.log(error == 'error')
+
+  console.log(error == "error");
   return (
     <div className={styles.container}>
       <div id="recaptcha-container"></div>
       <div className={styles.box}>
-      {FormChainge == false ?<>
-        <div className={styles.imgcontainer}>
-          <h1>Wellcome.</h1>
-          <p>Welcome to our website! We're thrilled that you've decided to sign up with us. As a valued member of our community, you'll gain access to exclusive features, benefits, and exciting opportunities. We can't wait to have you on board and provide you with an exceptional experience. Thank you for choosing us, and we look forward to serving you!</p>
-        </div>
-        <div className={styles.title}>
-          <h3>Create an acount</h3>
-        </div>
-        </> : ""}
-        {FormChainge ==false ? (
-          <div className={styles.field}>
-            <input
-              placeholder="+91"
-              maxlength="4"
-              type="number"
-              id="code"
-              name="code"
-              onChange={handleChangeCode}
-              value={code}
-              className={styles.code}
-              // className={styles.input}
-            />
-            <input
-              placeholder="phone"
-              type="text"
-              id="phone"
-              name="phone"
-              onChange={handleChange}
-              value={phonenumber}
-              className={styles.input}
-            />
+        <>
+          <div className={styles.imgcontainer}>
+            <h1 style={{ margin: "1px" }}>Wellcome.</h1>
+            <p style={{ fontSize: "12px" }}>
+              Welcome to our website! We're thrilled that you've decided to sign
+              up with us. As a valued member of our community, you'll gain
+              access to exclusive features, benefits, and exciting
+              opportunities. We can't wait to have you on board and provide you
+              with an exceptional experience. Thank you for choosing us, and we
+              look forward to serving you!
+            </p>
           </div>
+          <div className={styles.title}>
+            { FormChainge == false ? (
+            <h3>Create an acount</h3>) : (
+              <div style={{display:"flex", justifyContent: "center"}}>
+            <h3 >ENTER OTP</h3>
+            </div>
+            )
+            }
+            
+          </div>
+        </>
+        {FormChainge == false ? (
+          <>
+            <div className={styles.field}>
+              {/* <input
+                placeholder="+91"
+                maxlength="4"
+                type="number"
+                id="code"
+                name="code"
+                onChange={handleChangeCode}
+                value={code}
+                className={styles.code}
+                // className={styles.input}
+              /> */}
+              <input
+                placeholder="phone"
+                type="text"
+                id="phone"
+                name="phone"
+                onChange={handleChange}
+                value={phonenumber}
+                className={styles.input}
+              />
+            </div>
+            {FormChainge == false ?
+        <button onClick={() => requestOtp()} className={styles.button}>
+          <div style={{color:"#ffff"}}>Send OTP</div>
+        </button>: ''}
+          </>
         ) : (
-          // <div className={styles.field}>
-          //   <input
-          //     className={styles.input}
-          //     type="number"
-          //     id="otp-input"
-          //     // value={OTP}
-          //     onChange={verifyOtp}
-          //   />
-          // </div>
-<>
-          <div className={styles.otpText}><h1>OTP</h1></div>
           
           <div className={styles.otpbase}>
-          
+            <div className={styles.container}>
             {otp.map((_, index) => {
               return (
-                <div key={index} >
+                <div key={index}>
                   <input
-                  className={styles.inp}
+                    className={styles.inp}
                     ref={index === ActiveOTPIndex ? inputRef : null}
                     value={otp[index]}
                     onKeyDown={(e) => handleOnKeyDown(e, index)}
@@ -184,18 +183,14 @@ console.log(error == 'error')
                 </div>
               );
             })}
+            </div>
+            <div className={styles.invalidOtp}>
+              {error == "error" ? <p>Invalid OTP Code</p> : ""}
+            </div>
           </div>
-          <div className={styles.invalidOtp}>
-          {error == 'error' ? <p>Invalid OTP Code</p>:""}
-          </div>
-          </>
           
         )}
-{FormChainge == false ?
-        <button onClick={() => requestOtp()} className={styles.button}>
-          <div>Send Otp</div>
-        </button>: ''}
-      </div> 
+      </div>
     </div>
   );
 }

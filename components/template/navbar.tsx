@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Navbar.module.css";
 import Logo from "../../public/logo.png";
 import { useSelector } from "react-redux";
 import { BiShoppingBag } from "react-icons/bi";
-import { HiOutlineUser } from "react-icons/hi";
+import { HiOutlineUserCircle } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
 import Modal from "react-modal";
 import Image from "next/image";
@@ -17,6 +17,9 @@ function navbar() {
   const quantity: number = useSelector((state: any) => state.cart.quantity);
   const [oppen, setOppen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [showDiv, setShowDiv] = useState(false);
+
   const log = getLoggedIn();
   const router = useRouter();
   const handilclickOppen = () => {
@@ -35,13 +38,35 @@ function navbar() {
     overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" },
     content: {
       border: "none",
-      backgroundColor: "#fff",
-      top: "10%",
-      left: "1%",
-      right: `${width > 600 ? "70vw" : "1%"}`,
-      bottom: "1%",
+      backgroundColor: "rgb(218 215 215)",
+      top: "17%",
+      left: "5%",
+      right: `${width > 600 ? "70vw" : "5%"}`,
+      bottom: "10%",
     },
   };
+  const handleClickCart = () => {
+    if (quantity !== 0) {
+      router.push("/cart");
+    } else {
+      setShowDiv(true);
+    }
+  };
+
+  useEffect(() => {
+    let timer: any;
+    if (showDiv) {
+      // After 5 seconds, hide the div
+      timer = setTimeout(() => {
+        setShowDiv(false);
+      }, 4000);
+    }
+
+    // Clean up the timer when component unmounts or when showDiv changes
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [showDiv]);
 
   return (
     <div className={styles.container}>
@@ -84,7 +109,7 @@ function navbar() {
 
       <div onClick={() => handilclickOppen()}>
         <h1 style={{ marginLeft: "10px" }}>
-          <HiOutlineUser color="white" />
+          <HiOutlineUserCircle color="white" />
         </h1>
       </div>
       <div className={styles.item}>
@@ -95,7 +120,7 @@ function navbar() {
         </div>
       </div>
 
-      <div onClick={() => router.push("/cart")}>
+      <div onClick={() => handleClickCart()}>
         <div className={styles.item}>
           <div className={styles.cart}>
             <div className={styles.cartIcon}>
@@ -103,9 +128,12 @@ function navbar() {
                 <BiShoppingBag color="white" />
               </h1>
             </div>
-            <div className={styles.cartcounter} style={{ color: "white" }}>
-              {quantity}
+            <div >
+              {showDiv && <div className={styles.noItem}><div className={styles.noItmeText}>Cart Is Empty 😔</div></div>}
             </div>
+            {/* <div className={styles.cartcounter} style={{ color: "white" }}>
+              {quantity}
+            </div> */}
           </div>
         </div>
       </div>
