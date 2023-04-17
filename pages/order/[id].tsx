@@ -173,9 +173,9 @@ const Order = ({ order }: any, error: OrderProps) => {
     var raw = JSON.stringify({
       order_id: order._id,
       order_date: formattedDate,
-      pickup_location: "test",
-      channel_id: "3744780",
-      comment: "Reseller: M/s Goku",
+      pickup_location: "Vihara",
+      channel_id: "3740095",
+      comment: "Reseller: ---",
       billing_customer_name: order?.customer,
       billing_last_name: "",
       billing_address: order.address?.Address,
