@@ -1,13 +1,13 @@
 export default async function handler(req, res) {
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_CASHFREE_URI, {
+      const response = await fetch(process.env.CASHFREE_URI, {
         method: "POST",
         body: JSON.stringify(req.body),
         headers: {
           "Content-Type": "application/json",
           "x-api-version": "2022-01-01",
-          "x-client-id": process.env.NEXT_PUBLIC_CASHFREE_CLIENT_ID,
-          "x-client-secret": process.env.NEXT_PUBLIC_CASHFREE_CLIENT_SECRET,
+          "x-client-id": "TEST3691828b4e22dca122faea8649281963",
+          "x-client-secret": "TEST7d7f0d5a1bc6a0006d8d5fcb9c06c561c86df2f4",
         },
       });
   
