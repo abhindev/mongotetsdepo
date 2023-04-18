@@ -70,11 +70,11 @@ function Order({ data }: any) {
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
   }
-  if(loggedinValue){handleDelete()}
+  
 
   return (
     <div className={styles.orderindex}>
-      <h1>order</h1>
+      <h1 onLoad={()=>handleDelete()}>order</h1>
       
       {data.map((order: any, i: number) => (
         <Link href={`order/${order._id}`} style={{ textDecoration: "none" }} key={i}>
