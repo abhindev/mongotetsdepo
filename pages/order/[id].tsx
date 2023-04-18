@@ -25,10 +25,10 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       `https://mongotetsdepo.vercel.app/api/order/chashfree/${params.id}`
     );
     const chash = await resone.json();
-    console.log(chash);
+    // console.log(chash);
     const orderStatus = chash.data.order_status;
 
-    console.log("order.id try ssp");
+    // console.log("order.id try ssp");
     const uri = process.env.MONGODB_URI;
     if (!uri) {
       throw new Error("MongoDB connection string is missing.");
@@ -44,7 +44,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       const order = JSON.parse(JSON.stringify(orders));
       const status = order.status;
       if (status < 1) {
-        console.log("ststus<1");
+        // console.log("ststus<1");
         const updatedOrder = await db
           .collection("orders")
           .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
@@ -170,8 +170,10 @@ const Order = ({ order }: any, error: OrderProps) => {
   console.log("order states: " + orderstatus);
   console.log("order :" + order);
   // create shiprocket
+   
+  console.log(token)
 
-  if (order && orderstatus == 0) {
+  if (token !== undefined && order && orderstatus == 0) {
     console.log("running")
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
