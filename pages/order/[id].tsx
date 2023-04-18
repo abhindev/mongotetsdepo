@@ -22,7 +22,7 @@ interface OrderProps {
 export const getServerSideProps = async ({ params }: { params: Params }) => {
   try {
     const resone = await fetch(
-      `${process.env.NEXT_PUBLIC_DOM}/api/order/chashfree/${params.id}`
+      `https://mongotetsdepo.vercel.app/api/order/chashfree/${params.id}`
     );
     const chash = await resone.json();
     const orderStatus = chash.data.order_status;
