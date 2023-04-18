@@ -34,7 +34,7 @@ interface PaymentDetails {
         order_note: "Additional order info",
         order_meta: {
           
-          return_url: `${process.env.NEXT_PUBLIC_DOM}/order/{order_id}`,
+          return_url: "https://mongotetsdepo.vercel.app/order/{order_id}",
         },
         customer_details: {
           customer_id,
