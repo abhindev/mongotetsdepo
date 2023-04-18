@@ -104,35 +104,28 @@ const Order = ({ order }: any, error: OrderProps) => {
   //   .catch((error) => console.log("error", error));
   ////////////////////////////////////////////////////////////
 
-  if (!token) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      email: "vihara.lifecare@gmail.com",
-      password: "POP1@spiderman!",
-    });
-
-    var requestOptions: any = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        const data = { result };
-
-        const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
-        const token = parsedData.token; // Access the "token" value
-        setToken(token);
-      })
-      .catch((error) => console.log("error", error));
-  }
+  
   //////////////////////////////////////auuth///////////////////
-
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  var raw = JSON.stringify({
+    email: "vihara.lifecare@gmail.com",
+    password: "POP1@spiderman!",
+  });
+  
+  var requestOptions:any = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  
+  fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+  /////////////////////////auth end///////////////////////
   var currentDate = new Date();
 
   // Extract the components of the date and time
@@ -169,7 +162,8 @@ const Order = ({ order }: any, error: OrderProps) => {
   console.log("order :" + order);
   // create shiprocket
 
-
+  if (order && orderstatus == 0) {
+    console.log("running")
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Authorization", `Bearer ${token}`);
@@ -241,6 +235,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
+  }
   /// shiprocket end
   if (orderstatus > 0) {
     var myHeaders = new Headers();
