@@ -74,7 +74,8 @@ function Order({ data }: any) {
 
   return (
     <div className={styles.orderindex}>
-      <h1 onLoad={()=>handleDelete()}>order</h1>
+      <h1>order</h1>
+      <button onClick={()=>handleDelete()}>delet</button>
       
       {data.map((order: any, i: number) => (
         <Link href={`order/${order._id}`} style={{ textDecoration: "none" }} key={i}>
