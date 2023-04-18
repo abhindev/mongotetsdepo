@@ -247,7 +247,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
   }
-  console.log("jhfd")
+  
   /// shiprocket end
   if ( token !== undefined && orderstatus > 0) {
     var myHeaders = new Headers();
