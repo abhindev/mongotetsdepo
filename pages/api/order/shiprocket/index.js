@@ -24,6 +24,6 @@ export default async function handler(req, res) {
             const token = parsedData.token; // Access the "token" value
             res.status(200).json({ message: "error occurred." + token });
           })
-          .catch((error) => console.log("error", error));
+          .catch((error) => res.status(500).json({ message: "An error occurred." + error }));
 
 }
