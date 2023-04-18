@@ -167,8 +167,10 @@ const Order = ({ order }: any, error: OrderProps) => {
 
   // const value = arrayItem;
   // console.log(value + " : " + typeof value);
+  console.log("order states: "+orderstatus)
+  console.log("order :"+order)
   if (order && orderstatus == 0) {
-    // console.log("running");
+    console.log("running create order");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
