@@ -25,6 +25,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       `https://mongotetsdepo.vercel.app/api/order/chashfree/${params.id}`
     );
     const chash = await resone.json();
+    console.log(chash)
     const orderStatus = chash.data.order_status;
     
     console.log("order.id try ssp")

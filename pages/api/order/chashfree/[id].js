@@ -7,8 +7,8 @@ export default async function handler(req, res) {
     const headers = {
       "Content-Type": "application/json",
       "x-api-version": "2022-01-01",
-      "x-client-id": '315764e438e7781950770c97a4467513',
-      "x-client-secret": '4de62862e69a3713931bfd75910f48d68b533b5c',
+      "x-client-id": 'TEST3691828b4e22dca122faea8649281963',
+      "x-client-secret": 'TEST7d7f0d5a1bc6a0006d8d5fcb9c06c561c86df2f4',
     };
   
     try {
