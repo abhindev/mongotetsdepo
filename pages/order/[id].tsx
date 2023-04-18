@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 import Image from "next/image";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styles from "../../styles/OrderID.module.css";
 // import addOrder from "../../components/hooks/upDateUser"
 // import { addOrder } from "../../lib/redux/orderSlice";
@@ -84,56 +84,21 @@ const Order = ({ order }: any, error: OrderProps) => {
   const orderItems = order?.item?.products;
 
   const orderstatus = order?.status;
-  //////////////////////get ships//////////
-  // var myHeaders = new Headers();
-  // myHeaders.append("Content-Type", "application/json");
-  // myHeaders.append("Authorization", `Bearer ${token}`);
-
-  // var requestOptions: any = {
-  //   method: "GET",
-  //   headers: myHeaders,
-  //   redirect: "follow",
-  // };
-
-  // fetch(
-  //   "https://apiv2.shiprocket.in/v1/external/orders/show/335383658",
-  //   requestOptions
-  // )
-  //   .then((response) => response.text())
-  //   .then((result) => console.log(result))
-  //   .catch((error) => console.log("error", error));
-  ////////////////////////////////////////////////////////////
-
   
   //////////////////////////////////////auuth///////////////////
-  if (!token) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      email: "vihara.lifecare@gmail.com",
-      password: "POP1@spiderman!",
-    });
-
-    var requestOptions: any = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/shiprocket");
+      const jsonData = await response.json();
+      setToken(jsonData);
     };
 
-    fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        const data = { result };
+    if (token === undefined) {
+      fetchData();
+    }
+  }, [token]); // Only run the effect when token changes
 
-        const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
-        const token = parsedData.token; // Access the "token" value
-        setToken(token);
-      })
-      .catch((error) => console.log("error", error));
-  }
-  console.log(token);
+  console.log("token: " + token);
   /////////////////////////auth end///////////////////////
   var currentDate = new Date();
 
@@ -148,7 +113,6 @@ const Order = ({ order }: any, error: OrderProps) => {
   var formattedDate =
     year + "-" + month + "-" + day + " " + hours + ":" + minutes;
 
-  // console.log(formattedDate); // Example output: "2023-04-15 13:45"
   ////////////////////////////////////////////
   const item = order?.item?.products;
   const arrayItem: any = [];
@@ -163,111 +127,85 @@ const Order = ({ order }: any, error: OrderProps) => {
       hsn: 441122,
     });
   });
-  // console.log(order);
-
-  // const value = arrayItem;
-  // console.log(value + " : " + typeof value);
-  console.log("order states: " + orderstatus);
-  console.log("order :" + order);
-  // create shiprocket
-   
-  console.log(token)
-
-  if (token !== undefined && order && orderstatus == 0) {
-    console.log("running")
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", `Bearer ${token}`);
-
-  var raw = JSON.stringify(
-    {
-      "order_id": "2242343545447",
-      "order_date": "2023-04-16 11:11",
-      "pickup_location": "Vihara",
-      "channel_id": "3740095",
-      "comment": "Reseller: M/s Goku",
-      "billing_customer_name": "appu",
-      "billing_last_name": "Uzumaki",
-      "billing_address": "House 221B, Leaf Village",
-      "billing_address_2": "Near Hokage House",
-      "billing_city": "New Delhi",
-      "billing_pincode": "110002",
-      "billing_state": "Delhi",
-      "billing_country": "India",
-      "billing_email": "naruto@uzumaki.com",
-      "billing_phone": "9876543210",
-      "shipping_is_billing": true,
-      "shipping_customer_name": "",
-      "shipping_last_name": "",
-      "shipping_address": "",
-      "shipping_address_2": "",
-      "shipping_city": "",
-      "shipping_pincode": "",
-      "shipping_country": "",
-      "shipping_state": "",
-      "shipping_email": "",
-      "shipping_phone": "",
-      "order_items": [
-        {
-          "name": "Kunai",
-          "sku": "chakra123",
-          "units": 10,
-          "selling_price": "900",
-          "discount": "",
-          "tax": "",
-          "hsn": 441122
-        }
-      ],
-      "payment_method": "Prepaid",
-      "shipping_charges": 0,
-      "giftwrap_charges": 0,
-      "transaction_charges": 0,
-      "total_discount": 0,
-      "sub_total": 9000,
-      "length": 10,
-      "breadth": 15,
-      "height": 20,
-      "weight": 2.5
-    }
-    
-  );
-
-  var requestOptions:any = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow",
-  };
-
-  fetch(
-    "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-  }
+  console.log(orderstatus);
+  console.log(formattedDate)
   
-  /// shiprocket end
-  if ( token !== undefined && orderstatus > 0) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${token}`);
 
-    var requestOptions: any = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
+  // create order shiprocket////////////////////////////////
+  const addOrder = async () => {
+    const data = {
+      token: token,
+      order_id: order._id,
+      order_date: formattedDate,
+      billing_customer_name: order.customer,
+      billing_address: order.address.Address,    
+      billing_city: order.address.City,
+      billing_pincode: order.address.pinCode,
+      billing_state: order.address.State,
+      billing_email: order.email,
+      billing_phone: order.phone,
+      order_items: arrayItem,
+      sub_total: order.total,
     };
-
-    fetch(
-      `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${order?._id}`,
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => setTracking(result))
-      .catch((error) => console.log("error", error));
+  
+    const response = await fetch('/api/shiprocket', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.ok) {
+      const jsonData = await response.json();
+      console.log(jsonData);
+    } else {
+      console.error('Failed to add order:', response.statusText);
+    }
+  };
+  
+  if (order && orderstatus == 1) {
+    // addOrder();
   }
+  //////////////////////////////////////////////////////////
+/////////////////////////////track///////////////////////////
+if(order && token !== undefined){
+  (async () => {
+    const data = {
+      token: token,
+      trackingID: 336283221,
+    }
+    const response = await fetch("/api/shiprocket/track",{
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(data),
+    });
+    const jsonData = await response.json();
+    console.log(jsonData);
+  })();
+}
+////////////////////////////track-END//////////////////////////
+  // if ( token !== undefined && orderstatus > 0) {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Content-Type", "application/json");
+  //   myHeaders.append("Authorization", `Bearer ${token}`);
+
+  //   var requestOptions: any = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+
+  //   fetch(
+  //     `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${order?._id}`,
+  //     requestOptions
+  //   )
+  //     .then((response) => response.text())
+  //     .then((result) => setTracking(result))
+  //     .catch((error) => console.log("error", error));
+  // }
 
   // console.log("track : " + tracking);
   //  const track = {tracking}
