@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-
+console.log("hah")
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
     
