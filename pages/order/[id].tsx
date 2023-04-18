@@ -248,7 +248,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     .catch((error) => console.log("error", error));
   }
   /// shiprocket end
-  if (orderstatus > 0) {
+  if ( token !== undefined && orderstatus > 0) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
