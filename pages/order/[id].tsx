@@ -25,10 +25,10 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       `https://mongotetsdepo.vercel.app/api/order/chashfree/${params.id}`
     );
     const chash = await resone.json();
-    console.log(chash)
+    console.log(chash);
     const orderStatus = chash.data.order_status;
-    
-    console.log("order.id try ssp")
+
+    console.log("order.id try ssp");
     const uri = process.env.MONGODB_URI;
     if (!uri) {
       throw new Error("MongoDB connection string is missing.");
@@ -37,14 +37,14 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const db = client.db("kalianiammas");
 
     if (orderStatus == "PAID") {
-      console.log("order status PAID")
+      console.log("order status PAID");
       const orders = await db
         .collection("orders")
         .findOne({ _id: new ObjectId(params.id) });
       const order = JSON.parse(JSON.stringify(orders));
       const status = order.status;
       if (status < 1) {
-        console.log("ststus<1")
+        console.log("ststus<1");
         const updatedOrder = await db
           .collection("orders")
           .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
@@ -55,7 +55,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         },
       };
     } else {
-      console.log("ststus !1")
+      console.log("ststus !1");
       const deletOrder = await db
         .collection("orders")
         .deleteOne({ _id: new ObjectId(params.id) });
@@ -81,8 +81,6 @@ const Order = ({ order }: any, error: OrderProps) => {
   const [tracking, setTracking] = useState("");
   const [token, setToken] = useState();
 
-
-
   const orderItems = order?.item?.products;
 
   const orderstatus = order?.status;
@@ -104,8 +102,8 @@ const Order = ({ order }: any, error: OrderProps) => {
   //   .then((response) => response.text())
   //   .then((result) => console.log(result))
   //   .catch((error) => console.log("error", error));
-////////////////////////////////////////////////////////////
-  
+  ////////////////////////////////////////////////////////////
+
   if (!token) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -126,7 +124,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       .then((response) => response.text())
       .then((result) => {
         const data = { result };
-        
+
         const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
         const token = parsedData.token; // Access the "token" value
         setToken(token);
@@ -167,71 +165,83 @@ const Order = ({ order }: any, error: OrderProps) => {
 
   // const value = arrayItem;
   // console.log(value + " : " + typeof value);
-  console.log("order states: "+orderstatus)
-  console.log("order :"+order)
-  if (order && orderstatus == 0) {
-    console.log("running create order");
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${token}`);
+  console.log("order states: " + orderstatus);
+  console.log("order :" + order);
+  // create shiprocket
 
-    var raw = JSON.stringify({
-      order_id: order._id,
-      order_date: formattedDate,
-      pickup_location: "Vihara",
-      channel_id: "3740095",
-      comment: "Reseller: ---",
-      billing_customer_name: order?.customer,
-      billing_last_name: "",
-      billing_address: order.address?.Address,
-      billing_address_2: "",
-      billing_city: order.address?.City,
-      billing_pincode: order?.address?.pinCode,
-      billing_state: order?.address?.State,
-      billing_country: "India",
-      billing_email: order?.email,
-      billing_phone: order?.phone,
-      shipping_is_billing: true,
-      shipping_customer_name: "",
-      shipping_last_name: "",
-      shipping_address: "",
-      shipping_address_2: "",
-      shipping_city: "",
-      shipping_pincode: "",
-      shipping_country: "",
-      shipping_state: "",
-      shipping_email: "",
-      shipping_phone: "",
-      order_items: arrayItem,
 
-      payment_method: "Prepaid",
-      shipping_charges: 0,
-      giftwrap_charges: 0,
-      transaction_charges: 0,
-      total_discount: 0,
-      sub_total: order?.total,
-      length: 21.5,
-      breadth: 17.5,
-      height: 6,
-      weight: 0.5,
-    });
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", `Bearer ${token}`);
 
-    var requestOptions: any = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+  var raw = JSON.stringify(
+    {
+      "order_id": "2242343545447",
+      "order_date": "2023-04-16 11:11",
+      "pickup_location": "Vihara",
+      "channel_id": "3740095",
+      "comment": "Reseller: M/s Goku",
+      "billing_customer_name": "appu",
+      "billing_last_name": "Uzumaki",
+      "billing_address": "House 221B, Leaf Village",
+      "billing_address_2": "Near Hokage House",
+      "billing_city": "New Delhi",
+      "billing_pincode": "110002",
+      "billing_state": "Delhi",
+      "billing_country": "India",
+      "billing_email": "naruto@uzumaki.com",
+      "billing_phone": "9876543210",
+      "shipping_is_billing": true,
+      "shipping_customer_name": "",
+      "shipping_last_name": "",
+      "shipping_address": "",
+      "shipping_address_2": "",
+      "shipping_city": "",
+      "shipping_pincode": "",
+      "shipping_country": "",
+      "shipping_state": "",
+      "shipping_email": "",
+      "shipping_phone": "",
+      "order_items": [
+        {
+          "name": "Kunai",
+          "sku": "chakra123",
+          "units": 10,
+          "selling_price": "900",
+          "discount": "",
+          "tax": "",
+          "hsn": 441122
+        }
+      ],
+      "payment_method": "Prepaid",
+      "shipping_charges": 0,
+      "giftwrap_charges": 0,
+      "transaction_charges": 0,
+      "total_discount": 0,
+      "sub_total": 9000,
+      "length": 10,
+      "breadth": 15,
+      "height": 20,
+      "weight": 2.5
+    }
+    
+  );
 
-    fetch(
-      "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  }
+  var requestOptions:any = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
 
+  fetch(
+    "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+  /// shiprocket end
   if (orderstatus > 0) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -259,7 +269,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     var trackStatus = trackingObj?.tracking_data?.track_status;
     // console.log("track_status:", trackStatus);
   }
-  
+
   const [awbs, setAwbs] = useState(
     trackingObj?.tracking_data?.shipment_track?.awb_code
   );
@@ -346,7 +356,7 @@ const Order = ({ order }: any, error: OrderProps) => {
                   {trackingObj?.tracking_data?.track_url}
                 </a>
               </div>
-              
+
               <div className={styles.address}>
                 <h3>Delivery</h3>
                 <p>Address</p>

@@ -1,0 +1,62 @@
+if (order && orderstatus == 0) {
+    console.log("running create order");
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var raw = JSON.stringify({
+      order_id: order._id,
+      order_date: formattedDate,
+      pickup_location: "Vihara",
+      channel_id: "3740095",
+      comment: "Reseller: ---",
+      billing_customer_name: order?.customer,
+      billing_last_name: "",
+      billing_address: order.address?.Address,
+      billing_address_2: "",
+      billing_city: order.address?.City,
+      billing_pincode: order?.address?.pinCode,
+      billing_state: order?.address?.State,
+      billing_country: "India",
+      billing_email: order?.email,
+      billing_phone: order?.phone,
+      shipping_is_billing: true,
+      shipping_customer_name: "",
+      shipping_last_name: "",
+      shipping_address: "",
+      shipping_address_2: "",
+      shipping_city: "",
+      shipping_pincode: "",
+      shipping_country: "",
+      shipping_state: "",
+      shipping_email: "",
+      shipping_phone: "",
+      order_items: arrayItem,
+
+      payment_method: "Prepaid",
+      shipping_charges: 0,
+      giftwrap_charges: 0,
+      transaction_charges: 0,
+      total_discount: 0,
+      sub_total: order?.total,
+      length: 21.5,
+      breadth: 17.5,
+      height: 6,
+      weight: 0.5,
+    });
+
+    var requestOptions: any = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  }
