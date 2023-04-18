@@ -78,7 +78,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
   const [tracking, setTracking] = useState("");
-  const [token, setToken] = useState("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzgxODIsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxODEyMTA5LCJleHAiOjE2ODI2NzYxMDksIm5iZiI6MTY4MTgxMjEwOSwianRpIjoieDVrRHpxeFRIS0RuWmpnZSJ9.6B5XOZtxrgv6Eu38fE-B4xH7FsI4NcA28uxU77IRgyg");
+  const [token, setToken] = useState();
 
 
 
@@ -105,33 +105,33 @@ const Order = ({ order }: any, error: OrderProps) => {
   //   .catch((error) => console.log("error", error));
 ////////////////////////////////////////////////////////////
   
-  // if (!token) {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
+  if (!token) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-  //   var raw = JSON.stringify({
-  //     email: "vihara.lifecare@gmail.com",
-  //     password: "POP1@spiderman!",
-  //   });
+    var raw = JSON.stringify({
+      email: "vihara.lifecare@gmail.com",
+      password: "POP1@spiderman!",
+    });
 
-  //   var requestOptions: any = {
-  //     method: "POST",
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: "follow",
-  //   };
+    var requestOptions: any = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-  //   fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
-  //     .then((response) => response.text())
-  //     .then((result) => {
-  //       const data = { result };
+    fetch("https://apiv2.shiprocket.in/v1/external/auth/login", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        const data = { result };
         
-  //       const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
-  //       const token = parsedData.token; // Access the "token" value
-  //       setToken(token);
-  //     })
-  //     .catch((error) => console.log("error", error));
-  // }
+        const parsedData = JSON.parse(data.result); // Parse the "result" value as JSON
+        const token = parsedData.token; // Access the "token" value
+        setToken(token);
+      })
+      .catch((error) => console.log("error", error));
+  }
   //////////////////////////////////////auuth///////////////////
 
   var currentDate = new Date();
