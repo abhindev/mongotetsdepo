@@ -110,8 +110,8 @@ const Order = ({ order }: any, error: OrderProps) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      email: process.env.NEXT_PUBLIC_SHIPROCKETID,
-      password: process.env.NEXT_PUBLIC_SHIPROCKETPASSWORD,
+      email: "vihara.lifecare@gmail.com",
+      password: "POP1@spiderman!",
     });
 
     var requestOptions: any = {
