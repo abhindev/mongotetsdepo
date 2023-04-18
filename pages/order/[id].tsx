@@ -164,7 +164,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     }
   };
   
-  if (order && orderstatus == 1) {
+  if (order && token !== undefined) {
     addOrder();
   }
   //////////////////////////////////////////////////////////
