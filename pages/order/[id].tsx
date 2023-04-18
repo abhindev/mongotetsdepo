@@ -4,8 +4,8 @@ import { useState } from "react";
 import styles from "../../styles/OrderID.module.css";
 // import addOrder from "../../components/hooks/upDateUser"
 // import { addOrder } from "../../lib/redux/orderSlice";
-// import { useDispatch } from "react-redux";
-// import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 interface OrderProps {
   order:
     | {
@@ -27,7 +27,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const chash = await resone.json();
     const orderStatus = chash.data.order_status;
     
-
+    console.log("order.id try ssp")
     const uri = process.env.MONGODB_URI;
     if (!uri) {
       throw new Error("MongoDB connection string is missing.");
@@ -36,13 +36,14 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const db = client.db("kalianiammas");
 
     if (orderStatus == "PAID") {
+      console.log("order status PAID")
       const orders = await db
         .collection("orders")
         .findOne({ _id: new ObjectId(params.id) });
       const order = JSON.parse(JSON.stringify(orders));
       const status = order.status;
       if (status < 1) {
-       
+        console.log("ststus<1")
         const updatedOrder = await db
           .collection("orders")
           .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
@@ -53,6 +54,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         },
       };
     } else {
+      console.log("ststus !1")
       const deletOrder = await db
         .collection("orders")
         .deleteOne({ _id: new ObjectId(params.id) });
