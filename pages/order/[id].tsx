@@ -165,7 +165,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   };
   
   if (order && orderstatus == 1) {
-    // addOrder();
+    addOrder();
   }
   //////////////////////////////////////////////////////////
 /////////////////////////////track///////////////////////////
