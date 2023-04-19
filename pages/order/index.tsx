@@ -51,21 +51,11 @@ function Order({ data }: any) {
   // console.log("log: " + loggedinValue);
 
   // console.log(data);
-  const order = useSelector((state: any) => state.order);
-
-  console.log(data);
+  
+  // console.log(data);
   //delet order
 
-  const handleDelete = () => {
-    // console.log("delet")
-    fetch("/api/order", {
-      method: "DELETE",
-    })
-      .then((response) => response.text())
-      .then((result) => console.log("error"))
-      .catch((error) => console.log("error"));
-  };
-  handleDelete();
+  
 
   // const showIdFn =()=> {
   //   setShowId(true)
@@ -74,7 +64,7 @@ function Order({ data }: any) {
 
   return (
     <div className={styles.orderindex}>
-      <h3>order</h3>
+      <h3 style={{fontWeight:10,marginLeft:"10vw"}}>Your Orders</h3>
       {/* <button onClick={()=>handleDelete()}>delet</button> */}
 
       {data.map((order:any, i: number) => (
