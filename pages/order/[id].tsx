@@ -78,8 +78,9 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
 const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
-  const [tracking, setTracking] = useState("");
+  const [tracking, setTracking] = useState('');
   const [token, setToken] = useState();
+  const [trackingid,setTrackingID] = useState('');
 
   const orderItems = order?.item?.products;
 
@@ -98,7 +99,7 @@ const Order = ({ order }: any, error: OrderProps) => {
     }
   }, [token]); // Only run the effect when token changes
 
-  console.log("token: " + token);
+  // console.log("token: " + token);
   /////////////////////////auth end///////////////////////
   var currentDate = new Date();
 
@@ -127,8 +128,8 @@ const Order = ({ order }: any, error: OrderProps) => {
       hsn: 441122,
     });
   });
-  console.log(orderstatus);
-  console.log(formattedDate)
+  // console.log(orderstatus);
+  // console.log(formattedDate)
   
 
   // create order shiprocket////////////////////////////////
@@ -158,7 +159,11 @@ const Order = ({ order }: any, error: OrderProps) => {
     });
     if (response.ok) {
       const jsonData = await response.json();
-      console.log(jsonData);
+      const data = JSON.parse(jsonData);
+      const orderId = data.order_id;
+      // console.log(data)
+      // console.log(orderId)
+      setTrackingID(orderId)
     } else {
       console.error('Failed to add order:', response.statusText);
     }
@@ -168,6 +173,24 @@ const Order = ({ order }: any, error: OrderProps) => {
     addOrder();
   }
   //////////////////////////////////////////////////////////
+  // const orderId = trackingid
+////////////////////////////////////////////////////////////
+const putOrderId = async () => {
+  console.log("running")
+  const response = await fetch(`/api/order/${order._id}`, {
+    method: 'PUT',
+    // headers: {
+    //   'Content-Type': 'application/json', 
+    //   'Authorization': `Bearer ${token}`,
+    // },
+    body: JSON.stringify(trackingid),
+  });
+}
+
+
+const ordertrackId = order?.tracking_id;
+
+if(!ordertrackId){putOrderId()}
 /////////////////////////////track///////////////////////////
 if(order && token !== undefined){
   (async () => {
@@ -183,7 +206,7 @@ if(order && token !== undefined){
         body: JSON.stringify(data),
     });
     const jsonData = await response.json();
-    console.log(jsonData);
+    // console.log(jsonData);
   })();
 }
 ////////////////////////////track-END//////////////////////////

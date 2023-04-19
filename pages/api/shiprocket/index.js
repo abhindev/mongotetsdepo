@@ -1,5 +1,7 @@
+import clientPromise from "../../../lib/mongodb";
 export default async function handler(req, res) {
   const { method } = req;
+
   if (method === "GET") {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -89,7 +91,7 @@ export default async function handler(req, res) {
       requestOptions
     )
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => res.status(200).json(result))
       .catch((error) => console.log("error", error));
   }
 }

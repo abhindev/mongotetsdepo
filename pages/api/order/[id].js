@@ -1,5 +1,6 @@
 import clientPromise from "../../../lib/mongodb";
 import Order from "../../../models/Order";
+const { ObjectId } = require("mongodb"); 
 
 const handler = async (req, res) => {
   const {
@@ -9,27 +10,28 @@ const handler = async (req, res) => {
 
   const client = await clientPromise;
   const db = client.db();
-
   if (method === "GET") {
     try {
-      const order = await db.collection("orders").findOne({ _id: id });
+      const order = await db.collection("orders").findOne({ _id: new ObjectId(id) });
       
       if (!order) {
-        res.status(404).json({ message: "Order not found" });
-      } else {
-        res.status(200).json(order);
+        return res.status(404).json({ message: "Order not found" });
       }
+      
+      return res.status(200).json(order);
     } catch (err) {
-      res.status(500).json(err);
+      console.error("Error fetching order:", err);
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
-  
+
   if (method === "PUT") {
+    console.log(req.body)
     try {
       const order = await db
         .collection("orders")
-        .findOneAndUpdate({ _id: id }, { $set: req.body }, { returnOriginal: false });
-      res.status(200).json(order.value);
+        .updateOne({ _id: new ObjectId(id) }, { $set: { tracking_id: req.body } })
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
