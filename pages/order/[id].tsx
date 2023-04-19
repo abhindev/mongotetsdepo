@@ -80,11 +80,14 @@ const Order = ({ order }: any, error: OrderProps) => {
   const [isorder, setIsorder] = useState(order);
   const [tracking, setTracking] = useState('');
   const [token, setToken] = useState();
-  const [trackingid,setTrackingID] = useState('');
+  const [track_url, setTrack_url] = useState('');
+  // const [trackingid,setTrackingID] = useState('');
 
   const orderItems = order?.item?.products;
 
   const orderstatus = order?.status;
+
+  console.log(order?.tracking_id)
   
   //////////////////////////////////////auuth///////////////////
   useEffect(() => {
@@ -100,104 +103,15 @@ const Order = ({ order }: any, error: OrderProps) => {
   }, [token]); // Only run the effect when token changes
 
   // console.log("token: " + token);
-  /////////////////////////auth end///////////////////////
-  var currentDate = new Date();
-
-  // Extract the components of the date and time
-  var year = currentDate.getFullYear();
-  var month = String(currentDate.getMonth() + 1).padStart(2, "0");
-  var day = String(currentDate.getDate()).padStart(2, "0");
-  var hours = String(currentDate.getHours()).padStart(2, "0");
-  var minutes = String(currentDate.getMinutes()).padStart(2, "0");
-
-  // Format the date and time string
-  var formattedDate =
-    year + "-" + month + "-" + day + " " + hours + ":" + minutes;
-
-  ////////////////////////////////////////////
-  const item = order?.item?.products;
-  const arrayItem: any = [];
-  item?.map((item: any, i: number) => {
-    arrayItem.push({
-      name: item?.title,
-      sku: item?._id + i,
-      units: item?.quantity,
-      selling_price: item.price,
-      discount: "",
-      tax: "",
-      hsn: 441122,
-    });
-  });
-  // console.log(orderstatus);
+  /////////////////////////auth end//////////////
   // console.log(formattedDate)
   
-
-  // create order shiprocket////////////////////////////////
-  const addOrder = async () => {
-    const data = {
-      token: token,
-      order_id: order._id,
-      order_date: formattedDate,
-      billing_customer_name: order.customer,
-      billing_address: order.address.Address,    
-      billing_city: order.address.City,
-      billing_pincode: order.address.pinCode,
-      billing_state: order.address.State,
-      billing_email: order.email,
-      billing_phone: order.phone,
-      order_items: arrayItem,
-      sub_total: order.total,
-    };
-  
-    const response = await fetch('/api/shiprocket', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', 
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
-      const jsonData = await response.json();
-      const data = JSON.parse(jsonData);
-      const orderId = data.order_id;
-      // console.log(data)
-      // console.log(orderId)
-      setTrackingID(orderId)
-    } else {
-      console.error('Failed to add order:', response.statusText);
-    }
-  };
-  
-  if (!trackingid && order && token !== undefined) {
-    console.log("adding order")
-    addOrder();
-  }
-  //////////////////////////////////////////////////////////
-  // const orderId = trackingid
-////////////////////////////////////////////////////////////
-const putOrderId = async () => {
-  console.log("running")
-  const response = await fetch(`/api/order/${order._id}`, {
-    method: 'PUT',
-    // headers: {
-    //   'Content-Type': 'application/json', 
-    //   'Authorization': `Bearer ${token}`,
-    // },
-    body: JSON.stringify(trackingid),
-  });
-}
-
-
-const ordertrackId = order?.tracking_id;
-
-if(!ordertrackId){putOrderId()}
 /////////////////////////////track///////////////////////////
 if(order && token !== undefined){
   (async () => {
     const data = {
       token: token,
-      trackingID: 336283221,
+      trackingID: order?.tracking_id,
     }
     const response = await fetch("/api/shiprocket/track",{
       method: 'POST',
@@ -207,41 +121,14 @@ if(order && token !== undefined){
         body: JSON.stringify(data),
     });
     const jsonData = await response.json();
-    // console.log(jsonData);
+    
+    const trackData = (JSON.parse(jsonData));
+   const url = (trackData?.tracking_data?.track_url)
+    setTrack_url(url)
   })();
 }
-////////////////////////////track-END//////////////////////////
-  // if ( token !== undefined && orderstatus > 0) {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
-  //   myHeaders.append("Authorization", `Bearer ${token}`);
-
-  //   var requestOptions: any = {
-  //     method: "GET",
-  //     headers: myHeaders,
-  //     redirect: "follow",
-  //   };
-
-  //   fetch(
-  //     `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${order?._id}`,
-  //     requestOptions
-  //   )
-  //     .then((response) => response.text())
-  //     .then((result) => setTracking(result))
-  //     .catch((error) => console.log("error", error));
-  // }
-
-  // console.log("track : " + tracking);
-  //  const track = {tracking}
-  if (tracking.length > 10) {
-    var trackingObj = JSON.parse(tracking);
-    var trackStatus = trackingObj?.tracking_data?.track_status;
-    // console.log("track_status:", trackStatus);
-  }
-
-  const [awbs, setAwbs] = useState(
-    trackingObj?.tracking_data?.shipment_track?.awb_code
-  );
+console.log("track: "+track_url)
+  
 
   // setAwbs()
 
@@ -252,7 +139,7 @@ if(order && token !== undefined){
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Authorization",
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM0NzEwNzYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjgxNTM5NjY3LCJleHAiOjE2ODI0MDM2NjcsIm5iZiI6MTY4MTUzOTY2NywianRpIjoiN1llQktxNFZKZWQxT2FBbiJ9.OUabAxvnci7YD1hiEMqZ8hTRp7w0AtnX6MtuR3y_55g"
+      `Bearer ${token}`
     );
 
     var raw = JSON.stringify({
@@ -311,7 +198,7 @@ if(order && token !== undefined){
               <div className={styles.order_track}>
                 {tracking.length < 143 ? <>order Prosessing</> : ""}
 
-                <div>
+                {/* <div>
                   {trackingObj?.tracking_data?.shipment_track_activities?.map(
                     (item: any, i: number) => (
                       <div>
@@ -320,10 +207,10 @@ if(order && token !== undefined){
                       </div>
                     )
                   )}
-                </div>
-                <a href={trackingObj?.tracking_data?.track_url}>
+                </div> */}
+                {/* <a href={trackingObj?.tracking_data?.track_url}>
                   {trackingObj?.tracking_data?.track_url}
-                </a>
+                </a> */}
               </div>
 
               <div className={styles.address}>

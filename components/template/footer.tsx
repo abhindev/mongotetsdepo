@@ -34,7 +34,7 @@ function footer() {
         </div>
       </div>
       <div className={width>600?styles.bottom:styles.bottom_mob}>
-        <div>
+        <div className={styles.contact}>
           <h3>Contact</h3>
           <a>918606531201</a> 
           <a>kalyaniammahairoil@gmail.com</a>

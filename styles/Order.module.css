@@ -1,14 +1,81 @@
-.orderindex {
-    margin: 20px;
+.rev {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  /* width: 100vw; */
+  /* background-color: brown; */
+  /* margin: 30px; */
+  /* height: 110px; */
+  padding: 20px;
 }
-.imagecontainer {
-    /* background-color: aquamarine; */
-    /* margin: 10px; */
-    display: flex;
-    justify-content: space-between;
+.innerDiv {
+  width: 90vw;
+  max-width: 600px;
+  /* margin: 100px; */
+  /* height: 100px; */
+  /* background-color: aqua; */
+}
+.section {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  /* background-color: rgba(218, 148, 148, 0.277); */
+  /* margin-top: 100px; */
 }
 
-.rev {
+.imagecontainer {
+  /* background-color: aquamarine; */
+  /* margin: 10px; */
+  display: flex;
+  justify-content: space-between;
+}
+.nonimage{
     display: flex;
-    flex-direction: column-reverse;
+    justify-content: space-around;
+    /* background-color: brown; */
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+.wrapper {
+  /* padding: 20px; */
+  /* background: rgba(67, 67, 67, 0.074); */
+  max-width: 400px;
+  /* margin: 50px auto; */
+}
+
+.demo_2 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.Pricecontainer {
+  margin: 20px 0px;
+}
+
+.btncontainer{
+    /* background-color: aquamarine; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+  background-color: #76A11F;
+  width: 100%;
+  max-width: 120px;
+  margin: 3px;
+  height: 100%;
+  align-items: center;
+  padding: 2px;
+  justify-content: center;
+  display: flex;
+  /* position: absolute; */
+  border-radius: 5px;
+  /* right: 10px; */
+  color: #fff;
 }
