@@ -37,6 +37,7 @@ const handler = async (req, res) => {
     }
   }
   if (method === "DELETE") {
+    
   }
 };
 
