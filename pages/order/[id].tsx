@@ -170,6 +170,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   };
   
   if (order && token !== undefined) {
+    console.log("adding order")
     addOrder();
   }
   //////////////////////////////////////////////////////////
