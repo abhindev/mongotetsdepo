@@ -109,3 +109,51 @@
    align-items: center;
    justify-content: center;
 }
+
+.success {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    z-index: 9999999999999999;
+}
+.successIcon{
+    width: 60vw;
+    height: 60vw;
+    max-width: 200px;
+    height: 200px;
+    /* background-color: rgba(199, 255, 88, 0.643); */
+    padding: 20px;
+}
+.successText {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.successh1 {
+    font-size: 2rem;
+    margin: 20px 0px;
+    font-weight: 300;
+}
+.successp{
+ margin: 1px;
+}
+
+.successBtnContainer{
+   margin-top: 100px;
+}
+.successBtn{ 
+    background-color: #77a31f;
+    width: 70vw;
+    max-width: 250px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    color: #fff;
+}
