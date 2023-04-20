@@ -123,7 +123,8 @@ const Order = ({ order }: any, error: OrderProps) => {
   const orderItems = order?.item?.products;
 
   const orderstatus = order?.status;
-  console.log(orderstatus)
+  const orderMethord = order?.method;
+  console.log(orderMethord)
   //////////////////////////////////////auuth///////////////////
   useEffect(() => {
     const fetchData = async () => {
@@ -168,7 +169,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   });
   // console.log(orderstatus);
   // console.log(formattedDate)
-    const stat = (orderstatus== 0? "Prepaid": "COD")
+    const stat = (orderMethord== 0? "Prepaid": "COD")
   // create order shiprocket////////////////////////////////
   const addOrder = async () => {
     const data = {
