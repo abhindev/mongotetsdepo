@@ -317,7 +317,7 @@ function CheckOut() {
               cod:: {paymethod}
             </button> */}
           </div>
-          {paymethod}
+          {/* {paymethod} */}
           {Object.keys(formErrors).length === 0 && isSubmit ? (
             <>
               <div onLoad={onLaoded()}></div>
