@@ -56,7 +56,7 @@ function CartItem({ cart }) {
                       product.quantity > 1 ? handleRemoveQty(i, product) : null;
                     }}
                   >
-                    <RxDash className={styles.icon_remove} />
+                    <RxDash className={styles.icon_remove} color="#000"/>
                   </button>
                   <span className={styles.span}>{product.quantity}</span>
                   <button
@@ -65,7 +65,7 @@ function CartItem({ cart }) {
                       handleAddQty(i, product);
                     }}
                   >
-                    <RxPlus className={styles.icon_add} />
+                    <RxPlus className={styles.icon_add} color="#000"/>
                   </button>
                 </div>
               </div>
