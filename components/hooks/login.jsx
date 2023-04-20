@@ -139,7 +139,7 @@ function Login(setIsOpen) {
       <div className={styles.box}>
         <>
           <div className={styles.imgcontainer}>
-            <h1 style={{ margin: "1px" }}>Wellcome.</h1>
+            <h1 style={{ margin: "1px" }}>Welcome.</h1>
             <p style={{ fontSize: "12px" }}>
               Welcome to our website! We're thrilled that you've decided to sign
               up with us. As a valued member of our community, you'll gain

@@ -1,5 +1,7 @@
 .container {
   margin-top: 20px;
+  margin-bottom: 20vw;
+  /* background-color: #76a11f; */
 }
 .title {
   position: relative;
@@ -66,9 +68,9 @@
   background-color: hsl(80, 68%, 38%);
   border: none;
   border-radius: 5px;
-  width: 20vw;
+  width: 40vw;
   height: 40px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   color: #fff;
   font-size: 2vw;
   size-adjust: none;

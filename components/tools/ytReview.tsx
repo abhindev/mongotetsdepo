@@ -37,7 +37,7 @@ function Review() {
       </div>
       <div className={styles.buttoncontainer}>
       <div className={styles.button} >
-        <a href="https://www.youtube.com/@dailyhealth_malayalam/videos" target="_blank" style={{color:"#fff", fontSize:"10px"}} >
+        <a href="https://www.youtube.com/@dailyhealth_malayalam/videos" target="_blank" style={{color:"#fff", fontSize:"16px"}} >
         Show More
         </a>
         </div>

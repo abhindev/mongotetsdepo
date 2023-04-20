@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { BiShoppingBag } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
+import { BsWhatsapp } from "react-icons/Bs";
 import Modal from "react-modal";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -84,12 +85,22 @@ function navbar() {
               <GrClose />
             </div>
             <div className={styles.items}>
+              <a href="/" onClick={() => handilcliceClosr()}>
+                Home
+              </a>
+
               <a href="/order" onClick={() => handilcliceClosr()}>
-                Order
+                Orders
+              </a>
+              <a href="https://wa.link/83a0qt" onClick={() => handilcliceClosr()}>
+                Contact us
+              </a>
+              <a  href="/product/6409a6d1c8363009643569e1" target="_blank" onClick={() => handilcliceClosr()}>
+                Buy Hair Oil
               </a>
               <div className={styles.logoutcontainner}>
                 <button onClick={() => logOut()} className={styles.logOut}>
-                  logOut
+                  logout
                 </button>
               </div>
             </div>
@@ -128,13 +139,19 @@ function navbar() {
                 <BiShoppingBag color="white" />
               </h1>
             </div>
-            <div >
-              {showDiv && <div className={styles.noItem}><div className={styles.noItmeText}>Cart Is Empty 😔</div></div>}
+            <div>
+              {showDiv && (
+                <div className={styles.noItem}>
+                  <div className={styles.noItmeText}>Cart Is Empty</div>
+                </div>
+              )}
             </div>
-            {/* <div className={styles.cartcounter} style={{ color: "white" }}>
-              {quantity}
-            </div> */}
           </div>
+        </div>
+      </div>
+      <div className={styles.whatsapp}>
+        <div className={styles.btn} onClick={()=>window.open("https://wa.link/83a0qt")}>
+        <BsWhatsapp />
         </div>
       </div>
     </div>

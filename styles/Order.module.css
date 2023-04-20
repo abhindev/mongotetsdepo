@@ -65,8 +65,8 @@
 
 .Line {
     width: 100%;
-    height: 1px;
-    background-color: rgba(231, 231, 231, 0.56);
+    height: 8px;
+    background-color: rgba(149, 146, 146, 0.56);
     margin-top: 20px;
 }
 .cancelBtnC {
