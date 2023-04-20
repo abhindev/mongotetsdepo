@@ -6,7 +6,7 @@ import styles from "../../../styles/OrderID.module.css";
 // import { addOrder } from "../../lib/redux/orderSlice";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 interface OrderProps {
   order:
     | {
@@ -37,15 +37,52 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     const client = await MongoClient.connect(uri);
     const db = client.db("kalianiammas");
 
-    if (orderStatus == "PAID") {
-      console.log("order status PAID");
-      const orders = await db
-        .collection("orders")
-        .findOne({ _id: new ObjectId(params.id) });
-      const order = JSON.parse(JSON.stringify(orders));
-      const status = order.status;
+    // console.log("chash" + chash);
+
+    //get db order
+    const orders = await db
+      .collection("orders")
+      .findOne({ _id: new ObjectId(params.id) });
+    const order = JSON.parse(JSON.stringify(orders));
+    const status = order.status;
+    const method = order.method;
+
+    console.log("isorder" + method);
+    console.log("cash" + orderStatus);
+    //end
+    if (method == 0) {
+      if (orderStatus == "PAID") {
+        const status = order.status;
+        console.log("status update PAID");
+        if (status < 1) {
+          console.log("status update ");
+          const updatedOrder = await db
+            .collection("orders")
+            .updateOne(
+              { _id: new ObjectId(params.id) },
+              { $set: { status: 1 } }
+            );
+        }
+        return {
+          props: {
+            order: order,
+          },
+        };
+      } else {
+        console.log("DELET");
+        const deletOrder = await db
+          .collection("orders")
+          .deleteOne({ _id: new ObjectId(params.id) });
+        return {
+          props: {
+            order: "ERROR",
+          },
+        };
+      }
+    } else if (method == 1) {
+      console.log("status update COD");
       if (status < 1) {
-        // console.log("ststus<1");
+        console.log("status update");
         const updatedOrder = await db
           .collection("orders")
           .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
@@ -56,7 +93,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         },
       };
     } else {
-      console.log("ststus !1");
+      console.log("DELET FINAL");
       const deletOrder = await db
         .collection("orders")
         .deleteOne({ _id: new ObjectId(params.id) });
@@ -82,11 +119,11 @@ const Order = ({ order }: any, error: OrderProps) => {
   const [tracking, setTracking] = useState("");
   const [token, setToken] = useState();
   const [trackingid, setTrackingID] = useState("");
-  const router = useRouter()
+  const router = useRouter();
   const orderItems = order?.item?.products;
 
   const orderstatus = order?.status;
-
+  console.log(orderstatus)
   //////////////////////////////////////auuth///////////////////
   useEffect(() => {
     const fetchData = async () => {
@@ -131,7 +168,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   });
   // console.log(orderstatus);
   // console.log(formattedDate)
-
+    
   // create order shiprocket////////////////////////////////
   const addOrder = async () => {
     const data = {
@@ -147,6 +184,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       billing_phone: order.phone,
       order_items: arrayItem,
       sub_total: order.total,
+      payment_method : orderstatus== 0? "Prepaid": "COD",
     };
 
     const response = await fetch("/api/shiprocket", {
@@ -162,7 +200,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       const data = JSON.parse(jsonData);
       const orderId = data.order_id;
       // console.log(data)
-      console.log(orderId)
+      console.log(orderId);
       setTrackingID(orderId);
     } else {
       console.error("Failed to add order:", response.statusText);
@@ -219,8 +257,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   }
 
   // console.log(order.id);
-  
-  
+
   return (
     <div>
       {isorder == "ERROR" ? (
@@ -283,8 +320,15 @@ const Order = ({ order }: any, error: OrderProps) => {
           </div>
 
           <div className={styles.successBtnContainer}>
-            <div className={styles.successBtn} onClick={()=>router.push("/")}>Continue shopping</div>
-            <div className={styles.successBtn} onClick={()=>router.push("https://wa.link/83a0qt")} >contact us</div>
+            <div className={styles.successBtn} onClick={() => router.push("/")}>
+              Continue shopping
+            </div>
+            <div
+              className={styles.successBtn}
+              onClick={() => router.push("https://wa.link/83a0qt")}
+            >
+              contact us
+            </div>
           </div>
         </div>
       ) : (
@@ -345,8 +389,15 @@ const Order = ({ order }: any, error: OrderProps) => {
             </div>
           </div>
           <div className={styles.successBtnContainer}>
-            <div className={styles.successBtn} onClick={()=>router.push("/")}>Continue shopping</div>
-            <div className={styles.successBtn} onClick={()=>router.push(`/order/${order?._id}`)}>Track order status</div>
+            <div className={styles.successBtn} onClick={() => router.push("/")}>
+              Continue shopping
+            </div>
+            <div
+              className={styles.successBtn}
+              onClick={() => router.push(`/order/${order?._id}`)}
+            >
+              Track order status
+            </div>
           </div>
         </div>
       )}

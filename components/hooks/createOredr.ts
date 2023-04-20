@@ -30,7 +30,8 @@ async function createOrder(
   phone2: string,
   item: string,
   email:string,
-  total: number
+  total: number,
+  paymentmethod: number
 ): Promise<Order> {
   let Schema = mongoose.Schema
   function getCookieValue(cookieName:any) {
@@ -70,7 +71,7 @@ var loggedinValue = getCookieValue("loggedin");
       item,
       total,
       status: 0,
-      method: 0,
+      method: paymentmethod,
     }),
   });
   return await res.json();

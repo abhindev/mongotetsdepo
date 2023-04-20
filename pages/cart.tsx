@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import getLoggedIn from "../components/hooks/getLoggedIn";
 import Login from "../components/hooks/login";
 import Modal from "react-modal";
-import { GrClose } from "react-icons/gr";
+import { IoMdArrowBack } from "react-icons/io";
 function Cart() {
   const redux = useSelector((state: any) => state.cart);
   const router = useRouter();
@@ -89,7 +89,7 @@ function Cart() {
                   style={customStyles}
                 >
                   <div className={styles.close} onClick={() => modelClose()}>
-                    <GrClose />
+                    <IoMdArrowBack />
                   </div>
                     <div className={styles.checkoutmodel}>
                       <CheckOut />
@@ -101,7 +101,7 @@ function Cart() {
                   style={customStyless}
                 >
                   <div className={styles.close} onClick={() => modelClose()}>
-                    <GrClose />
+                    <IoMdArrowBack />
                   </div>
                     <Login />
                 </Modal>)}
@@ -119,7 +119,7 @@ function Cart() {
             <div className={styles.totalDiv}>
               <div className={styles.total}>
                 <p>Subtotal</p>
-                <p>₹{redux.total}.00</p>
+                <p style={{fontSize:"1rem"}}>₹{redux.total}.00</p>
               </div>
               {cart.length == 0 ? (
                 ""
@@ -150,7 +150,7 @@ function Cart() {
                   <h4>Total</h4>
                   <p>Including 18% in taxes</p>
                 </div>
-                {cart.length == 0 ? "" : <h2>INR {redux.total + 50}.00</h2>}
+                {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem"}}>INR {redux.total + 50}.00</h2>}
               </div>
               <div className={styles.btn}>
                 {/* {ckeckout == false ? ( */}
@@ -201,7 +201,7 @@ function Cart() {
                 <h4>Total</h4>
                 <p>Including 18% in taxes</p>
               </div>
-              {cart.length == 0 ? "" : <h2>INR {redux.total + 50}.00</h2>}
+              {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem"}}>INR {redux.total + 50}.00</h2>}
             </div>
             <div className={styles.btn}>
               {ckeckout == false ? (
@@ -228,7 +228,7 @@ function Cart() {
                   onClick={() => modelClose()}
                   className={styles.closebtn}
                 >
-                  <GrClose />
+                  <IoMdArrowBack />
                 </button>
               </div>
               {log ? <CheckOut /> : <Login />}

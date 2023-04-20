@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   }
   if (method === "POST") {
     // console.log("body : "+req.body.order_id)
-    // console.log("token: "+req.body.token)
+    console.log("order states: "+req.body.payment_method)
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
       shipping_email: "",
       shipping_phone: "",
       order_items: req.body.order_items,
-      payment_method: "Prepaid",
+      payment_method: req.body.payment_method,
       shipping_charges: 0,
       giftwrap_charges: 0,
       transaction_charges: 0,

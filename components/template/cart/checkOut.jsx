@@ -10,10 +10,10 @@ function CheckOut() {
   const router = useRouter();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  
+
   const num = cart.total + 50;
   const cartTotal = num.toString();
- 
+
   const [orderId, setOrderId] = useState("");
 
   const [customername, setCustomername] = useState("");
@@ -25,7 +25,8 @@ function CheckOut() {
   const [customerphone, setCustomerPhone] = useState("");
   const [customerphone2, setCustomerPhone2] = useState("");
 
-  
+  const [paymethod, setPaymentmethod] = useState(0);
+
   const initialValues = {
     name: "",
     email: "",
@@ -40,7 +41,6 @@ function CheckOut() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,9 +54,7 @@ function CheckOut() {
   };
 
   useEffect(() => {
-    
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      
       setCustomername(formValues.name);
       setCustomemail(formValues.email);
       setCustomeraddress(formValues.address);
@@ -113,6 +111,7 @@ function CheckOut() {
   const phone2 = customerphone2;
   const item = cart;
   const total = cartTotal;
+  const paymentmethod = paymethod;
   /////////////////////////
   const order_id = orderId;
   const order_amount = total;
@@ -124,12 +123,13 @@ function CheckOut() {
   const err = Object.keys(formErrors).length;
   const val = Object.keys(setFormValues).length;
 
-  
   ///////////////////////////
-  
+  // const [createNewOrder, setCreateNewOrder] = useState(true)
+
   const onLaoded = () => {
-    if ( isSubmit && err == 0 && val < 7 && loading == false) {
-      
+    if (isSubmit && err == 0 && val < 7 && loading == false) {
+      // if (createNewOrder){
+      // setCreateNewOrder(false)
       createOrder(
         customer,
         Address,
@@ -140,29 +140,39 @@ function CheckOut() {
         phone2,
         item,
         email,
-        total
+        total,
+        paymentmethod
       ).then(function (result) {
-       
-        //loading
+        console.log("added");
         setLoading(true);
-        //loadingend
-        setOrderId(result.insertedId);
+        if (paymethod == 1) {
+          router.push(`/order/success/${result.insertedId}`);
+        }
 
-        const order_id = result.insertedId;
-        // handilClickBuy()
-        createPayment(
-          order_id,
-          order_amount,
-          customer_id,
-          customer_name,
-          customer_email,
-          customer_phone
-        ).then(function (result) {
-          router.push(result?.payment_link);
-          return "normalReturn";
-        });
+        if (paymethod == 0) {
+          setOrderId(result.insertedId);
+          //loading
+          setLoading(true);
+          //loadingend
+
+          const order_id = result.insertedId;
+          // handilClickBuy()
+
+          createPayment(
+            order_id,
+            order_amount,
+            customer_id,
+            customer_name,
+            customer_email,
+            customer_phone
+          ).then(function (result) {
+            router.push(result?.payment_link);
+            return "normalReturn";
+          });
+        }
         return "normalReturn";
       });
+      // }
     } else {
       console.log("error");
     }
@@ -272,7 +282,42 @@ function CheckOut() {
             />
           </div>
           <p className={styles.error}>{formErrors.phone2}</p>
+          <div className={styles.paytittl}>
+            <h3 style={{fontWeight:400,fontSize:"1.4rem" ,marginTop:"2px",marginBottom:"0px"}}>Payment</h3>
+            <p>All transactions are secure and encrypted.</p>
+          </div>
+          <div className={styles.paymentmethod}>
+            <div
+              className={styles.rediobutton}
+              onClick={() => setPaymentmethod(0)}
+            >
+              <button
+                className={styles.rediobuttoninner}
+                style={paymethod == 0 ? { backgroundColor: "#77a31f" } : {}}
+              ></button>
+              <div className={styles.buttontext}>
+                <p>UPI,CARDS, WALLETS NETBANKING</p>
+              </div>
+            </div>
+            <div className={styles.line}></div>
+            <div
+              className={styles.rediobutton}
+              onClick={() => setPaymentmethod(1)}
+            >
+              <button
+                className={styles.rediobuttoninner}
+                style={paymethod == 1 ? { backgroundColor: "#77a31f" } : {}}
+              ></button>
+              <div className={styles.buttontext}>
+                <p>Cash on Delivery (COD)</p>
+              </div>
+            </div>
 
+            {/* <button onClick={() => setPaymentmethod(1)}>
+              cod:: {paymethod}
+            </button> */}
+          </div>
+          {paymethod}
           {Object.keys(formErrors).length === 0 && isSubmit ? (
             <>
               <div onLoad={onLaoded()}></div>
