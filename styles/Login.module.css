@@ -80,7 +80,8 @@ align-items: center;
 }
 .otpbase {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
+  flex-direction: column;
   width: 100%;
   justify-content: center;
   /* background-color: aqua; */
@@ -114,5 +115,5 @@ align-items: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(228, 228, 228);
+  color: tomato;
 }

@@ -155,7 +155,7 @@ function Cart() {
               <div className={styles.btn}>
                 {/* {ckeckout == false ? ( */}
                 <button className={styles.button} onClick={() => CkeckOut()}>
-                  {log == true ? "CONTINU" : "CHECKOUT"}
+                  {log == true ? "CONTINUE" : "CHECKOUT"}
                 </button>
                 {/* ) : (
                   ""
@@ -209,7 +209,7 @@ function Cart() {
                   className={styles.button}
                   onClick={() => handile_mobsubmit()}
                 >
-                  {log == true ? "CONTINU" : "CHECKOUT"}
+                  {log == true ? "CONTINUE" : "CHECKOUT"}
                 </button>
               ) : (
                 ""
