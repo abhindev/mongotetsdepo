@@ -66,7 +66,10 @@ function Order({ data }: any) {
     <div className={styles.orderindex}>
       <h3 style={{fontWeight:10,marginLeft:"10vw"}}>Your Orders</h3>
       {/* <button onClick={()=>handleDelete()}>delet</button> */}
-
+<div 
+    style={{display: "flex",
+    flexDirection: "column-reverse"}}
+>
       {data.map((order:any, i: number) => (
         <div className={styles.rev} key={i}>
           <div className={styles.innerDiv}>
@@ -74,6 +77,7 @@ function Order({ data }: any) {
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 }
