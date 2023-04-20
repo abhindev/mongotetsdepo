@@ -14,7 +14,8 @@ export default async function handler(req, res) {
     };
 
     fetch(
-      `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${req.body.trackingID}`,
+      // `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${req.body.trackingID}`,
+      `https://apiv2.shiprocket.in/v1/external/orders/show/${req.body.trackingID}`,
       // `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/336502422`,
       requestOptions
     )
@@ -50,5 +51,25 @@ export default async function handler(req, res) {
         .then((result) => res.status(200).json(result))
         .catch((error) => res.status(400).json(error));
     };
+    if (method == "PUT") {
+      console.log(req.body.awb+"awb")
+      var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${req.body.token}`);
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://apiv2.shiprocket.in/v1/external/courier/track/awb/${req.body.awb}`,
+     requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) =>  res.status(200).json(result))
+      .catch((error) => console.log("error", error))
+    }
 
 }

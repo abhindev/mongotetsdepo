@@ -7,13 +7,13 @@ import { useRouter } from 'next/router'
 function OrderItem({ order }: any) {
   const [token, setToken] = useState();
   const [showId, setShowId] = useState(false);
-  const [track_url, setTrack_url] = useState();
+  const [awb, setAwb] = useState();
   const [remove, setRemove] = useState(false);
   const [message, setMessage] = useState();
-  //   const []
-  const router = useRouter()
-  //   GET AUTH
+  const [trackingLink, setTrackingLink] = useState('');
 
+  const router = useRouter()
+  //   GET AUTH TOKEN
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/api/shiprocket");
@@ -25,8 +25,9 @@ function OrderItem({ order }: any) {
       fetchData();
     }
   }, [token]);
-  // GET TRACK
-  if (order && token !== undefined && track_url == undefined) {
+
+  // GET AWD && track_url == undefined
+  if (order && token !== undefined ) {
     (async () => {
       const data = {
         token: token,
@@ -41,14 +42,16 @@ function OrderItem({ order }: any) {
       });
       const jsonData = await response.json();
       const trackData = JSON.parse(jsonData);
-      const url = trackData;
-      setTrack_url(url);
+      const url = {...trackData};
+      const obj = {...url.data};
+    //   console.log(obj?.awb_data?.awb)
+    //   console.log(obj)
+    setAwb(obj?.awb_data?.awb)
+    //   setTrack_url(obj?.awb);
     })();
   }
-  //  DELETE ORDER
-  //stage-1
-  const [conform, setConform] = useState(false);
 
+  //  DELETE ORDER
   async function handleClickCancel() {
     const data = {
       token: token,
@@ -67,6 +70,35 @@ function OrderItem({ order }: any) {
       setMessage(url)
       router.push("/")
   }
+// console.log(awb)
+//   TRACK WITH AWD
+// track uRL
+if (order && token !== undefined ) {
+    (async () => {
+      const data = {
+        token: token,
+        awb: awb,
+      };
+      const response = await fetch("/api/shiprocket/track", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const jsonData = await response.json();
+      const trackData = JSON.parse(jsonData);
+    //   console.log(jsonData)
+      const url = {...trackData};
+    //   const obj = {...url.data};
+    //   console.log(obj?.awb_data?.awb)
+    //   console.log(url.tracking_data.track_url)
+      setTrackingLink(url?.tracking_data?.track_url)
+    //   setTrack_url(obj?.awb);
+    })();
+  }
+
+
   // DELETE EMPTY ORDER
 
   const handleDelete = () => {
@@ -98,7 +130,8 @@ function OrderItem({ order }: any) {
       borderColor: "transparent",
     },
   };
-
+// console.log(typeof(trackingLink) + " ::::type")
+ const [nolink , shownolink] = useState(false)
   return (
     <>
     {/* <div>{message}</div> */}
@@ -132,13 +165,25 @@ function OrderItem({ order }: any) {
             </div>
           </div>
           <div className={styles.btncontainer}>
-            <a
-              className={styles.btn}
-              href={track_url}
-              style={{ textDecoration: "none", color: "#fff" }}
-            >
-              <div className={styles.btn}> Track</div>
-            </a>
+            {
+                trackingLink ? <a
+                className={styles.btn}
+                href={trackingLink}
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                <div className={styles.btn}> Track</div>
+                
+              </a> : <>
+              <div className={styles.btn} style={{backgroundColor:"#76a11fbf"}} onClick={()=>shownolink(true)}> Track</div>
+              <Modal
+                  isOpen={nolink}
+                  onRequestClose={() => shownolink(false)}
+                  style={customStyles}
+                >
+                  Order is under processing. Available Soon!
+                </Modal></>
+            }
+            
             <div
               className={styles.btn}
               onClick={() => setConformModelShow(true)}

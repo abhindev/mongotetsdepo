@@ -162,7 +162,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       const data = JSON.parse(jsonData);
       const orderId = data.order_id;
       // console.log(data)
-      // console.log(orderId)
+      console.log(orderId)
       setTrackingID(orderId);
     } else {
       console.error("Failed to add order:", response.statusText);
