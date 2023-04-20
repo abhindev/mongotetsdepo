@@ -207,7 +207,7 @@ if (order && token !== undefined ) {
                 className={styles.cancelBtn}
                 onClick={() => handleClickCancel()}
               >
-                conform
+                confirm
               </button>
               <button
                 className={styles.cancelBtn}
