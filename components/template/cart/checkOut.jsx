@@ -127,9 +127,13 @@ function CheckOut() {
   // const [createNewOrder, setCreateNewOrder] = useState(true)
 
   const onLaoded = () => {
-    if (isSubmit && err == 0 && val < 7 && loading == false) {
+    // isSubmit && err == 0 && val < 7 && loading == false
+    const namelength = customer_name.length
+    console.log(namelength>3)
+    if (isSubmit && err == 0 && val < 7 && loading == false && namelength>2) {
       // if (createNewOrder){
       // setCreateNewOrder(false)
+
       createOrder(
         customer,
         Address,
