@@ -168,7 +168,7 @@ const Order = ({ order }: any, error: OrderProps) => {
   });
   // console.log(orderstatus);
   // console.log(formattedDate)
-    
+    const stat = (orderstatus== 0? "Prepaid": "COD")
   // create order shiprocket////////////////////////////////
   const addOrder = async () => {
     const data = {
@@ -184,9 +184,9 @@ const Order = ({ order }: any, error: OrderProps) => {
       billing_phone: order.phone,
       order_items: arrayItem,
       sub_total: order.total,
-      payment_method : orderstatus== 0? "Prepaid": "COD",
+      payment_method : stat,
     };
-
+console.log(stat)
     const response = await fetch("/api/shiprocket", {
       method: "POST",
       headers: {

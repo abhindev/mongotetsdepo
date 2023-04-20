@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   }
   if (method === "POST") {
     // console.log("body : "+req.body.order_id)
-    console.log("order states: "+req.body.payment_method)
+    console.log("order states: "+req.body.payment_method+ typeof(req.body.payment_method))
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
