@@ -65,7 +65,7 @@ function Cart() {
       top: "17%",
       left: "5%",
       right: `${width > 600 ? "70vw" : "5%"}`,
-      bottom: "10%",
+      bottom: "1%",
     },
   };
   const cart = redux.products;

@@ -40,6 +40,7 @@ function CheckOut() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [buttonsubmit ,setButtonsubmit] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -322,13 +323,13 @@ function CheckOut() {
             </button> */}
           </div>
           {/* {paymethod} */}
-          {Object.keys(formErrors).length === 0 && isSubmit ? (
+          {Object.keys(formErrors).length === 0 && isSubmit && buttonsubmit == true ?  (
             <>
               <div onLoad={onLaoded()}></div>
             </>
           ) : (
             <div className={styles.btn}>
-              <button className={styles.button}>Submit</button>
+              <button className={styles.button} onClick={()=>setButtonsubmit(true)}>Submit</button>
             </div>
           )}
         </div>
