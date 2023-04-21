@@ -42,6 +42,7 @@ function CheckOut() {
   const [isSubmit, setIsSubmit] = useState(false);
   const [buttonsubmit ,setButtonsubmit] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -131,7 +132,7 @@ function CheckOut() {
     // isSubmit && err == 0 && val < 7 && loading == false
     const namelength = customer_name.length
     console.log(namelength>3)
-    if (isSubmit && err == 0 && val < 7 && loading == false && namelength>2) {
+    if (isSubmit && err == 0 && val < 7 && loading2 == false && namelength>2) {
       // if (createNewOrder){
       // setCreateNewOrder(false)
 
@@ -149,7 +150,7 @@ function CheckOut() {
         paymentmethod
       ).then(function (result) {
         console.log("added");
-        setLoading(true);
+        setLoading2(true);
         if (paymethod == 1) {
           router.push(`/order/success/${result.insertedId}`);
         }
@@ -157,7 +158,7 @@ function CheckOut() {
         if (paymethod == 0) {
           setOrderId(result.insertedId);
           //loading
-          setLoading(true);
+          // setLoading(true);
           //loadingend
 
           const order_id = result.insertedId;
@@ -325,6 +326,7 @@ function CheckOut() {
           {/* {paymethod} */}
           {Object.keys(formErrors).length === 0 && isSubmit && buttonsubmit == true ?  (
             <>
+              <div onLoad={loading == false ? setLoading(true) :""}>loadding</div>
               <div onLoad={onLaoded()}></div>
             </>
           ) : (
