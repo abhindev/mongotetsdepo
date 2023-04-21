@@ -177,7 +177,7 @@ function Login(setIsOpen) {
               /> */}
               <input
                 placeholder="phone"
-                type="text"
+                type="number"
                 id="phone"
                 name="phone"
                 onChange={handleChange}
