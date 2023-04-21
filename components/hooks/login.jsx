@@ -34,6 +34,7 @@ function Login(setIsOpen) {
   
 
   const requestOtp = () => {
+    setLoad(true)
     generateRecaptchaVerifier();
 
     const phonenum = (phone) =>{
@@ -186,7 +187,7 @@ function Login(setIsOpen) {
             </div>
             {FormChainge == false ?
         <button onClick={() => requestOtp()} className={styles.button}>
-          <div style={{color:"#ffff"}}>Send OTP</div>
+          <div style={{color:"#ffff"}}>{!load ?"Send OTP": "Loadding"}</div>
         </button>: ''}
           </>
         ) : (
