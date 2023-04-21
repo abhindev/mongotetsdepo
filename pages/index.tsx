@@ -32,6 +32,7 @@ export default function Home({
       
       <Head>
         <title>Kalyaniammas</title>
+        
         <link rel="icon" href="/favicon.ico" />
         {/* <!-- Chrome, Firefox OS and Opera --> */}
         <meta name="theme-color" content="#77a31f" />
