@@ -75,6 +75,10 @@ function Cart() {
     setIsOpen(false);
     setCkeckout(false);
   };
+
+  if(cart.length==0){
+    router.push("/")
+  }
   return (
     <div className={width > 600 ? styles.cart : styles.mob}>
       {width > 600 ? (
