@@ -187,7 +187,7 @@ function Login(setIsOpen) {
             </div>
             {FormChainge == false ?
         <button onClick={() => requestOtp()} className={styles.button}>
-          <div style={{color:"#ffff"}}>{!load ?"Send OTP": "Loadding"}</div>
+          <div style={{color:"#ffff"}}>{!load ?"Send OTP": "Loadding..."}</div>
         </button>: ''}
           </>
         ) : (
