@@ -89,7 +89,7 @@ function Cart() {
                   style={customStyles}
                 >
                   <div className={styles.close} onClick={() => modelClose()}>
-                    <IoMdArrowBack color="#000" style={{fontSize:"1.2rem"}}/>
+                    <IoMdArrowBack color="#000" style={{fontSize:"1.2rem" ,marginBottom: "40px",marginTop: "30px"}}/>
                   </div>
                     <div className={styles.checkoutmodel}>
                       <CheckOut />
@@ -101,7 +101,7 @@ function Cart() {
                   style={customStyless}
                 >
                   <div className={styles.close} onClick={() => modelClose()}>
-                    <IoMdArrowBack color="#000" style={{fontSize:"1.2rem"}}/>
+                    <IoMdArrowBack color="#000" style={{fontSize:"1.2rem",marginBottom: "40px",marginTop: "30px"}}/>
                   </div>
                     <Login />
                 </Modal>)}
@@ -228,7 +228,7 @@ function Cart() {
                   onClick={() => modelClose()}
                   className={styles.closebtn}
                 >
-                  <IoMdArrowBack color="#000" style={{fontSize:"1.2rem"}}/>
+                  <IoMdArrowBack color="#000" style={{fontSize:"1.2rem",marginBottom: "40px",marginTop: "30px"}}/>
                 </button>
               </div>
               {log ? <CheckOut /> : <Login />}
@@ -241,3 +241,5 @@ function Cart() {
 }
 
 export default Cart;
+
+

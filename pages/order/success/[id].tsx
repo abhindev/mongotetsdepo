@@ -395,7 +395,7 @@ console.log(stat)
             </div>
             <div
               className={styles.successBtn}
-              onClick={() => router.push(`/order/${order?._id}`)}
+              onClick={() => router.push("/order")}
             >
               Track order status
             </div>
