@@ -197,7 +197,7 @@ const Product = ({ product, products }: any) => {
                       maxHeight: "250px",
                       minHeight: "30px",
                       height: "30vw",
-                      backgroundColor: "red",
+                      // backgroundColor: "red",
                     }}
                   />
                 </a>
@@ -215,8 +215,8 @@ const Product = ({ product, products }: any) => {
         {/* <div className={styles.notify}>ha</div> */}
       </div>
       <div>
-        <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1>
-        <Review reviews={reviews} />
+        {/* <h1 style={{ marginLeft: "10%", fontSize: "15px" }}>User reviews</h1> */}
+        {/* <Review reviews={reviews} /> */}
         {/* <AddReview id={product}/> */}
       </div>
     </>

@@ -34,7 +34,9 @@ interface PaymentDetails {
         order_note: "Additional order info",
         order_meta: {
           // return_url: "http://localhost:3000/order/success/{order_id}",
-          return_url: "https://mongotetsdepo.vercel.app/order/success/{order_id}",
+          // return_url: "https://mongotetsdepo.vercel.app/order/success/{order_id}",
+          return_url: "https://www.kalyaniammas.com/order/success/{order_id}",
+          
         },
         customer_details: {
           customer_id,
