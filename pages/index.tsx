@@ -32,7 +32,7 @@ export default function Home({
       
       <Head>
         <title>Kalyaniammas</title>
-        
+        <meta name="google-site-verification" content="Wo-crY-Z4aTOr7uX8isPx7VRkiQZ4tcK95ClrXqoLps" />
         <link rel="icon" href="/favicon.ico" />
         {/* <!-- Chrome, Firefox OS and Opera --> */}
         <meta name="theme-color" content="#77a31f" />
