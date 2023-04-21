@@ -5,7 +5,7 @@ import styles from "../styles/Home.module.css";
 import Featured from "../components/tools/Featured";
 import PoductList from "../components/template/products/productlist";
 import Review from "../components/tools/ytReview";
-
+import { NextSeo } from 'next-seo';
 
 
 export async function getServerSideProps() {
@@ -44,6 +44,10 @@ export default function Home({
         <meta name="keywords" content="Kalyaniammas, Kalyaniamma hair oil, Kalyaniammas hair drops"/>
         <meta name="description" content="Kalyaniyammas Hair Drops is a premium organic hair oil that is carefully crafted with 100% natural coconut oil and herbs."/>
       </Head>
+      <NextSeo
+      title="Kalyaniammas"
+      description="Kalyaniyammas premium organic ."
+    />
       <main>
         <Featured />
         <PoductList products={products} />
