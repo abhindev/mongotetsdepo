@@ -164,22 +164,11 @@ function Login(setIsOpen) {
         {FormChainge == false ? (
           <>
             <div className={styles.field}>
-              {/* <input
-                placeholder="+91"
-                maxlength="4"
-                type="number"
-                id="code"
-                name="code"
-                onChange={handleChangeCode}
-                value={code}
-                className={styles.code}
-                // className={styles.input}
-              /> */}
               <input
                 placeholder="phone"
                 type="number"
                 id="phone"
-                name="phone"
+                name="Phone"
                 onChange={handleChange}
                 value={phonenumber}
                 className={styles.input}
@@ -187,7 +176,7 @@ function Login(setIsOpen) {
             </div>
             {FormChainge == false ?
         <button onClick={() => requestOtp()} className={styles.button}>
-          <div style={{color:"#ffff"}}>{!load ?"Send OTP": "Loadding..."}</div>
+          <div style={{color:"#ffff"}}>{!load ?"Send OTP": "Loading..."}</div>
         </button>: ''}
           </>
         ) : (

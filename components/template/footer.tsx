@@ -12,6 +12,7 @@ function footer() {
   const [width, height] = useDeviceSize();
   const router = useRouter()
   return (
+    
     <div className={styles.footer}>
       <div className={styles.top}>
         <h1 className={styles.title}>Connect with us</h1>

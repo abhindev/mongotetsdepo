@@ -71,32 +71,34 @@ function CheckOut() {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.name) {
-      errors.name = "Name is required!";
+      errors.name = "Name is required !";
     }
     if (!values.email) {
-      errors.email = "Email is required!";
+      errors.email = "Email is required !";
     } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
+      errors.email = "This is not a valid email format !";
     }
     if (!values.address) {
-      errors.address = "Address is required!";
+      errors.address = "Address is required !";
     }
     if (!values.city) {
-      errors.city = "city is required";
+      errors.city = "City is required !";
     }
     if (!values.state) {
-      errors.state = "state is required";
+      errors.state = "State is required !";
     }
     if (!values.pincode) {
-      errors.pincode = "pincode is required";
+      errors.pincode = "Pincode is required !";
     }
     if (!values.phone) {
-      errors.phone = "phone is required";
+      errors.phone = "Phone number is required !";
+    } else if (values.phone2.length <= 10) {
+      errors.phone2 = "Phone number must be  10 characters !";
     }
     if (!values.phone2) {
       null;
-    } else if (values.phone2.length < 10) {
-      errors.phone2 = "phone must be  10 characters";
+    } else if (values.phone2.length <= 10) {
+      errors.phone2 = "Alternative phone number must be  10 characters !";
     }
     return errors;
   };
@@ -214,14 +216,14 @@ function CheckOut() {
               onChange={handleChange}
             />
           </div>
-          <p className={styles.error}>{formErrors.name}</p>
+          <p className={styles.error}>{formErrors.email}</p>
           <div className={styles.field}>
             {/* <label>phone</label> */}
             <input
               className={styles.input}
               type="number"
               name="phone"
-              placeholder="phone"
+              placeholder="Phone number"
               value={formValues.phone}
               onChange={handleChange}
             />
@@ -246,7 +248,7 @@ function CheckOut() {
               className={styles.input}
               type="text"
               name="city"
-              placeholder="city"
+              placeholder="City"
               value={formValues.city}
               onChange={handleChange}
             />
@@ -258,7 +260,7 @@ function CheckOut() {
               className={styles.input}
               type="text"
               name="state"
-              placeholder="state"
+              placeholder="State"
               value={formValues.state}
               onChange={handleChange}
             />
@@ -270,7 +272,7 @@ function CheckOut() {
               className={styles.input}
               type="number"
               name="pincode"
-              placeholder="pincode"
+              placeholder="Pincode"
               value={formValues.pincode}
               onChange={handleChange}
             />
@@ -282,7 +284,7 @@ function CheckOut() {
               className={styles.input}
               type="number"
               name="phone2"
-              placeholder="phone"
+              placeholder="Alternative phone number"
               value={formValues.phone2}
               onChange={handleChange}
             />
@@ -326,7 +328,7 @@ function CheckOut() {
           {/* {paymethod} */}
           {Object.keys(formErrors).length === 0 && isSubmit && buttonsubmit == true ?  (
             <>
-              <div onLoad={loading == false ? setLoading(true) :""}>loadding</div>
+              <div onLoad={loading == false ? setLoading(true) :""}>loading</div>
               <div onLoad={onLaoded()}></div>
             </>
           ) : (

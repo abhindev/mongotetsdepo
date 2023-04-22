@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "../../../styles/OrderID.module.css";
 // import addOrder from "../../components/hooks/upDateUser"
 // import { addOrder } from "../../lib/redux/orderSlice";
+import { reset } from "../../../lib/redux/cartSlice";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -124,7 +125,8 @@ const Order = ({ order }: any, error: OrderProps) => {
 
   const orderstatus = order?.status;
   const orderMethord = order?.method;
-  console.log(orderMethord)
+  // console.log(orderMethord)
+  const dispatch = useDispatch();
   //////////////////////////////////////auuth///////////////////
   useEffect(() => {
     const fetchData = async () => {
@@ -187,7 +189,7 @@ const Order = ({ order }: any, error: OrderProps) => {
       sub_total: order.total,
       payment_method : stat,
     };
-console.log(stat)
+// console.log(stat)
     const response = await fetch("/api/shiprocket", {
       method: "POST",
       headers: {
@@ -334,6 +336,7 @@ console.log(stat)
         </div>
       ) : (
         <div className={styles.success}>
+          
           <div className={styles.successIcon}>
             {/*  */}
             <div className="ui-success">
@@ -390,12 +393,12 @@ console.log(stat)
             </div>
           </div>
           <div className={styles.successBtnContainer}>
-            <div className={styles.successBtn} onClick={() => router.push("/")}>
+            <div className={styles.successBtn} onClick={() => {router.push("/"); dispatch(reset())}}>
               Continue shopping
             </div>
             <div
               className={styles.successBtn}
-              onClick={() => router.push("/order")}
+              onClick={() => {router.push("/order"); dispatch(reset())}}
             >
               Track order status
             </div>

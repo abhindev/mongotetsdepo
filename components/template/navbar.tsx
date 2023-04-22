@@ -100,7 +100,7 @@ function navbar() {
               </a>
               <div className={styles.logoutcontainner}>
                 <button onClick={() => logOut()} className={styles.logOut}>
-                  logout
+                  Sign Out
                 </button>
               </div>
             </div>

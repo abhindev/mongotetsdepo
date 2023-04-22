@@ -15,9 +15,9 @@ const Layout = ({ children }: any) => {
         >
           {children}
         </div>
-        <div>
+        <footer>
           <Footer />
-        </div>
+        </footer>
       </div>
     </>
   );

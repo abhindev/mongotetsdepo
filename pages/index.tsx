@@ -62,9 +62,6 @@ export default function Home({
   <meta name="msapplication-navbutton-color" content="#77a31f" />
   <meta name="apple-mobile-web-app-status-bar-style" content="#77a31f" />
 </Head>
-
-      
-      
       <main>
         <Featured />
         <PoductList products={products} />
