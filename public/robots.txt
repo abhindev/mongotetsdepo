@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.kalyaniammas.com
+
+# Sitemaps
+Sitemap: https://www.kalyaniammas.com/sitemap.xml

@@ -69,5 +69,8 @@
     padding:2px;
    } */
   .span {
+    position: relative;
+    bottom: 3px;
     margin:0px 2px 0px 2px;
+    color: black;
   }

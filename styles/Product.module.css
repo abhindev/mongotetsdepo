@@ -24,7 +24,7 @@
 
 .title {
   font-size: 3.5vw;
-  margin: 10px 0 10px 0;
+  margin: 10vw 0 10px 0;
 }
 .price {
   /* text-decoration: none; */
@@ -34,7 +34,7 @@
   /* border-bottom: 1px solid #d1411e; */
 }
 .desc {
-  font-size: 2vw;
+  font-size: 1.8vw;
   color: #484848;
 }
 .choose {
