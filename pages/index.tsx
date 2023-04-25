@@ -30,9 +30,9 @@ export default function Home({
   return (
     <div className={styles.container}>
       <Head>
-  <title>Kalyaniammas - Premium Organic Hair Oil</title>
+  <title>Kalyaniammas Hair Oil</title>
 
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="/logo.png" />
 
   {/* Meta tags for SEO */}
   <meta name="description" content="Kalyaniyammas Hair Drops is a premium organic hair oil that is carefully crafted with 100% natural coconut oil and herbs." />
