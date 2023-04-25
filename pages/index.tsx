@@ -35,25 +35,46 @@ export default function Home({
   <link rel="icon" href="/logo.png" />
 
   {/* Meta tags for SEO */}
-  <meta name="description" content="Kalyaniyammas Hair Drops is a premium organic hair oil that is carefully crafted with 100% natural coconut oil and herbs." />
-  <meta name="keywords" content="Kalyaniammas, Kalyaniamma hair oil, Kalyaniammas hair drops, organic hair oil, coconut oil, herbs, natural hair care" />
-  <meta name="author" content="Your Name" />
+  <meta name="description" content="Our products are carefully crafted
+using natural ingredients that are known for
+their beneficial properties to promote
+healthy hair growth" />
+  <meta name="keywords" content="kalyani amma hair oil,
+how to make hair growth oil,
+top hair oil for male,
+top hair oil for ladies,
+top hair oil for ladies in india,
+top hair oil for ladies in kerala,
+which is best hair growth oil available in india,
+which is best affordable hair growth oil,
+which is best affordable hair growth hair oils,
+which is best affordable hair growth hair oils india,
+best working hair oils,
+best working hair oils for hair growth,
+best working hair oils for dandruff,
+best working hair oils for premature greying,
+best result hair oils for premature greying,
+best result hair oils for hair growth,
+best hair oil for daily use,
+which is the best hair oil for daily use,
+which is the best hair care oil,
+which is the best hair care oil in india,
+which is the best hair care oil in kerala,
+which is the best ayurvedic hair oil in kerala," />
+  <meta name="author" content="Abhin dev" />
 
   {/* Meta tags for social sharing */}
-  <meta property="og:title" content="Kalyaniammas - Premium Organic Hair Oil" />
-  <meta property="og:description" content="Kalyaniyammas Hair Drops is a premium organic hair oil that is carefully crafted with 100% natural coconut oil and herbs." />
-  <meta property="og:image" content="/your-image-url.jpg" />
-  <meta property="og:url" content="https://www.yourwebsite.com/" />
+  <meta property="og:title" content="Kalyaniammas Hair Oil" />
+  <meta property="og:description" content="Our products are carefully crafted
+using natural ingredients that are known for
+their beneficial properties to promote
+healthy hair growth" />
+  <meta property="og:image" content="/hero/web home.webp" />
+  <meta property="og:url" content="https://www.kalyaniammas.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kalyaniammas" />
 
-  {/* Meta tags for Twitter */}
-  <meta name="twitter:title" content="Kalyaniammas - Premium Organic Hair Oil" />
-  <meta name="twitter:description" content="Kalyaniyammas Hair Drops is a premium organic hair oil that is carefully crafted with 100% natural coconut oil and herbs." />
-  <meta name="twitter:image" content="/your-image-url.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@yourtwitterhandle" />
-
+  
   {/* Meta tags for mobile devices */}
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
