@@ -1,9 +1,9 @@
 .footer {
     width: 100vw;
     /* color:white; */
-    background-color: #cfff70af;
+    background-color: #a9aaa6af;
     /* position: sticky; */
-    bottom: 0;
+    bottom: 0px;
     position: relative;
 }
 .title{

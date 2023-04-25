@@ -513,10 +513,10 @@ function PrivacyPolicy() {
       </p>
       <ul>
         <li>
-          <p>By email: kalyaniammawayand@gmail.com</p>
+          <p>By email: <a href="mailto:kalyaniammawayand@gmail.com"> kalyaniammawayand@gmail.com </a></p>
         </li>
         <li>
-          <p>By phone number: 8606531201</p>
+          <p>By phone number: <a href="tel:8606531201"> 8606531201 </a></p>
         </li>
       </ul>
     </div>
