@@ -152,7 +152,7 @@ function Login(setIsOpen) {
           </div>
           <div className={styles.title}>
             { FormChainge == false ? (
-            <h3>Create an acount</h3>) : (
+            <h3>Create an account</h3>) : (
               <div style={{display:"flex", justifyContent: "center"}}>
             <h3 >ENTER OTP</h3>
             </div>

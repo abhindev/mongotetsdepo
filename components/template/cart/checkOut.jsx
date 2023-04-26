@@ -92,13 +92,15 @@ function CheckOut() {
     }
     if (!values.phone) {
       errors.phone = "Phone number is required !";
-    } else if (values.phone2.length <= 10) {
-      errors.phone2 = "Phone number must be  10 characters !";
+    } else if (values.phone.length <= 9) {
+      console.log(values.phone.length)
+      errors.phone = "Phone number must be  10 characters !";
     }
     if (!values.phone2) {
-      null;
-    } else if (values.phone2.length <= 10) {
+      console.log(values.phone2.length)
+    } else if (values.phone2.length <= 9) {
       errors.phone2 = "Alternative phone number must be  10 characters !";
+    console.log(values.phone2.length)
     }
     return errors;
   };
@@ -340,7 +342,10 @@ function CheckOut() {
       </form>
       {loading == true ? (
         <div className={styles.loading_container}>
-          <div className={styles.loading}></div>
+          <p style={{fontSize:"1rem", fontWeight:300}}>Order processing...</p>
+          <div className={styles.loading}>
+            <div className={styles.lodline}></div>
+          </div>
         </div>
       ) : null}
     </div>

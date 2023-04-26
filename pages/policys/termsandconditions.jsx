@@ -2,9 +2,9 @@ import React from "react";
 
 function termsandconditions() {
   return (
-    <div style={{margin:"20px"}}>
+    <div style={{margin:"10vw",fontSize:"10px"}}>
       <h2
-        style={{ display: "flex", justifyContent: "center", fontWeight: 400 }}
+        style={{ display: "flex", justifyContent: "center", fontWeight: 400 ,marginBottom:"20px"}}
       >
         Terms and Conditions
       </h2>

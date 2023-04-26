@@ -151,7 +151,7 @@ function Cart() {
               </div>
               <div className={styles.total}>
                 <div>
-                  <h4>Total</h4>
+                  <h4 style={{fontWeight:500}}>Total</h4>
                   <p>Including 18% in taxes</p>
                 </div>
                 {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem" ,fontWeight:500}}>INR {redux.total + 50}.00</h2>}

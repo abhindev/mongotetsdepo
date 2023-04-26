@@ -6,6 +6,7 @@ import { addProduct } from "../../lib/redux/cartSlice";
 import Details from "../../components/template/products/Details";
 import { useRouter } from "next/router";
 import Slider from "../../components/tools/Slider";
+import Whatsapp from "../../components/tools/whatsapp"
 import CarouselSlider from "../../components/tools/productSilde";
 import Link from "next/link";
 // import AddReview from "../../components/template/products/addReview"
@@ -219,6 +220,7 @@ const Product = ({ product, products }: any) => {
         {/* <Review reviews={reviews} /> */}
         {/* <AddReview id={product}/> */}
       </div>
+      <Whatsapp />
     </>
   );
 };

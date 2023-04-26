@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../styles/PrivacyPolicy.module.css";
 function PrivacyPolicy() {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{margin:"10vw",fontSize:"10px"}}>
       <h1>Privacy Policy</h1>
       <p>Last updated: April 22, 2023</p>
       <p>

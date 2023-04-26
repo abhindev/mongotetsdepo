@@ -2,7 +2,7 @@ import React from "react";
 
 function returnpolicy() {
   return (
-    <div style={{ margin: "20px" }}>
+    <div style={{ margin:"10vw",fontSize:"10px"}}>
       <h2
         style={{ display: "flex", justifyContent: "center", fontWeight: 400 }}
       >
@@ -96,11 +96,11 @@ function returnpolicy() {
             will take place only if informed within 24 hours with video proof of
             unboxing, from the time of delivery.
           </li>
-        </ul>
-      </p>
-      <p>
-        <a style={{ color: "blue" }} href="mailto:kalyaniammawayand@gmail.com" >kalyaniammawayanad@gmail.com</a>
+          <li>
+          <a style={{ color: "blue" }} href="mailto:kalyaniammawayand@gmail.com" >kalyaniammawayanad@gmail.com</a>
         {"(For shipment related queries)"}
+          </li>
+        </ul>
       </p>
       <ul>
         <li>

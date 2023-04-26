@@ -2,7 +2,7 @@ import React from "react";
 
 function faq() {
   return (
-    <div style={{margin:"20px"}}>
+    <div style={{margin:"10vw",fontSize:"10px"}}>
       <h3 style={{fontWeight:300}}>How do I place my order?</h3>
       <p>Step 1: Click on the product of your choice.</p>
       <p>Step 2: Click on BUY IT NOW Or Step 2: Click on ADD TO CART</p>

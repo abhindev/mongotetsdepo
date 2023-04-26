@@ -6,7 +6,7 @@ import Featured from "../components/tools/Featured";
 import PoductList from "../components/template/products/productlist";
 import Review from "../components/tools/ytReview";
 import { NextSeo } from 'next-seo';
-
+import Whatsapp from "../components/tools/whatsapp"
 
 export async function getServerSideProps() {
   try {
@@ -87,6 +87,7 @@ healthy hair growth" />
         <Featured />
         <PoductList products={products} />
         <Review />
+        <Whatsapp/>
       </main>
     </div>
   );

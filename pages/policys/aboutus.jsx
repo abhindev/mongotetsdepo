@@ -2,7 +2,7 @@ import React from "react";
 
 function aboutus() {
   return (
-    <div  style={{height:"100%" ,margin:"20px"}}>
+    <div  style={{margin:"auto" ,fontSize:"15px" ,maxWidth:"70vw" ,display:"flex",flexDirection:"column"}}>
       <h2 style={{display: "flex",justifyContent: "center" }}>About Us</h2>
       <p>
         Welcome to Kalyaniammas, your one-stop solution for all your hair care
@@ -10,8 +10,7 @@ function aboutus() {
         and natural hair cleanser powder that will nourish and strengthen your
         hair.
       </p>
-      <p></p>
-      <p>
+      <p style={{margin:0}}>
         Our products are carefully crafted using natural ingredients that are
         known for their beneficial properties to promote healthy hair growth and
         a healthy scalp We believe in offering our customers the best quality
