@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { BiShoppingBag } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
-import { BsWhatsapp } from "react-icons/bs";
+// import { BsWhatsapp } from "react-icons/bs";
 import Modal from "react-modal";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -149,11 +149,11 @@ function navbar() {
           </div>
         </div>
       </div>
-      <div className={styles.whatsapp}>
+      {/* <div className={styles.whatsapp}>
         <div className={styles.btn} onClick={()=>window.open("https://wa.link/83a0qt")}>
         <BsWhatsapp />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
