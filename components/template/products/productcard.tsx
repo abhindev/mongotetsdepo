@@ -128,14 +128,7 @@ function ProductCard({ product, i }: any) {
               </div>
             </button>
 
-            <div
-              style={{
-                width: "100px",
-                height: "100%",
-                backgroundColor: "aqua",
-              }}
-            >
-            </div>
+            
           </div>
         </div>
       </div>

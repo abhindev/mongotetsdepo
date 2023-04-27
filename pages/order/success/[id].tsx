@@ -71,7 +71,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
           const updatedOrder = await db
             .collection("orders")
             .updateOne(
-              { _id: new ObjectId(params.id) },
+              { _id: id },
               { $set: { status: 1 } }
             );
         }
@@ -84,7 +84,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         console.log("DELET");
         const deletOrder = await db
           .collection("orders")
-          .deleteOne({ _id: new ObjectId(params.id) });
+          .deleteOne({ _id: id });
         return {
           props: {
             order: "ERROR methode !==0",
@@ -108,7 +108,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
       console.log("DELET FINAL");
       const deletOrder = await db
         .collection("orders")
-        .deleteOne({ _id: new ObjectId(params.id) });
+        .deleteOne({ _id: id });
       return {
         props: {
           order: "ERROR methode !==1",
