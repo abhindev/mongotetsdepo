@@ -41,13 +41,24 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     // console.log("chash" + chash);
 
     //get db order
+   let id = Number(params.id) //(26184490 data in db)
+   console.log("id :" + id)
+   console.log("paramsId :: " + id  + "paramsIdtype :: " +typeof(id) )
     const orders = await db
       .collection("orders")
-      .findOne({ _id: new ObjectId(params.id) });
+      .findOne({ _id: id }); // ({_id: 26184490}) its working
     const order = JSON.parse(JSON.stringify(orders));
+    // console.log("orders" +order)
+    
+
+    // return {
+    //         props: {
+    //           order: orders,
+    //         },
+    //       };
+
     const status = order.status;
     const method = order.method;
-
     console.log("isorder" + method);
     console.log("cash" + orderStatus);
     //end
@@ -76,7 +87,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
           .deleteOne({ _id: new ObjectId(params.id) });
         return {
           props: {
-            order: "ERROR",
+            order: "ERROR methode !==0",
           },
         };
       }
@@ -86,7 +97,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         console.log("status update");
         const updatedOrder = await db
           .collection("orders")
-          .updateOne({ _id: new ObjectId(params.id) }, { $set: { status: 1 } });
+          .updateOne({ _id: params.id }, { $set: { status: 1 } });
       }
       return {
         props: {
@@ -100,7 +111,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         .deleteOne({ _id: new ObjectId(params.id) });
       return {
         props: {
-          order: "ERROR",
+          order: "ERROR methode !==1",
         },
       };
     }
@@ -109,13 +120,14 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
     // Return an error object with the order prop set to "ERROR"
     return {
       props: {
-        order: "ERROR",
+        order: "ERROR main",
       },
     };
   }
 };
 
 const Order = ({ order }: any, error: OrderProps) => {
+  console.log(order)
   const [isorder, setIsorder] = useState(order);
   const [tracking, setTracking] = useState("");
   const [token, setToken] = useState();

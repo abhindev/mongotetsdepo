@@ -153,7 +153,7 @@ function CheckOut() {
         total,
         paymentmethod
       ).then(function (result) {
-        console.log("added");
+        console.log("added to db");
         setLoading2(true);
         if (paymethod == 1) {
           router.push(`/order/success/${result.insertedId}`);

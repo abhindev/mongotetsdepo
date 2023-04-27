@@ -56,7 +56,7 @@ var loggedinValue = getCookieValue("loggedin");
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      _id : Schema.Types.ObjectId,
+      _id :  Math.floor(Math.random() * 90000000) + 10000000,//Schema.Types.ObjectId
       costomer_id: costomerID,
       customer,
       address: {

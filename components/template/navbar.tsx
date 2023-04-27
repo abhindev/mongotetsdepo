@@ -95,7 +95,7 @@ function navbar() {
               <a href="https://wa.link/83a0qt" onClick={() => handilcliceClosr()}>
                 Contact us
               </a>
-              <a  href="/product/6409a6d1c8363009643569e1" target="_blank" onClick={() => handilcliceClosr()}>
+              <a  href="/product/6409a6d1c8363009643569e1" onClick={() => handilcliceClosr()}>
                 Buy Hair Oil
               </a>
               <div className={styles.logoutcontainner}>

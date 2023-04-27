@@ -7,6 +7,7 @@ import useDeviceSize from "../../hooks/useWindowSize";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../../lib/redux/cartSlice";
+import Link from "next/link";
 
 function ProductCard({ product, i }: any) {
   const [width, height] = useDeviceSize();
@@ -19,13 +20,13 @@ function ProductCard({ product, i }: any) {
   const price = item.prices[0].price;
   const originalPrice = item.prices[0].originalPrice;
 
-  const getOffP=(price: any, originalPrice:any)=>{
-    let discountPrice = price
-    let a = discountPrice*100/originalPrice
-    let value = Math.round(100-a)
-    return value
-  }
-  const offp = (getOffP (price,originalPrice)+"%")
+  const getOffP = (price: any, originalPrice: any) => {
+    let discountPrice = price;
+    let a = (discountPrice * 100) / originalPrice;
+    let value = Math.round(100 - a);
+    return value;
+  };
+  const offp = getOffP(price, originalPrice) + "%";
   const quantity = 1;
 
   const variant = item.prices[0].text;
@@ -54,8 +55,8 @@ function ProductCard({ product, i }: any) {
         <div style={{ flex: 1 }} className={styles.left}>
           <div className={width < 600 ? styles.imgcont_mob : styles.imgcont}>
             <a
-            href={`/product/${product._id}`}
-            // onClick={() => router.push(`/product/${product._id}`)}
+              href={`/product/${product._id}`}
+              // onClick={() => router.push(`/product/${product._id}`)}
             >
               {/* href={`/product/${product._id}`} */}
               {/* <div onClick={()=>handleClick() }> */}
@@ -78,6 +79,8 @@ function ProductCard({ product, i }: any) {
           <a
             // onClick={() => router.push(`/product/${product._id}`)}
             href={`/product/${product._id}`}
+            // href={{pathname: `tests/${product._id}`,
+            // query: product._id}}
             // passHref
             style={{ textDecoration: "none", color: "#000" }}
           >
@@ -91,7 +94,17 @@ function ProductCard({ product, i }: any) {
               </p>
               <p className={width < 600 ? styles.price_mob : styles.price}>
                 <h1 className={styles.ins}>Rs. {price}.00</h1>
-                <p className={width < 600 ? "" : styles.offp} style={{ marginLeft: "7px",fontSize: "9px", fontWeight: 400, color: "hsl(80, 68%, 38%)"}}>{offp} off</p>
+                <p
+                  className={width < 600 ? "" : styles.offp}
+                  style={{
+                    marginLeft: "7px",
+                    fontSize: "9px",
+                    fontWeight: 400,
+                    color: "hsl(80, 68%, 38%)",
+                  }}
+                >
+                  {offp} off
+                </p>
               </p>
               {/* <div className={width < 600 ? styles.off : styles.offBig}>
                 <del className={styles.del} style={{ fontSize: "1.3rem" ,margin:"0px 15px 0px 0px"}}>
@@ -99,7 +112,6 @@ function ProductCard({ product, i }: any) {
                 </del> 
                 <p className={width < 600 ? "" : styles.offp} >{offp} off</p>
               </div> */}
-              
             </div>
           </a>
 
@@ -115,6 +127,15 @@ function ProductCard({ product, i }: any) {
                 {/* <BiShoppingBag /> */}
               </div>
             </button>
+
+            <div
+              style={{
+                width: "100px",
+                height: "100%",
+                backgroundColor: "aqua",
+              }}
+            >
+            </div>
           </div>
         </div>
       </div>
