@@ -97,7 +97,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
         console.log("status update");
         const updatedOrder = await db
           .collection("orders")
-          .updateOne({ _id: params.id }, { $set: { status: 1 } });
+          .updateOne({ _id: id }, { $set: { status: 1 } });
       }
       return {
         props: {
