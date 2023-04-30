@@ -319,8 +319,8 @@ input[type=number] {
 }
 
 .formbold-form-input {
-  width: 55vw;
-  padding: 12px 24px;
+  width: 100%;
+  padding: 12px 5px;
   border-radius: 6px;
   border: 1px solid #e0e0e0;
   background: white;
