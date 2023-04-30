@@ -50,6 +50,8 @@ function footer() {
         <div style={{display:"flex",flexDirection: "column",
     marginBottom: "20px"}}>
           <h3 style={{ fontWeight: 400 }}>Support</h3>
+          
+          <a style={{color:"black" ,cursor:"pointer",margin:"2px"}} href="/policys/contactus">Contact us</a>
           <a style={{color:"black" ,cursor:"pointer",margin:"2px"}} href="/policys/aboutus">About us</a>
           <a style={{color:"black" ,cursor:"pointer",margin:"2px"}} href="/policys/faq">FAQ</a>
           <a style={{color:"black" ,cursor:"pointer",margin:"2px"}} href="/policys/returnpolicy">Shipping & Returns</a>
