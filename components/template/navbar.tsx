@@ -92,7 +92,7 @@ function navbar() {
               <a href="/order" onClick={() => handilcliceClosr()}>
                 Orders
               </a>
-              <a href="https://wa.link/83a0qt" onClick={() => handilcliceClosr()}>
+              <a href="/policys/contactus" onClick={() => handilcliceClosr()}>
                 Contact us
               </a>
               <a  href="/product/6409a6d1c8363009643569e1" onClick={() => handilcliceClosr()}>
