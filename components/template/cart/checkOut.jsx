@@ -171,12 +171,9 @@ function CheckOut() {
           createPayment(
             order_id,
             order_amount,
-            customer_id,
-            customer_name,
-            customer_email,
             customer_phone
           ).then(function (result) {
-            router.push(result?.payment_link);
+            router.push(result);
             return "normalReturn";
           });
         }

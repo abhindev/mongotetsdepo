@@ -35,7 +35,7 @@ function CartItem({ cart }) {
           <div key={i} className={styles.container}>
             <div key={product._id} className={styles.cartItem}>
               <div className={styles.image}>
-                <Image src={product.img[0]} alt="" width="100" height="100" />
+                <Image src={product?.img[0]} alt="" width="100" height="100" />
               </div>
               <div className={styles.textcont}>
                 <span className={styles.name}>
