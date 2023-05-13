@@ -27,10 +27,10 @@ async function createPayment(
 
   const json = {
     merchantId: "KALYANIAMMASONLINE",
-    merchantTransactionId: `MT${order_id}`,
-    merchantUserId: `${order_id}`,
+    merchantTransactionId: 'MTQWERTYHGFC34567',
+    merchantUserId: "MUI12340987654321",
     amount: order_amount + "00",
-    redirectUrl: `https://www.kalyaniammas.com/success/${order_id}`,
+    redirectUrl: `https://www.kalyaniammas.com/success/34567`,
     redirectMode: "POST",
     callbackUrl: "https://webhook.site/callback-url",
     mobileNumber: `${customer_phone}`,
@@ -38,7 +38,10 @@ async function createPayment(
       type: "PAY_PAGE",
     },
   };
-   const encode = btoa(JSON.stringify(json));
+  // console.log(Buffer.from("Hello World").toString('base64'));
+  const data = JSON.stringify(json);
+  console.log("llllll")
+  const encode = Buffer.from(data).toString('base64'); //btoa(JSON.stringify(json));
    const key = 'a528519a-95c1-4cfd-802b-cdacee3a0752'
    const newString = `${encode}/pg/v1/${key}`
    const SHA256 = CryptoJS.SHA256(newString).toString()

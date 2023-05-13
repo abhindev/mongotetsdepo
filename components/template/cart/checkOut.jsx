@@ -173,7 +173,8 @@ function CheckOut() {
             order_amount,
             customer_phone
           ).then(function (result) {
-            router.push(result);
+            // router.push(result);
+            console.log(result);
             return "normalReturn";
           });
         }
