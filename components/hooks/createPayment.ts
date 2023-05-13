@@ -27,10 +27,10 @@ async function createPayment(
 
   const json = {
     merchantId: "KALYANIAMMASONLINE",
-    merchantTransactionId: "MT7850590068188104",
+    merchantTransactionId: `MT${order_id}`,
     merchantUserId: `${order_id}`,
     amount: order_amount + "00",
-    redirectUrl: "https://webhook.site/redirect-url",
+    redirectUrl: `https://www.kalyaniammas.com/success/${order_id}`,
     redirectMode: "POST",
     callbackUrl: "https://webhook.site/callback-url",
     mobileNumber: `${customer_phone}`,

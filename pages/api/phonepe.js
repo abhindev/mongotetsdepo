@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         accept: "application/json",
       };
     try {
-      const response = await fetch("https://api-preprod.phonepe.com/apis/merchant-simulator/pg/v1/pay", {
+      const response = await fetch("https://api.phonepe.com/apis/hermes", {
         method: "POST",
         headers: headers,
         body: JSON.stringify(payload),
