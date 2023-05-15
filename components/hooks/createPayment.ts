@@ -26,11 +26,11 @@ async function createPayment(
 
 
   const json = {
-    merchantId: "KALYANIAMMASONLINE",
-    merchantTransactionId: 'MTQWERTYHGFC34567',
-    merchantUserId: "MUI12340987654321",
+    merchantId: process.env.NEXT_PUBLIC_PHONEPE_MID,
+    merchantTransactionId: "MT7850590068188104",
+    merchantUserId: `${order_id}`,
     amount: order_amount + "00",
-    redirectUrl: `https://www.kalyaniammas.com/success/34567`,
+    redirectUrl: "https://webhook.site/redirect-url",
     redirectMode: "POST",
     callbackUrl: "https://webhook.site/callback-url",
     mobileNumber: `${customer_phone}`,
@@ -38,13 +38,17 @@ async function createPayment(
       type: "PAY_PAGE",
     },
   };
-  // console.log(Buffer.from("Hello World").toString('base64'));
-  const data = JSON.stringify(json);
-  console.log("llllll")
-  const encode = Buffer.from(data).toString('base64'); //btoa(JSON.stringify(json));
-   const key = 'a528519a-95c1-4cfd-802b-cdacee3a0752'
+   const encode = btoa(JSON.stringify(json));
+   const key = process.env.NEXT_PUBLIC_PHONEPE_KEY
    const newString = `${encode}/pg/v1/${key}`
    const SHA256 = CryptoJS.SHA256(newString).toString()
+
+   console.log(">>>>>>>>>>>>>>>>>>>.........")
+   console.log(encode)
+    console.log("--------------------------")
+    console.log(SHA256)
+    console.log("--------------------------")
+   console.log(">>>>>>>>>>>>>>>>>>>.........")
    ////////////////////////////////////////
     // console.log("json::"+json)
     // console.log("encode::"+encode)
@@ -54,20 +58,18 @@ async function createPayment(
   const verify =
     `${SHA256}###1`;
   
+console.log(verify);
+
   const res = await fetch("/api/phonepe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      payload: payload, //encoded json payload
-      verify: verify, //verifyer
+      "Payload": payload, //encoded json payload
+      "Verify": verify, //verifyer
     },
   }).then(response => response.json())
-  .then(data => {
-    console.log("hooks" + data.instrumentResponse.redirectInfo.url);
-    return data.instrumentResponse.redirectInfo.url;
-  })
   // .then(data => console.log("hooks"+data.instrumentResponse.redirectInfo.url
-  // .then(data =>  console.log(data) )
+  .then(data =>  console.log(data) )
   .catch(error => console.error(error));
 
   // console.log(res)
