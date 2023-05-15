@@ -15,7 +15,7 @@ function text() {
         customer_phone
       ).then(function(res) {
         console.log("page:"+res)
-        // router.push(res);
+        // router?.push(res);
         return "normalReturn";
       });
     }
@@ -74,3 +74,20 @@ export default text
 
 // export default text;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////

@@ -28,7 +28,7 @@ async function createPayment(
   const json = {
     merchantId: process.env.NEXT_PUBLIC_PHONEPE_MID,
     merchantTransactionId: "MT7850590068188104",
-    merchantUserId: `${order_id}`,
+    merchantUserId: `00000000000000A`,
     amount: order_amount + "00",
     redirectUrl: "https://webhook.site/redirect-url",
     redirectMode: "POST",
