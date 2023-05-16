@@ -1,81 +1,82 @@
-import { useState } from "react";
-import CryptoJS from 'crypto-js';
+// import { useState } from "react";
 
-interface PaymentDetails {
-  order_id: string;
-  order_amount: number;
-  order_currency: string;
-  order_note: string;
-  order_meta: {
-    return_url: string;
-  };
-  customer_details: {
-    customer_id: string;
-    customer_name: string;
-    customer_email: string;
-    customer_phone: number;
-  };
-}
+// interface PaymentDetails {
+//   order_id: string;
+//   order_amount: number;
+//   order_currency: string;
+//   order_note: string;
+//   order_meta: {
+//     return_url: string;
+//   };
+//   customer_details: {
+//     customer_id: string;
+//     customer_name: string;
+//     customer_email: string;
+//     customer_phone: number;
+//   };
+// }
 
+// async function createPayment(
+//   order_id: string,
+//   order_amount: number,
+//   customer_phone: number,
+//   customer_id:string
+// ): Promise<any> {
+
+//   const data = {
+//     merchantTransactionId: order_id,
+//     merchantUserId: customer_id,
+//     amount: order_amount,
+//     mobileNumber: customer_phone,
+//   };
+
+//   const res = await
+//     fetch("/api/phonepe", {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: "jay"
+//     })
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .catch(error => console.error(error));
+//   return res;
+// }
+
+// export default createPayment;
+
+// //return_url: "https://www.kalyaniammas.com/order/success/{order_id}",
 
 async function createPayment(
-  order_id: string,
-  order_amount: number,
-  customer_phone: number
-): Promise<any> {
+  order_id : string,
+  order_amount :number,
+  customer_phone : string,
+) {
 
+  // const order_amountNUM = parseInt(order_amount)
 
-  const json = {
-    merchantId: process.env.NEXT_PUBLIC_PHONEPE_MID,
-    merchantTransactionId: "MT7850590068188104",
-    merchantUserId: `00000000000000A`,
-    amount: order_amount + "00",
-    redirectUrl: "https://webhook.site/redirect-url",
-    redirectMode: "POST",
-    callbackUrl: "https://webhook.site/callback-url",
-    mobileNumber: `${customer_phone}`,
-    paymentInstrument: {
-      type: "PAY_PAGE",
-    },
-  };
-   const encode = btoa(JSON.stringify(json));
-   const key = process.env.NEXT_PUBLIC_PHONEPE_KEY
-   const newString = `${encode}/pg/v1/${key}`
-   const SHA256 = CryptoJS.SHA256(newString).toString()
-
-   console.log(">>>>>>>>>>>>>>>>>>>.........")
-   console.log(encode)
-    console.log("--------------------------")
-    console.log(SHA256)
-    console.log("--------------------------")
-   console.log(">>>>>>>>>>>>>>>>>>>.........")
-   ////////////////////////////////////////
-    // console.log("json::"+json)
-    // console.log("encode::"+encode)
-    // console.log("sha256::"+SHA256)
-
-  const payload = encode;
-  const verify =
-    `${SHA256}###1`;
-  
-console.log(verify);
-
+  // console.log(order_amount+"type" + typeof order_amount)
+  // console.log(order_amountNUM+"type" + typeof order_amountNUM )
   const res = await fetch("/api/phonepe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Payload": payload, //encoded json payload
-      "Verify": verify, //verifyer
     },
-  }).then(response => response.json())
-  // .then(data => console.log("hooks"+data.instrumentResponse.redirectInfo.url
-  .then(data =>  console.log(data) )
-  .catch(error => console.error(error));
-
-  // console.log(res)
+    body: JSON.stringify({
+      merchantTransactionId: order_id,
+      merchantUserId: `USER_${order_id}`,
+      amount: order_amount,
+      mobileNumber: customer_phone,
+    }),
+  })
+    .then((response) => response.json())
+    // .then((data) => console.log(data))
+    .catch((error) => {
+      console.log(error);
+    });
   return res;
+// console.log(res)
 }
 
 export default createPayment;
-
-//return_url: "https://www.kalyaniammas.com/order/success/{order_id}",

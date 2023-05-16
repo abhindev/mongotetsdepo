@@ -6,15 +6,17 @@ function text() {
     const router = useRouter();
    const handleClick=()=>{
     console.log("running")
-    const order_id= "123asjhdg43wr"
-    const order_amount= 299
-    const customer_phone= 62353554432
+    const order_id = "HGVDS73GYDUHWJ293"
+    const customer_id = '25638FHGSJ723QTW'
+    const order_amount = 100
+    const customer_phone = 6235354432
+    
     createPayment(
         order_id,
         order_amount,
-        customer_phone
+        customer_phone,
       ).then(function(res) {
-        console.log("page:"+res)
+        console.log(res)
         // router?.push(res);
         return "normalReturn";
       });
