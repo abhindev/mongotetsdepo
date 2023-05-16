@@ -439,7 +439,8 @@ import { useRouter } from "next/router";
 export async function getServerSideProps({ params }: any) {
   // console.log(params.id+" params");
   // Fetch data from external API
-  const res = await fetch(`http://localhost:3000/api/order/${params.id}`);
+  // https://www.kalyaniammas.com/order/success/36841587
+  const res = await fetch(`https://www.kalyaniammas.com/api/order/${params.id}`);
   const order = await res.json();
 
   // Pass data to the page via props
