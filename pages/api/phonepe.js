@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     };
     
     try {
-      const response = await fetch(process.env.PHONEPEURL, {
+      const response = await fetch("https://api.phonepe.com/apis/hermes/pg/v1/pay", {
         method: "POST",
         headers: headers,
         body: JSON.stringify(payload),
