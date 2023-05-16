@@ -6,11 +6,11 @@ export default async function handler(req, res) {
   }
   const { method } = req;
   if (method === "POST") {
-    const key = process.env.PHONEPE_KEY;
-    const index = process.env.PHONEPE_INDEX;
+    const key = "a528519a-95c1-4cfd-802b-cdacee3a0752";//process.env.PHONEPE_KEY
+    const index = 1;//process.env.PHONEPE_INDEX
 
     const data = {
-      merchantId: process.env.PHONEPE_MID,
+      merchantId: "KALYANIAMMASONLINE",//process.env.PHONEPE_MID
       merchantTransactionId: "ORDER_"+req.body.merchantTransactionId,
       merchantUserId: req.body.merchantUserId,
       amount: req.body.amount*100,
