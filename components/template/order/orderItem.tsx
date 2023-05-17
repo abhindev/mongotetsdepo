@@ -101,18 +101,18 @@ if (order && token !== undefined ) {
 
   // DELETE EMPTY ORDER
 
-  const handleDelete = () => {
-    setRemove(true);
-    fetch("/api/order", {
-      method: "DELETE",
-    })
-      .then((response) => response.text())
-      .then((result) => console.log("error"))
-      .catch((error) => console.log("error"));
-  };
-  if (remove == false) {
-    handleDelete();
-  }
+  // const handleDelete = () => {
+  //   setRemove(true);
+  //   fetch("/api/order", {
+  //     method: "DELETE",
+  //   })
+  //     .then((response) => response.text())
+  //     .then((result) => console.log("error"))
+  //     .catch((error) => console.log("error"));
+  // };
+  // if (remove == false) {
+  //   handleDelete();
+  // }
 
   const [conformModelShow, setConformModelShow] = useState(false);
 
@@ -180,7 +180,7 @@ if (order && token !== undefined ) {
                   onRequestClose={() => shownolink(false)}
                   style={customStyles}
                 >
-                  Order is under processing. Available Soon!
+                 Your order is under processing.
                 </Modal></>
             }
             
