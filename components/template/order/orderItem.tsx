@@ -53,22 +53,31 @@ function OrderItem({ order }: any) {
 
   //  DELETE ORDER
   async function handleClickCancel() {
+    console.log("conform")
     const data = {
       token: token,
       trackingID: order?.tracking_id,
     };
     const response = await fetch("/api/shiprocket/track", {
       method: "DELETE",
-      headers: {
+      headers: { 
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
+    const cancel = await fetch("/api/order/cancel", {
+      method: "PUT",
+      headers: { 
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({cancel: true, id:order?._id}),
+    })
     const jsonData = await response.json();
       const trackData = JSON.parse(jsonData);
       const url = trackData;
       setMessage(url)
       router.push("/")
+
   }
 // console.log(awb)
 //   TRACK WITH AWD
@@ -132,10 +141,12 @@ if (order && token !== undefined ) {
   };
 // console.log(typeof(trackingLink) + " ::::type")
  const [nolink , shownolink] = useState(false)
+
+ const cancelStatus = order.cancel
   return (
     <>
     {/* <div>{message}</div> */}
-      <div className={styles.section}>
+      <div className={styles.section} >
         <div className={styles.imagecontainer}>
           <Image
             src={order.item.products[0].img[0]}
@@ -164,7 +175,7 @@ if (order && token !== undefined ) {
               <p style={{ fontWeight: 10 }}>₹{order.total}.00</p>
             </div>
           </div>
-          <div className={styles.btncontainer}>
+          {cancelStatus!==true ? <div className={styles.btncontainer}>
             {
                 trackingLink ? <a
                 className={styles.btn}
@@ -180,7 +191,7 @@ if (order && token !== undefined ) {
                   onRequestClose={() => shownolink(false)}
                   style={customStyles}
                 >
-                 Your order is under processing.
+                Your order is under processing.
                 </Modal></>
             }
             
@@ -190,7 +201,8 @@ if (order && token !== undefined ) {
             >
               Cancel
             </div>
-          </div>
+          </div> :<div className={styles.btncontainer} style={{color:"red",fontSize:"1.3rem"}}>Order was cancelled</div>}
+          
         </div>
       </div>
       <div className={styles.Line}></div>
