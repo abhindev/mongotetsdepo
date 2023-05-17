@@ -440,7 +440,9 @@ export async function getServerSideProps({ params }: any) {
   // console.log(params.id+" params");
   // Fetch data from external API
   // https://www.kalyaniammas.com/order/success/36841587
-  const res = await fetch(`https://www.kalyaniammas.com/api/order/${params.id}`);
+  const res = await fetch(
+    `https://www.kalyaniammas.com/api/order/${params.id}`
+  );
   const order = await res.json();
 
   // Pass data to the page via props
@@ -451,6 +453,7 @@ function Order({ order }: any) {
   const [token, setToken] = useState();
   const [trackingID, setTrackingID] = useState();
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [enable, setEnable] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   // dispatch(reset())
@@ -469,6 +472,17 @@ function Order({ order }: any) {
   }, [token]); // Only run the effect when token changes
   // console.log("token: " + token);
   /////////////////////////shiprockt--auth end///////////////////////
+  ///enabel butn affter 2 seconds//////////////
+ 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setEnable(true);
+    }, 2000);
+
+    return () => clearTimeout(timer); // Clean up the timer on component unmount
+  }, []);
+
+  
   /////////////////////////Data for shiprockt ////////////////////////
   var currentDate = new Date();
 
@@ -548,94 +562,107 @@ function Order({ order }: any) {
   };
 
   const putOrderId = async () => {
-        console.log("running");
-        const response = await fetch(`/api/order/${order._id}`, {
-          method: "PUT",
-          // headers: {
-          //   'Content-Type': 'application/json',
-          //   'Authorization': `Bearer ${token}`,
-          // },
-          body: JSON.stringify(trackingID),
-        });
-      };
-      if(trackingID == undefined){
-        addOrder()
-      }
-      if(trackingID !== undefined){
-        putOrderId();
-      }
-      
+    console.log("running");
+    const response = await fetch(`/api/order/${order._id}`, {
+      method: "PUT",
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   'Authorization': `Bearer ${token}`,
+      // },
+      body: JSON.stringify(trackingID),
+    });
+  };
+  if (trackingID == undefined) {
+    addOrder();
+  }
+  if (trackingID !== undefined) {
+    putOrderId();
+  }
+
+  
   return (
     <div>
       <div className={styles.success}>
-           <div className={styles.successIcon}>
-             {/*  */}
-            <div className="ui-success">
-               <svg
-                viewBox="0 0 87 87"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-              >
-                <g
-                  id="Page-1"
-                  stroke="none"
-                  strokeWidth="1"
-                  fill="none"
-                  fillRule="evenodd"
-                >
-                  <g id="Group-3" transform="translate(2.000000, 2.000000)">
-                    <circle
-                      id="Oval-2"
-                      stroke="rgba(165, 220, 134, 0.2)"
-                      strokeWidth="4"
-                      cx="41.5"
-                      cy="41.5"
-                      r="41.5"
-                    ></circle>
-                    <circle
-                      className="ui-success-circle"
-                      id="Oval-2"
-                      stroke="#A5DC86"
-                      strokeWidth="4"
-                      cx="41.5"
-                      cy="41.5"
-                      r="41.5"
-                    ></circle>
-                    <polyline
-                      className="ui-success-path"
-                      id="Path-2"
-                      stroke="#A5DC86"
-                      strokeWidth="4"
-                      points="19 38.8036813 31.1020744 54.8046875 63.299221 28"
-                    ></polyline>
-                  </g>
-                </g>
-              </svg>
-            </div>
-
-            {/*  */}
-          </div>
-          <div className={styles.successText}>
-            <div className={styles.successh1}>Order placed</div>
-            <div className={styles.successp}>Order ID :{order?._id}</div>
-            <div className={styles.successp}>
-              Order Qty :{order?.item?.quantity}
-            </div>
-          </div>
-          <div className={styles.successBtnContainer}>
-            <div className={styles.successBtn} onClick={() => {router.push("/"); dispatch(reset())}}>
-              Continue shopping
-            </div>
-            <div
-              className={styles.successBtn}
-              onClick={() => {router.push("/order"); dispatch(reset())}}
+        <div className={styles.successIcon}>
+          {/*  */}
+          <div className="ui-success">
+            <svg
+              viewBox="0 0 87 87"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
             >
-              Track order status
-            </div>
+              <g
+                id="Page-1"
+                stroke="none"
+                strokeWidth="1"
+                fill="none"
+                fillRule="evenodd"
+              >
+                <g id="Group-3" transform="translate(2.000000, 2.000000)">
+                  <circle
+                    id="Oval-2"
+                    stroke="rgba(165, 220, 134, 0.2)"
+                    strokeWidth="4"
+                    cx="41.5"
+                    cy="41.5"
+                    r="41.5"
+                  ></circle>
+                  <circle
+                    className="ui-success-circle"
+                    id="Oval-2"
+                    stroke="#A5DC86"
+                    strokeWidth="4"
+                    cx="41.5"
+                    cy="41.5"
+                    r="41.5"
+                  ></circle>
+                  <polyline
+                    className="ui-success-path"
+                    id="Path-2"
+                    stroke="#A5DC86"
+                    strokeWidth="4"
+                    points="19 38.8036813 31.1020744 54.8046875 63.299221 28"
+                  ></polyline>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          {/*  */}
+        </div>
+        <div className={styles.successText}>
+          <div className={styles.successh1}>Order placed</div>
+          <div className={styles.successp}>Order ID :{order?._id}</div>
+          <div className={styles.successp}>
+            Order Qty :{order?.item?.quantity}
           </div>
         </div>
-      
+        { enable &&
+          <div className={styles.successBtnContainer}>
+          <div 
+            className={styles.successBtn}
+            onClick={() => {
+              router.push("/");
+              dispatch(reset());
+            }}
+          >
+            Continue shopping
+          </div>
+          <div
+            className={styles.successBtn}
+            onClick={() => {
+              
+                router.push("/order");
+                dispatch(reset());
+              
+            }}
+          >
+            Track order status
+          </div>
+        </div>
+        }
+      </div>
     </div>
     // </div>
   );

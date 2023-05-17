@@ -225,7 +225,7 @@ input[type=number] {
   stroke-dasharray: 60px 64px;
   stroke-dashoffset: 62px;
   stroke-linecap: round;
-  animation: ani-success-path 0.4s 1s ease-in both;
+  animation: ani-success-path 0.4s 2s ease-in both;
 }
 
 @keyframes ani-success-path {
