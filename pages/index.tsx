@@ -5,8 +5,8 @@ import styles from "../styles/Home.module.css";
 import Featured from "../components/tools/Featured";
 import PoductList from "../components/template/products/productlist";
 import Review from "../components/tools/ytReview";
-import { NextSeo } from 'next-seo';
-import Whatsapp from "../components/tools/whatsapp"
+import { NextSeo } from "next-seo";
+import Whatsapp from "../components/tools/whatsapp";
 
 export async function getServerSideProps() {
   try {
@@ -26,20 +26,24 @@ export async function getServerSideProps() {
 export default function Home({
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
- 
   return (
     <div className={styles.container}>
       <Head>
-  <title>Kalyaniammas Hair Oil</title>
+        <title>Kalyaniammas Hair Oil</title>
 
-  <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo.png" />
 
-  {/* Meta tags for SEO */}
-  <meta name="description" content="Our products are carefully crafted
+        {/* Meta tags for SEO */}
+        <meta
+          name="description"
+          content="Our products are carefully crafted
 using natural ingredients that are known for
 their beneficial properties to promote
-healthy hair growth" />
-  <meta name="keywords" content="kalyani amma hair oil,
+healthy hair growth"
+        />
+        <meta
+          name="keywords"
+          content="kalyani amma hair oil,
 how to make hair growth oil,
 top hair oil for male,
 top hair oil for ladies,
@@ -60,34 +64,61 @@ which is the best hair oil for daily use,
 which is the best hair care oil,
 which is the best hair care oil in india,
 which is the best hair care oil in kerala,
-which is the best ayurvedic hair oil in kerala," />
-  <meta name="author" content="Abhin dev" />
+which is the best ayurvedic hair oil in kerala,"
+        />
+        <meta name="author" content="Abhin dev" />
 
-  {/* Meta tags for social sharing */}
-  <meta property="og:title" content="Kalyaniammas Hair Oil" />
-  <meta property="og:description" content="Our products are carefully crafted
+        {/* Meta tags for social sharing */}
+        <meta property="og:title" content="Kalyaniammas Hair Oil" />
+        <meta
+          property="og:description"
+          content="Our products are carefully crafted
 using natural ingredients that are known for
 their beneficial properties to promote
-healthy hair growth" />
-  <meta property="og:image" content="/hero/web home.webp" />
-  <meta property="og:url" content="https://www.kalyaniammas.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Kalyaniammas" />
+healthy hair growth"
+        />
+        <meta property="og:image" content="/hero/web home.webp" />
+        <meta property="og:url" content="https://www.kalyaniammas.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Kalyaniammas" />
 
-  
-  {/* Meta tags for mobile devices */}
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Meta tags for mobile devices */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  {/* Meta tags for browser theme */}
-  <meta name="theme-color" content="#77a31f" />
-  <meta name="msapplication-navbutton-color" content="#77a31f" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="#77a31f" />
-</Head>
+        {/* Meta tags for browser theme */}
+        <meta name="theme-color" content="#77a31f" />
+        <meta name="msapplication-navbutton-color" content="#77a31f" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#77a31f" />
+        {/* Meta Pixel Code */}
+  <script>
+    {`!function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '164880206511230');
+    fbq('track', 'PageView');`}
+  </script>
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style={{ display: 'none' }}
+      src="https://www.facebook.com/tr?id=164880206511230&ev=PageView&noscript=1"
+      alt="fb-pixel"
+    />
+  </noscript>
+  {/* End Meta Pixel Code */}
+      
+      </Head>
       <main>
         <Featured />
         <PoductList products={products} />
         <Review />
-        <Whatsapp/>
+        <Whatsapp />
       </main>
     </div>
   );
