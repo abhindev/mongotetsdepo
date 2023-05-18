@@ -109,7 +109,7 @@ const Product = ({ product, products }: any) => {
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window,document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-     fbq('init', '452105277009480');
+     fbq('init', '164880206511230');
     fbq('track', 'PageView');`}
   </script>
   <noscript>
@@ -117,7 +117,7 @@ const Product = ({ product, products }: any) => {
       height="1"
       width="1"
       alt="fb-pixel"
-      src="https://www.facebook.com/tr?id=452105277009480&ev=PageView&noscript=1"
+      src="https://www.facebook.com/tr?id=164880206511230&ev=PageView&noscript=1"
     />
   </noscript></head>
       <div className={styles.container}>
