@@ -29,7 +29,7 @@ export default function Home({
   return (
     <div className={styles.container}>
       <Head>
-        <title>Kalyaniammas Hair Oil</title>
+        <title>Kalyani amma Hair oil</title>
 
         <link rel="icon" href="/logo.png" />
 
