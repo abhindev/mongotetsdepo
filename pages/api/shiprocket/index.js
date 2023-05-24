@@ -76,7 +76,7 @@ export default async function handler(req, res) {
       length: 17.0,
       breadth: 10.0,
       height: 9,
-      weight: 0.16,
+      weight: 0.18,
     });
 
     var requestOptions = {
