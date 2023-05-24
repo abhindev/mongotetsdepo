@@ -243,7 +243,6 @@ const Product = ({ product, products }: any) => {
         {/* <Review reviews={reviews} /> */}
         {/* <AddReview id={product}/> */}
       </div>
-      <Whatsapp />
     </>
   );
 };
