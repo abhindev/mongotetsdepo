@@ -28,7 +28,7 @@ function footer() {
           <div className={styles.icon}>
             <div
               onClick={() =>
-                window.open("https://instagram.com/kalyaniammashairoil")
+                window.open("https://instagram.com/kalyaniammas")
               }
             >
               <BsInstagram />
