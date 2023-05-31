@@ -28,7 +28,7 @@ function footer() {
           <div className={styles.icon}>
             <div
               onClick={() =>
-                window.open("https://instagram.com/kalyaniammahairoil")
+                window.open("https://instagram.com/kalyaniammashairoil")
               }
             >
               <BsInstagram />
@@ -44,7 +44,7 @@ function footer() {
       <div className={width > 600 ? styles.bottom : styles.bottom_mob}>
         <div className={styles.contact}>
           <h3 style={{ fontWeight: 400 }}>Contact</h3>
-          <a href="tel: 918606531201">918606531201</a>
+          <a href="tel: 919778037852">919778037852</a>
           <a href="mailto: kalyaniammahairoil@gmail.com" >kalyaniammahairoil@gmail.com</a>
         </div>
         <div style={{display:"flex",flexDirection: "column",
