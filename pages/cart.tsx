@@ -130,7 +130,7 @@ function Cart() {
               ) : (
                 <div className={styles.total}>
                   <p>Shipping</p>
-                  <p>₹50.00</p>
+                  <p>₹100.00</p>
                 </div>
               )}
 
@@ -181,7 +181,7 @@ function Cart() {
             ) : (
               <div className={styles.total}>
                 <p>Shipping</p>
-                <p>₹50.00</p>
+                <p>₹100.00</p>
               </div>
             )}
 
