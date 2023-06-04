@@ -11,7 +11,7 @@ function CheckOut() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const num = cart.total + 100;
+  const num = cart.total + 50;
   const cartTotal = num.toString();
 
   const [orderId, setOrderId] = useState("");
