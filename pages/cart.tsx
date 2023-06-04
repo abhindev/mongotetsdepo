@@ -154,7 +154,7 @@ function Cart() {
                   <h4 style={{fontWeight:500}}>Total</h4>
                   <p>Including 18% in taxes</p>
                 </div>
-                {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem" ,fontWeight:500}}>INR {redux.total + 100}.00</h2>}
+                {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem" ,fontWeight:500}}>INR {redux.total + 50}.00</h2>}
               </div>
               <div className={styles.btn}>
                 {/* {ckeckout == false ? ( */}
@@ -205,7 +205,7 @@ function Cart() {
                 <h4>Total</h4>
                 <p>Including 18% in taxes</p>
               </div>
-              {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem"}}>INR {redux.total + 100}.00</h2>}
+              {cart.length == 0 ? "" : <h2 style={{fontSize:"1rem"}}>INR {redux.total + 50}.00</h2>}
             </div>
             <div className={styles.btn}>
               {ckeckout == false ? (
