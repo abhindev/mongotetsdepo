@@ -59,8 +59,13 @@ function footer() {
           <a style={{color:"black" ,cursor:"pointer",margin:"2px"}} href="/policys/termsandconditions">Terms and Conditions</a>
         </div>
       </div>
-      <p>©2023 All rights reserved
-Powered by vihara life care pvt.ltd</p>
+      <p style={{margin: 0,
+                  textAlign: "center",
+                  paddingBottom: "10px",
+                  fontSize: "small"}}>
+        ©2023 All rights reserved
+          Powered by vihara life care pvt.ltd
+      </p>
     </div>
   );
 }
